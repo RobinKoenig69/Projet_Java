@@ -1,0 +1,53 @@
+create database if not exists Projet_JAVA;
+
+USE Projet_JAVA;
+
+create table Attraction (
+    id_attraction INT PRIMARY KEY AUTO_INCREMENT,
+    Nom VARCHAR(255),
+    Nb_places_tot int,
+    Nb_places_dispo int,
+    Ouvert boolean,
+    Tarif float,
+    Categorie ENUM('Sensations Fortes', 'Familiaux', 'Enfants', 'Aquatiques', 'Simulateurs', 'Autres'),
+    Heure_ouverture TIME,
+    Heure_fermeture TIME,
+    Heure_fin_inscription Time
+);
+
+create table Reduction (
+    id_reduction INT PRIMARY KEY AUTO_INCREMENT,
+    Pourcentage int CHECK (0 <= Pourcentage <= 100),
+    Concerne enum('Ancien', 'Nouveau'),
+    id_attraction int,
+    FOREIGN KEY (id_attraction) REFERENCES Attraction(id_attraction)
+);
+
+create table Utilisateur (
+    id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
+    Nom VARCHAR(255),
+    Prenom VARCHAR(255),
+    Client_type enum('Ancien', 'Nouveau', 'Invite'),
+    Tranche_Age enum('Enfant', 'Jeune Adulte', 'Adulte', 'Senior'),
+    Email VARCHAR(255),
+    Adresse VARCHAR(255),
+    Derniere_visite DATE,
+    Attraction_preferee_id INT,
+    FOREIGN KEY (Attraction_preferee_id) REFERENCES Attraction(id_attraction)
+);
+
+create table Reservation (
+    id_reservation INT PRIMARY KEY AUTO_INCREMENT,
+    Date_reservation DATETIME,
+    Prix float CHECK ( Prix > 0),
+    id_utilisateur int,
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
+    id_attraction int,
+    FOREIGN KEY (id_attraction) REFERENCES Attraction(id_attraction)
+);
+
+create table Administrateur (
+    id_administrateur INT PRIMARY KEY AUTO_INCREMENT,
+    id_utilisateur int,
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (id_utilisateur)
+)
