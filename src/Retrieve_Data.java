@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class Retrieve_Data {
 
@@ -95,6 +97,64 @@ public class Retrieve_Data {
             } catch (Exception e) {
                 System.out.println("Erreur lors de l'insertion : " + e.getMessage());
             }
+        }
+    }
+
+    public void add_reduction (int pourcentage, String concerne, int Id_attraction){
+        Connection connection = connect();
+
+        if (connection != null) {
+            try {
+
+                String sql = "INSERT INTO Attraction (Pourcentage, concerne, id_attraction) VALUES (?, ?, ?)";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setInt(1, pourcentage);
+                statement.setString(2, concerne);
+                statement.setInt(3, Id_attraction);
+
+                int rowsInserted = statement.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    System.out.println("Insertion réussie !");
+                }
+
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                System.out.println("Erreur lors de l'insertion : " + e.getMessage());
+            }
+        }
+    }
+
+    public void add_reservation(LocalDateTime date_reservation, float prix, int id_attraction, int id_utilisateur) {
+        Connection connection = connect();
+
+        if (connection != null) {
+            try {
+                String sql = "INSERT INTO Attraction (Date_reservation, Prix, id_utilisateur, id_attraction) VALUES (?, ?, ?, ?)";
+                PreparedStatement statement = connection.prepareStatement(sql);
+
+                Timestamp timestamp = Timestamp.valueOf(date_reservation);
+                statement.setTimestamp(1, timestamp);
+                statement.setFloat(2, prix);
+                statement.setInt(3, id_utilisateur);
+                statement.setInt(4, id_attraction);
+
+                int rowsInserted = statement.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    System.out.println("Insertion réussie !");
+                }
+
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                System.out.println("Erreur lors de l'insertion : " + e.getMessage());
+            }
+        } else {
+            System.out.println("La connexion à la base de données a échoué.");
         }
     }
 
