@@ -11,10 +11,11 @@ public class testGraphic extends Application{
       button.setOnAction(e -> System.out.println("Bouton cliqué"));
 
       StackPane root = new StackPane(button);
-      Scene scene = new Scene(root, 300, 200);
+      Scene scene = new Scene(root, 900, 850);
 
       primaryStage.setTitle("Test JavaFX");
       primaryStage.setScene(scene);
+      primaryStage.setFullScreen(true);
       primaryStage.show();
    }
 
