@@ -1,3 +1,7 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
         Retrieve_Data rd = new Retrieve_Data();
@@ -5,19 +9,21 @@ public class App {
     }
 }
 
+class Retrieve_Data {
+    public void getData() {
         String jdbcUrl = "jdbc:mysql://localhost:3306/projet_java";
         String username = "root";
-        String password = ""; 
+        String password = "";
 
         try {
             // Connexion à la base
             Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
             System.out.println("Connexion réussie !");
 
-            //recup liste des attractions
+            // recup liste des attractions
             List<Attraction> attractions = AttractionDAO.getAllAttractions(connection);
 
-            //afficher les attractions
+            // afficher les attractions
             System.out.println("\n--- LISTE DES ATTRACTIONS ---");
             for (Attraction attraction : attractions) {
                 System.out.println(
@@ -27,8 +33,8 @@ public class App {
                 );
             }
 
-
         } catch (Exception e) {
             System.out.println("Erreur : " + e.getMessage());
         }
-    
+    }
+}
