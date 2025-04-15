@@ -16,7 +16,6 @@ public class testGraphic extends Application{
       primaryStage.setTitle("Test JavaFX");
       primaryStage.setScene(scene);
       primaryStage.setFullScreen(true);
-      
       primaryStage.show();
    }
 
