@@ -1,10 +1,10 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 public class App {
     public static void main(String[] args) {
+        Retrieve_Data rd = new Retrieve_Data();
+        rd.getData();
+    }
+}
+
         String jdbcUrl = "jdbc:mysql://localhost:3306/projet_java";
         String username = "root";
         String password = ""; 
@@ -31,5 +31,4 @@ public class App {
         } catch (Exception e) {
             System.out.println("Erreur : " + e.getMessage());
         }
-    }
-}
+    
