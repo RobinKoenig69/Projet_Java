@@ -1,3 +1,8 @@
+package src;
+
+import src.model.*;
+import src.Database_access.*;
+
 
 public class App {
     public static void main(String[] args) {
