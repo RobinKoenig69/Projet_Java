@@ -1,4 +1,4 @@
-package src;
+package Controler;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
