@@ -1,24 +1,27 @@
 package Controler;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class testGraphic extends Application{
+public class testGraphic extends Application {
    @Override
    public void start(Stage primaryStage) {
-      Button button = new Button("Clique-moi !");
-      button.setOnAction(e -> System.out.println("Bouton cliqué"));
+      try {
+         // Load the FXML file (assuming it's located in /resources/Controler/main_view.fxml)
+         Parent root = FXMLLoader.load(getClass().getResource("AppTemplate.fxml"));
 
-      StackPane root = new StackPane(button);
-      Scene scene = new Scene(root, 900, 850);
+         Scene scene = new Scene(root, 900, 850);
 
-      primaryStage.setTitle("Test JavaFX");
-      primaryStage.setScene(scene);
-      primaryStage.setFullScreen(true);
-      primaryStage.show();
+         primaryStage.setTitle("Test JavaFX avec FXML");
+         primaryStage.setScene(scene);
+         primaryStage.setFullScreen(true);
+         primaryStage.show();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
    }
 
    public static void main(String[] args) {
