@@ -40,4 +40,30 @@ public class AttractionDAO_Implementation {
             }
         }
     }
+
+    public void AttractionDAO_GetAll(){
+
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+
+                String sql = "SELECT * FROM attraction";
+
+
+                int rowsInserted = statement.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    System.out.println("Insertion réussie !");
+                }
+
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                System.out.println("Erreur lors de l'insertion : " + e.getMessage());
+            }
+        }
+    }
+
 }

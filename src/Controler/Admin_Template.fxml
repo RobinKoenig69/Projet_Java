@@ -50,32 +50,36 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Mes réservations">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Nouvelle réservation" />
-            <MenuItem mnemonicParsing="false" text="Annuler réservation" />
-          </items>
-        </Menu>
+        <Menu mnemonicParsing="false" text="Statistiques" />
         <Menu mnemonicParsing="false" text="Attractions">
           <items>
-            <MenuItem mnemonicParsing="false" text="Nos attractions" />
-            <MenuItem mnemonicParsing="false" text="A venir" />
+            <MenuItem mnemonicParsing="false" text="Nouvelle attraction" />
+            <MenuItem mnemonicParsing="false" text="Modifier attraction" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer attraction" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Réductions en cours">
+        <Menu mnemonicParsing="false" text="Clients">
           <items>
-            <MenuItem mnemonicParsing="false" text="Nos Offres en cours" />
-                  <MenuItem mnemonicParsing="false" text="Offres à venir" />
-                  <MenuItem mnemonicParsing="false" text="Offres passées" />
+            <MenuItem mnemonicParsing="false" text="Ajouter client" />
+                  <MenuItem mnemonicParsing="false" text="Modifier client" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer client" />
           </items>
         </Menu>
+            <Menu mnemonicParsing="false" text="Réductions">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Ajouter réduction" />
+                  <MenuItem mnemonicParsing="false" text="Modifier réduction" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer réduction" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Rechercher" />
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.24498886414253898" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane>
+        <AnchorPane prefHeight="551.0" prefWidth="1199.0">
           <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
+            <Label alignment="CENTER" layoutX="14.0" layoutY="194.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Réservations à venir" textAlignment="CENTER" wrapText="false">
               <font>
                 <Font size="18.0" fx:id="x1" />
               </font>
@@ -83,22 +87,25 @@
                 <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
               </textFill>
             </Label>
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Mon profil" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" fx:id="x11" />
+                     </font>
+                     <textFill>
+                        <Color red="0.624" green="0.624" blue="0.624" fx:id="x21" />
+                     </textFill>
+                  </Label>
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
-                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Carte du Parc" textAlignment="CENTER" textFill="$x2" wrapText="false" />
               </children>
             </AnchorPane>
           </content>
         </ScrollPane>
-        <AnchorPane>
-          <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-          </children>
-        </AnchorPane>
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
