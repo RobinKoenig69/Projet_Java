@@ -49,19 +49,19 @@ public class AttractionDAO_Implementation {
             try {
 
                 String sql = "SELECT * FROM attraction";
-
+                PreparedStatement statement = connection.prepareStatement(sql);
 
                 int rowsInserted = statement.executeUpdate();
 
                 if (rowsInserted > 0) {
-                    System.out.println("Insertion réussie !");
+                    System.out.println("Recherche réussie !");
                 }
 
                 statement.close();
                 connection.close();
 
             } catch (Exception e) {
-                System.out.println("Erreur lors de l'insertion : " + e.getMessage());
+                System.out.println("Erreur lors de la recherche : " + e.getMessage());
             }
         }
     }
