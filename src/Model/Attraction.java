@@ -1,27 +1,28 @@
 package Model;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 public class Attraction {
-    private int id_attraction;
+    private int id;
     private String nom;
     private int Nb_places_dispo;
     private int Nb_places_tot;
-    private float tarif;
+    private double tarif;
     private boolean ouvert;
     private String categorie;
-    private LocalDateTime heure_ouverture;
-    private LocalDateTime heure_fermeture;
-    private LocalDateTime heure_fin_inscription;
+    private Time heure_ouverture;
+    private Time heure_fermeture;
+    private Time heure_fin_inscription;
 
     //constructor
-    public Attraction(int Id_attraction, String Nom, int Nb_places_dispo,
-                      int Nb_places_tot, float tarif,
+    public Attraction(int id, String Nom, int Nb_places_dispo,
+                      int Nb_places_tot, double tarif,
                       boolean ouvert, String categorie,
-                      LocalDateTime heure_ouverture, LocalDateTime heure_fermeture,
-                      LocalDateTime heure_fin_inscription) {
+                      Time heure_ouverture, Time heure_fermeture,
+                      Time heure_fin_inscription) {
 
-        this.id_attraction = Id_attraction;
+        this.id = id;
         this.nom = Nom;
         this.Nb_places_dispo = Nb_places_dispo;
         this.Nb_places_tot = Nb_places_tot;
@@ -34,15 +35,15 @@ public class Attraction {
     }
 
     //getters
+    public int getId() { return id; }
     public String getNom() { return nom; }
     public int getPlacesDispo() { return Nb_places_dispo; }
-    public float getTarif() { return tarif; }
+    public double getTarif() { return tarif; }
     public boolean isOuvert() { return ouvert; }
     public String getCategorie() { return categorie; }
-    public LocalDateTime getHeureOuverture() { return heure_ouverture; }
-    public LocalDateTime getHeureFermeture() { return heure_fermeture; }
-    public LocalDateTime getHeureFinInscription() { return heure_fin_inscription; }
-    public int getId_attraction() { return id_attraction; }
+    public Time getHeureOuverture() { return heure_ouverture; }
+    public Time getHeureFermeture() { return heure_fermeture; }
+    public Time getHeureFinInscription() { return heure_fin_inscription; }
     public int getNb_places_dispo() { return Nb_places_dispo; }
     public int getNb_places_tot() { return Nb_places_tot; }
 }
