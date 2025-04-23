@@ -32,6 +32,8 @@ public class AttractionDAO_Implementation {
     private TableColumn<Attraction, Double> colTarif;
     @FXML
     private TableColumn<Attraction, String> colOuvert;
+    @FXML
+    private TableColumn<Attraction, String> colCategorie;
 
     @FXML
     private TableColumn<Attraction, Void> colAction;
@@ -150,14 +152,16 @@ public class AttractionDAO_Implementation {
             return new SimpleStringProperty(ouvert);
         });
 
+        colCategorie.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getCategorie()));
 
         attractionTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         colId.setMaxWidth(1f * Integer.MAX_VALUE * 10);
-        colNom.setMaxWidth(1f * Integer.MAX_VALUE * 25);
-        colPlaces.setMaxWidth(1f * Integer.MAX_VALUE * 25);
-        colTarif.setMaxWidth(1f * Integer.MAX_VALUE * 20);
-        colOuvert.setMaxWidth(1f * Integer.MAX_VALUE * 20);
+        colNom.setMaxWidth(1f * Integer.MAX_VALUE * 17);
+        colPlaces.setMaxWidth(1f * Integer.MAX_VALUE * 20);
+        colTarif.setMaxWidth(1f * Integer.MAX_VALUE * 15);
+        colOuvert.setMaxWidth(1f * Integer.MAX_VALUE * 15);
+        colCategorie.setMaxWidth(1f * Integer.MAX_VALUE * 23);
     }
 
     @FXML

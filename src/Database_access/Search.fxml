@@ -163,6 +163,7 @@
         <TableColumn fx:id="colPlaces" prefWidth="200" text="Places (total / disponibles)" />
         <TableColumn fx:id="colTarif" prefWidth="128.0" text="Tarif (€)" />
         <TableColumn fx:id="colOuvert" prefWidth="138.0" text="Ouvert" />
+        <TableColumn fx:id="colCategorie" prefWidth="138.0" text="Categorie" />
       </columns>
       </TableView>
          </children>
