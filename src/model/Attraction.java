@@ -1,3 +1,5 @@
+package model;
+
 public class Attraction {
     private int id;
     private String nom;

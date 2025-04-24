@@ -106,7 +106,7 @@ public class Retrieve_Data {
         if (connection != null) {
             try {
 
-                String sql = "INSERT INTO Attraction (Pourcentage, concerne, id_attraction) VALUES (?, ?, ?)";
+                String sql = "INSERT INTO Reduction (Pourcentage, concerne, id_attraction) VALUES (?, ?, ?)";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setInt(1, pourcentage);
                 statement.setString(2, concerne);
@@ -132,7 +132,7 @@ public class Retrieve_Data {
 
         if (connection != null) {
             try {
-                String sql = "INSERT INTO Attraction (Date_reservation, Prix, id_utilisateur, id_attraction) VALUES (?, ?, ?, ?)";
+                String sql = "INSERT INTO Reservation (Date_reservation, Prix, id_utilisateur, id_attraction) VALUES (?, ?, ?, ?)";
                 PreparedStatement statement = connection.prepareStatement(sql);
 
                 Timestamp timestamp = Timestamp.valueOf(date_reservation);
@@ -184,6 +184,33 @@ public class Retrieve_Data {
 
             } catch (Exception e) {
                 System.out.println("Erreur lors de la récupération : " + e.getMessage());
+            }
+        }
+    }
+    public void afficher_utilisateurs() {
+        Connection connection = connect();
+
+        if (connection != null) {
+            try {
+                Statement statement = connection.createStatement();
+                String sql = "SELECT * FROM Utilisateur";
+                ResultSet rs = statement.executeQuery(sql);
+
+                System.out.println("\n--- UTILISATEURS ---");
+                while (rs.next()) {
+                    String nom = rs.getString("Nom");
+                    String prenom = rs.getString("Prenom");
+                    String type = rs.getString("Client_type");
+                    String email = rs.getString("Email");
+                    System.out.println(nom + " " + prenom + " | " + type + " | " + email);
+                }
+
+                rs.close();
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                System.out.println("Erreur lors de l'affichage : " + e.getMessage());
             }
         }
     }
