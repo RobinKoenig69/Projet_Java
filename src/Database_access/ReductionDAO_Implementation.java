@@ -1,6 +1,5 @@
 package Database_access;
 
-import Model.Attraction;
 import Model.Reduction;
 import javafx.fxml.FXML;
 
@@ -85,10 +84,6 @@ public class ReductionDAO_Implementation {
             System.out.println(a);
         }
 
-
-
         return reductions;
     }
-
 }
-
