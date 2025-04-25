@@ -1,32 +1,33 @@
-package Controler;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.List;
 
-import Database_access.*;
-import Model.*;
-
+import dao.AttractionDAO;
+import dao.ReductionDAO;
+import model.Attraction;
+import model.Reduction;
 
 public class App {
     public static void main(String[] args) {
-    /*    Retrieve_Data rd = new Retrieve_Data();
-        rd.getData();*/
+        Retrieve_Data rd = new Retrieve_Data();
+        rd.getData();
     }
 }
 
-/*
-class Retrieve_Data {
-    public void getData() {
         String jdbcUrl = "jdbc:mysql://localhost:3306/projet_java";
         String username = "root";
-        String password = "";
+        String password = ""; 
 
         try {
             // Connexion à la base
             Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
             System.out.println("Connexion réussie !");
+            connection.close();
 
-            // recup liste des attractions
+            //recup liste des attractions
             List<Attraction> attractions = AttractionDAO.getAllAttractions(connection);
 
-            // afficher les attractions
+            //afficher les attractions
             System.out.println("\n--- LISTE DES ATTRACTIONS ---");
             for (Attraction attraction : attractions) {
                 System.out.println(
@@ -36,10 +37,18 @@ class Retrieve_Data {
                 );
             }
 
+            // afficher les reduc
+            System.out.println("\n--- LISTE DES REDUCTIONS ---");
+            List<Reduction> reductions = ReductionDAO.getAllReductions(connection);
+            for (Reduction red : reductions) {
+                System.out.println(red);
+            }
+
+            Retrieve_Data rd = new Retrieve_Data();
+            rd.afficher_utilisateurs(); */
+
         } catch (Exception e) {
             System.out.println("Erreur : " + e.getMessage());
         }
     }
 }
-
- */
