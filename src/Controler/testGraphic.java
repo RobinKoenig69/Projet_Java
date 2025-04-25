@@ -7,11 +7,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class testGraphic extends Application {
+
+   public static String UserName = "John";
+   public static int UserID = 1;
+
    @Override
    public void start(Stage primaryStage) {
       try {
          // Load the FXML file (assuming it's located in /resources/Controler/main_view.fxml)
-         Parent root = FXMLLoader.load(getClass().getResource("../Database_access/Search.fxml"));
+         Parent root = FXMLLoader.load(getClass().getResource("../Database_access/Stats.fxml"));
 
          Scene scene = new Scene(root, 1920, 1080);
 

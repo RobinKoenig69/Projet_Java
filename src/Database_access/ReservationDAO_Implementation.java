@@ -1,13 +1,29 @@
 package Database_access;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Timestamp;
+import Model.Reservation;
+import Model.Utilisateur;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+
+import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import static Controler.testGraphic.UserID;
+import static Controler.testGraphic.UserName;
+import static javafx.application.Application.getUserAgentStylesheet;
 
 public class ReservationDAO_Implementation {
 
-    public ReservationDAO_Implementation(LocalDateTime date_reservation, float prix, int id_attraction, int id_utilisateur) {
+    @FXML
+    private TextArea ReservationInfo; // ou TextArea si tu as utilisé <TextArea>
+
+    public ReservationDAO_Implementation() {
+
+    }
+
+    public void ReservationDAO_Add(LocalDateTime date_reservation, float prix, int id_attraction, int id_utilisateur) {
 
         Connection connection = Database_connection.connect();
 
@@ -37,6 +53,61 @@ public class ReservationDAO_Implementation {
         } else {
             System.out.println("La connexion à la base de données a échoué.");
         }
+    }
+
+
+    @FXML
+    public void initialize() {
+        List<Reservation> reservations = ReservationDAO_getInfo();
+
+        if (!reservations.isEmpty()) {
+            StringBuilder infos = new StringBuilder();
+
+            for (Reservation reservation : reservations) {
+                infos.append(String.format(
+                        "Code de réservation : %s\nDate : %s\nPrix : %s\nId Attraction : %s\n\n",
+                        reservation.getId_reservation(),
+                        reservation.getDate_reservation(),
+                        reservation.getPrix(),
+                        reservation.getId_attraction()
+                ));
+            }
+
+            ReservationInfo.setText(infos.toString());
+        } else {
+            ReservationInfo.setText("Aucune réservation trouvée pour cet utilisateur.");
+        }
+    }
+
+
+    @FXML
+    public List<Reservation> ReservationDAO_getInfo() {
+        List<Reservation> reservations = new ArrayList<>();
+
+        try (Connection connection = Database_connection.connect()) {
+            if (connection != null) {
+                String sql = "SELECT * FROM reservation WHERE id_utilisateur = ?";
+                try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                    statement.setInt(1, UserID);
+
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        while (resultSet.next()) {
+                            int id = resultSet.getInt("id_reservation");
+                            Date sqlDate = resultSet.getDate("Date_reservation");
+                            LocalDateTime date = sqlDate.toLocalDate().atStartOfDay(); // adapte si besoin
+                            int prix = resultSet.getInt("Prix");
+                            int idAttraction = resultSet.getInt("id_attraction");
+
+                            reservations.add(new Reservation(id, date, prix, UserID, idAttraction));
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la recherche : " + e.getMessage());
+        }
+
+        return reservations;
     }
 
 }

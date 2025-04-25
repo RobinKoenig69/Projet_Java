@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -39,6 +40,8 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -101,7 +104,15 @@
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
-                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Carte du Parc" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                <Label alignment="CENTER" layoutX="14.0" layoutY="32.0" style="&#10;" text="Carte du Parc" textAlignment="CENTER" textFill="$x2" wrapText="false">
+                           <font>
+                              <Font size="26.0" />
+                           </font></Label>
+                        <ImageView fitHeight="477.0" fitWidth="640.0" layoutX="14.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../Downloads/plan_ete_2024.jpg" />
+                           </image>
+                        </ImageView>
               </children>
             </AnchorPane>
           </content>
@@ -125,5 +136,6 @@
         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
       </padding>
     </HBox>
+      <View />
   </children>
 </VBox>

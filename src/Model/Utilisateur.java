@@ -1,25 +1,24 @@
 package Model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Utilisateur {
-    public enum Client_type { ANCIEN, NOUVEAU, INVITE }
-    public enum Tranche_Age { ENFANT, JEUNE_ADULTE, ADULTE, SENIOR }
 
     private int id_utilisateur;
     private String nom;
     private String prenom;
-    private Client_type clientType;
-    private Tranche_Age trancheAge;
+    private String clientType;
+    private String trancheAge;
     private String email;
     private String adresse;
-    private LocalDate dateNaissance;
+    private Date derniere_visite;
     private int attractionPrefereeId;
 
     //constructor
     public Utilisateur(int id_utilisateur, String nom, String prenom,
-                       Client_type clientType, Tranche_Age trancheAge,
-                       String email, String adresse, LocalDate dateNaissance,
+                       String clientType, String trancheAge,
+                       String email, String adresse, Date derniere_visite,
                        int attractionPrefereeId) {
 
         this.id_utilisateur = id_utilisateur;
@@ -29,7 +28,7 @@ public class Utilisateur {
         this.trancheAge = trancheAge;
         this.email = email;
         this.adresse = adresse;
-        this.dateNaissance = dateNaissance;
+        this.derniere_visite = derniere_visite;
         this.attractionPrefereeId = attractionPrefereeId;
     }
 
@@ -37,10 +36,10 @@ public class Utilisateur {
     public int getId_utilisateur() { return id_utilisateur; }
     public String getNom() { return nom; }
     public String getPrenom() { return prenom; }
-    public Client_type getClientType() { return clientType; }
-    public Tranche_Age getTrancheAge() { return trancheAge; }
+    public String getClientType() { return clientType; }
+    public String getTrancheAge() { return trancheAge; }
     public String getEmail() { return email; }
     public String getAdresse() { return adresse; }
-    public LocalDate getDateNaissance() { return dateNaissance; }
+    public Date getDerniereVisite() { return derniere_visite; }
     public int getAttractionPrefereeId() { return attractionPrefereeId; }
 }
