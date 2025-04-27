@@ -140,7 +140,7 @@ public class UtilisateurDAO_Implementation {
                 connection.close();
 
             } catch (Exception e) {
-                System.out.println("Erreur lors de la recherche : " + e.getMessage());
+                throw new Exceptions_Database("Erreur lors de la recherche", e);
             }
         } else {
             throw new Exceptions_Database("La connexion à la base de données a échoué");
@@ -149,8 +149,6 @@ public class UtilisateurDAO_Implementation {
         return user;
     }
 
-
-    /*
     public Utilisateur UtilisateurDAO_Login() throws Exception {
         Connection connection = Database_connection.connect();
 
@@ -162,8 +160,48 @@ public class UtilisateurDAO_Implementation {
 
         String Pwd_encrypted = encrypt(Pwd, key);
 
+        Utilisateur user = null;
 
+        if (connection != null) {
+            try {
+                String sql = "SELECT id_utilisateur, Prenom FROM utilisateur WHERE Email = ? AND Mdp = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1,  Email.getText());
+                statement.setString(2, Pwd_encrypted);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    int id = resultSet.getInt("id_utilisateur");
+                    String nom = resultSet.getString("Nom");
+                    String prenom = resultSet.getString("Prenom");
+                    String client_type = resultSet.getString("Client_type");
+                    String tranche_age = resultSet.getString("Tranche_Age");
+                    String email = resultSet.getString("Email");
+                    String adresse = resultSet.getString("Adresse");
+                    Date derniere_visite = resultSet.getDate("Derniere_visite");
+                    int id_attractionpref = resultSet.getInt("Attraction_preferee_id");
+
+                    user = new Utilisateur(id, nom, prenom, client_type, tranche_age, email, adresse, derniere_visite, id_attractionpref);
+
+                    UserID = id;
+                    UserName = prenom;
+                } else {
+                    throw new Exceptions_Database("Le compte n'existe pas");
+                }
+
+                resultSet.close();
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur lors de la recherche", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
+
+        return user;
     }
-    */
 }
 
