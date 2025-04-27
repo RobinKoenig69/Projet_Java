@@ -6,7 +6,11 @@ VALUES
     ('Roller Coaster', 100, 50, TRUE, 25.50, 'Sensations Fortes', '09:00:00', '18:00:00', '17:00:00'),
     ('Ferris Wheel', 60, 30, TRUE, 15.00, 'Familiaux', '10:00:00', '20:00:00', '19:00:00'),
     ('Water Slide', 80, 40, TRUE, 20.00, 'Aquatiques', '11:00:00', '19:00:00', '18:00:00'),
-    ('Haunted House', 50, 25, FALSE, 10.00, 'Autres', '12:00:00', '22:00:00', '21:00:00');
+    ('Haunted House', 50, 25, FALSE, 10.00, 'Autres', '12:00:00', '22:00:00', '21:00:00'),
+    ('Bumper Cars', 50, 25, TRUE, 12.00, 'Familiaux', '10:00:00', '20:00:00', '19:00:00'),
+    ('Swing Ride', 70, 35, TRUE, 18.00, 'Sensations Fortes', '09:00:00', '18:00:00', '17:00:00'),
+    ('Log Flume', 90, 45, TRUE, 22.00, 'Aquatiques', '11:00:00', '19:00:00', '18:00:00'),
+    ('Mirror Maze', 40, 20, FALSE, 8.00, 'Autres', '12:00:00', '22:00:00', '21:00:00');
 
 -- Insert data into Reduction table
 INSERT INTO projet_java.reduction (Pourcentage, Concerne, id_attraction)
@@ -14,7 +18,11 @@ VALUES
     (10, 'Ancien', 1),
     (15, 'Nouveau', 2),
     (20, 'Ancien', 3),
-    (5, 'Nouveau', 4);
+    (5, 'Nouveau', 4),
+    (12, 'Ancien', 5),
+    (18, 'Nouveau', 6),
+    (25, 'Ancien', 7),
+    (7, 'Nouveau', 8);
 
 -- Insert data into Utilisateur table
 INSERT INTO projet_java.utilisateur (Nom, Prenom, Client_type, Tranche_Age, Email, Adresse, Derniere_visite, Attraction_preferee_id)
@@ -22,7 +30,11 @@ VALUES
     ('Doe', 'John', 'Ancien', 'Adulte', 'john.doe@example.com', '123 Main St', '2023-01-01', 1),
     ('Smith', 'Jane', 'Nouveau', 'Jeune Adulte', 'jane.smith@example.com', '456 Elm St', '2023-02-01', 2),
     ('Brown', 'Charlie', 'Invite', 'Enfant', 'charlie.brown@example.com', '789 Oak St', '2023-03-01', 3),
-    ('Johnson', 'Emily', 'Ancien', 'Senior', 'emily.johnson@example.com', '101 Pine St', '2023-04-01', 4);
+    ('Johnson', 'Emily', 'Ancien', 'Senior', 'emily.johnson@example.com', '101 Pine St', '2023-04-01', 4),
+    ('Williams', 'Alex', 'Ancien', 'Adulte', 'alex.williams@example.com', '321 Birch St', '2023-05-01', 5),
+    ('Taylor', 'Chris', 'Nouveau', 'Jeune Adulte', 'chris.taylor@example.com', '654 Cedar St', '2023-06-01', 6),
+    ('Davis', 'Pat', 'Invite', 'Enfant', 'pat.davis@example.com', '987 Maple St', '2023-07-01', 7),
+    ('Martinez', 'Sam', 'Ancien', 'Senior', 'sam.martinez@example.com', '111 Spruce St', '2023-08-01', 8);
 
 -- Insert data into Reservation table
 INSERT INTO projet_java.reservation (Date_reservation, Prix, id_utilisateur, id_attraction)
@@ -30,7 +42,11 @@ VALUES
     ('2023-05-01 10:00:00', 50.00, 1, 1),
     ('2023-05-02 11:00:00', 30.00, 2, 2),
     ('2023-05-03 12:00:00', 40.00, 3, 3),
-    ('2023-05-04 13:00:00', 20.00, 4, 4);
+    ('2023-05-04 13:00:00', 20.00, 4, 4),
+    ('2023-09-01 14:00:00', 55.00, 5, 5),
+    ('2023-09-02 15:00:00', 35.00, 6, 6),
+    ('2023-09-03 16:00:00', 45.00, 7, 7),
+    ('2023-09-04 17:00:00', 25.00, 8, 8);
 
 -- Insert data into Administrateur table
 INSERT INTO projet_java.administrateur (id_utilisateur)
@@ -38,4 +54,8 @@ VALUES
     (1),
     (2),
     (3),
-    (4);
+    (4),
+    (5),
+    (6),
+    (7),
+    (8);
