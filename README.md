@@ -1,4 +1,4 @@
-# :computer: Base-projet-Java
+# :computer: Projet JAVA : Attractions
 
 🌟 Highlights
 Gestion complète de réservations d'attractions avec remises selon le type de client
