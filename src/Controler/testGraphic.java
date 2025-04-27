@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
+import java.util.Date;
+
 public class testGraphic extends Application {
 
    public static String UserName = "John";
@@ -28,7 +31,18 @@ public class testGraphic extends Application {
       }
    }
 
-   public static void main(String[] args) {
+   public static void main(String[] args) throws FileNotFoundException {
+      Log.startLogging("console_output.txt");
+
+      //Enregistrement de tous les évènements console dans un fichier spécifique :
+      System.out.print("\n\nDébut des logs en date du :");
+
+      System.out.println(new Date() +"\n");
+
       launch(args);
+
+
+      System.out.print("\n\n");
+      Log.stopLogging();
    }
 }
