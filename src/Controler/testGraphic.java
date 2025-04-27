@@ -15,7 +15,7 @@ public class testGraphic extends Application {
    public void start(Stage primaryStage) {
       try {
          // Load the FXML file (assuming it's located in /resources/Controler/main_view.fxml)
-         Parent root = FXMLLoader.load(getClass().getResource("../Database_access/Stats.fxml"));
+         Parent root = FXMLLoader.load(getClass().getResource("../Database_access/Search.fxml"));
 
          Scene scene = new Scene(root, 1920, 1080);
 

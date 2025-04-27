@@ -22,7 +22,7 @@ public class UtilisateurDAO_Implementation {
 
     }
 
-    public void UtilisateurDAO_Add(String nom, String prenom, int age, String email, String adresse) {
+    public void UtilisateurDAO_Add(String nom, String prenom, int age, String email, String adresse) throws Exceptions_Database {
 
         Connection connection = Database_connection.connect();
 
@@ -66,13 +66,15 @@ public class UtilisateurDAO_Implementation {
                 connection.close();
 
             } catch (Exception e) {
-                System.out.println("Erreur lors de l'insertion : " + e.getMessage());
+                throw new Exceptions_Database("Erreur de insertion", e);
             }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws  Exceptions_Database {
         Utilisateur user = UtilisateurDAO_getInfo();
 
         if (user != null) {
@@ -94,7 +96,7 @@ public class UtilisateurDAO_Implementation {
     }
 
     @FXML
-    public Utilisateur UtilisateurDAO_getInfo() {
+    public Utilisateur UtilisateurDAO_getInfo() throws Exceptions_Database {
         Utilisateur user = null;
 
         Connection connection = Database_connection.connect();
@@ -129,6 +131,8 @@ public class UtilisateurDAO_Implementation {
             } catch (Exception e) {
                 System.out.println("Erreur lors de la recherche : " + e.getMessage());
             }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
 
         return user;

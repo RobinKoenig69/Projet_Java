@@ -23,7 +23,7 @@ public class ReservationDAO_Implementation {
 
     }
 
-    public void ReservationDAO_Add(LocalDateTime date_reservation, float prix, int id_attraction, int id_utilisateur) {
+    public void ReservationDAO_Add(LocalDateTime date_reservation, float prix, int id_attraction, int id_utilisateur) throws  Exceptions_Database {
 
         Connection connection = Database_connection.connect();
 
@@ -48,16 +48,16 @@ public class ReservationDAO_Implementation {
                 connection.close();
 
             } catch (Exception e) {
-                System.out.println("Erreur lors de l'insertion : " + e.getMessage());
+                throw new  Exceptions_Database("Erreur lors de l'insertion", e);
             }
         } else {
-            System.out.println("La connexion à la base de données a échoué.");
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
     }
 
 
     @FXML
-    public void initialize() {
+    public void initialize() throws Exceptions_Database {
         List<Reservation> reservations = ReservationDAO_getInfo();
 
         if (!reservations.isEmpty()) {
@@ -81,7 +81,7 @@ public class ReservationDAO_Implementation {
 
 
     @FXML
-    public List<Reservation> ReservationDAO_getInfo() {
+    public List<Reservation> ReservationDAO_getInfo() throws Exceptions_Database{
         List<Reservation> reservations = new ArrayList<>();
 
         try (Connection connection = Database_connection.connect()) {
@@ -103,8 +103,11 @@ public class ReservationDAO_Implementation {
                     }
                 }
             }
+            else {
+                throw new Exceptions_Database("Connexion à la base de données échouée.");
+            }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la recherche : " + e.getMessage());
+            throw new Exceptions_Database("Erreur lors de la recherche", e);
         }
 
         return reservations;

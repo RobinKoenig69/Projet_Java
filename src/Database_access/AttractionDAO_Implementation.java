@@ -45,12 +45,12 @@ public class AttractionDAO_Implementation {
     private ToggleGroup Select_option;
 
 
-
     public AttractionDAO_Implementation() {
         // constructeur vide requis par FXMLLoader
     }
+
     @FXML
-    public void AttractionDAO_Add(String nom, int nb_places_tot, String categorie, Boolean ouvert, int prix, Time heure_ouverture, Time heure_fermeture, Time fin_inscription){
+    public void AttractionDAO_Add(String nom, int nb_places_tot, String categorie, Boolean ouvert, int prix, Time heure_ouverture, Time heure_fermeture, Time fin_inscription) throws Exceptions_Database {
 
         Connection connection = Database_connection.connect();
 
@@ -79,13 +79,15 @@ public class AttractionDAO_Implementation {
                 connection.close();
 
             } catch (Exception e) {
-                System.out.println("Erreur lors de l'insertion : " + e.getMessage());
+                throw new Exceptions_Database("Erreur de insertion", e);
             }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
     }
 
     @FXML
-    public List<Attraction> AttractionDAO_GetAll() {
+    public List<Attraction> AttractionDAO_GetAll() throws Exceptions_Database {
         List<Attraction> attractions = new ArrayList<>();
         Connection connection = Database_connection.connect();
 
@@ -119,10 +121,10 @@ public class AttractionDAO_Implementation {
                 connection.close();
 
             } catch (Exception e) {
-                System.out.println("Erreur lors de la recherche : " + e.getMessage());
+                throw new Exceptions_Database("Erreur lors de la recherche", e);
             }
         } else {
-            System.out.println("Connexion à la base de données échouée.");
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
 
         // For debug
@@ -165,244 +167,96 @@ public class AttractionDAO_Implementation {
     }
 
     @FXML
-    public List<Attraction> AttractionDAO_Get() {
+    public List<Attraction> AttractionDAO_Get() throws Exceptions_Database {
         List<Attraction> attractions = new ArrayList<>();
-        Connection connection = Database_connection.connect();
 
         if (inputtext_attraction == null) {
-            System.out.println("Le champ inputtext_attraction n'est pas initialisé !");
-            //return attractions;
+            throw new Exceptions_Database("Le champ inputtext n'est pas initialisé !");
         }
 
         Toggle selectedToggle = Select_option.getSelectedToggle();
+        if (selectedToggle == null) {
+            throw new Exceptions_Database("Aucun critère de recherche sélectionné !");
+        }
 
-        if (selectedToggle != null) {
-            String selectedText = ((RadioButton) selectedToggle).getText();
+        String selectedText = ((RadioButton) selectedToggle).getText();
+        int search_criteria;
+        switch (selectedText) {
+            case "Nom" -> search_criteria = 0;
+            case "Tarif" -> search_criteria = 1;
+            case "Ouvert" -> search_criteria = 2;
+            case "Places disponibles" -> search_criteria = 3;
+            case "Catégorie" -> search_criteria = 4;
+            default -> throw new Exceptions_Database("Critère de recherche inconnu !");
+        }
 
-            switch (selectedText) {
-                case "Nom":
-                    search_criteria = 0;
-                    break;
-                case "Tarif":
-                    search_criteria = 1;
-                    break;
-                case "Ouvert":
-                    search_criteria = 2;
-                    break;
-                case "Places disponibles":
-                    search_criteria = 3;
-                    break;
-                case "Catégorie":
-                    search_criteria = 4;
-                    break;
-                default:
-                    System.out.println("Critère inconnu");
-                    return attractions;
+        String search = inputtext_attraction.getText().trim();
+
+        String sql;
+        boolean needsParameter = true;
+
+        switch (search_criteria) {
+            case 0 -> sql = "SELECT * FROM attraction WHERE Nom LIKE ?";
+            case 1 -> sql = "SELECT * FROM attraction WHERE Tarif < ?";
+            case 2 -> {
+                sql = "SELECT * FROM attraction WHERE Ouvert = 1";
+                needsParameter = false;
+            }
+            case 3 -> sql = "SELECT * FROM attraction WHERE Nb_places_dispo > ?";
+            case 4 -> sql = "SELECT * FROM attraction WHERE Categorie LIKE ?";
+            default -> throw new Exceptions_Database("Critère non pris en charge !");
+        }
+
+        try (Connection connection = Database_connection.connect();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            if (connection == null) {
+                throw new Exceptions_Database("Connexion à la base de données échouée.");
             }
 
-            // Lire le texte de recherche uniquement si le critère le nécessite
-            String search = "";
-            if (search_criteria == 0 || search_criteria == 1 || search_criteria == 3 || search_criteria == 4) {
-                if (inputtext_attraction == null) {
-                    System.out.println("Champ de recherche non initialisé.");
-                    return attractions;
-                }
-                search = inputtext_attraction.getText();
-            }
-
-
-            if (search_criteria == 0) {
-                if (connection != null) {
-                    try {
-                        String sql = "SELECT * FROM attraction WHERE Nom LIKE ?";
-                        PreparedStatement statement = connection.prepareStatement(sql);
-                        statement.setString(1, "%" + search + "%");
-
-                        ResultSet resultSet = statement.executeQuery();
-
-                        while (resultSet.next()) {
-                            int id = resultSet.getInt("id_attraction");
-                            String nom = resultSet.getString("Nom");
-                            int nbPlacesTot = resultSet.getInt("Nb_places_tot");
-                            int nbPlacesDispo = resultSet.getInt("Nb_places_dispo");
-                            boolean ouvert = resultSet.getBoolean("Ouvert");
-                            double tarif = resultSet.getDouble("Tarif");
-                            String categorie = resultSet.getString("Categorie");
-                            Time heureOuverture = resultSet.getTime("Heure_ouverture");
-                            Time heureFermeture = resultSet.getTime("Heure_fermeture");
-                            Time heureFinInscription = resultSet.getTime("Heure_fin_inscription");
-
-                            Attraction attraction = new Attraction(id, nom, nbPlacesTot, nbPlacesDispo, tarif, ouvert,
-                                    categorie, heureOuverture, heureFermeture, heureFinInscription);
-
-                            attractions.add(attraction);
+            if (needsParameter) {
+                switch (search_criteria) {
+                    case 0, 4 -> statement.setString(1, "%" + search + "%");
+                    case 1 -> {
+                        try {
+                            statement.setDouble(1, Double.parseDouble(search));
+                        } catch (NumberFormatException e) {
+                            throw new Exceptions_Database("Le tarif doit être un nombre valide.", e);
                         }
-
-                        resultSet.close();
-                        statement.close();
-                        connection.close();
-
-                    } catch (Exception e) {
-                        System.out.println("Erreur lors de la recherche : " + e.getMessage());
+                    }
+                    case 3 -> {
+                        try {
+                            statement.setInt(1, Integer.parseInt(search));
+                        } catch (NumberFormatException e) {
+                            throw new Exceptions_Database("Le nombre de places doit être un entier valide.", e);
+                        }
                     }
                 }
             }
 
-            else if (search_criteria == 1) {
-                if (connection != null) {
-                    try {
-                        String sql = "SELECT * FROM attraction WHERE Tarif <  ?";
-                        PreparedStatement statement = connection.prepareStatement(sql);
-
-                        ResultSet resultSet = statement.executeQuery();
-
-                        while (resultSet.next()) {
-                            int id = resultSet.getInt("id_attraction");
-                            String nom = resultSet.getString("Nom");
-                            int nbPlacesTot = resultSet.getInt("Nb_places_tot");
-                            int nbPlacesDispo = resultSet.getInt("Nb_places_dispo");
-                            boolean ouvert = resultSet.getBoolean("Ouvert");
-                            double tarif = resultSet.getDouble("Tarif");
-                            String categorie = resultSet.getString("Categorie");
-                            Time heureOuverture = resultSet.getTime("Heure_ouverture");
-                            Time heureFermeture = resultSet.getTime("Heure_fermeture");
-                            Time heureFinInscription = resultSet.getTime("Heure_fin_inscription");
-
-                            Attraction attraction = new Attraction(id, nom, nbPlacesTot, nbPlacesDispo, tarif, ouvert,
-                                    categorie, heureOuverture, heureFermeture, heureFinInscription);
-
-                            attractions.add(attraction);
-                        }
-
-                        resultSet.close();
-                        statement.close();
-                        connection.close();
-
-                    } catch (Exception e) {
-                        System.out.println("Erreur lors de la recherche : " + e.getMessage());
-                    }
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Attraction attraction = new Attraction(
+                            resultSet.getInt("id_attraction"),
+                            resultSet.getString("Nom"),
+                            resultSet.getInt("Nb_places_tot"),
+                            resultSet.getInt("Nb_places_dispo"),
+                            resultSet.getDouble("Tarif"),
+                            resultSet.getBoolean("Ouvert"),
+                            resultSet.getString("Categorie"),
+                            resultSet.getTime("Heure_ouverture"),
+                            resultSet.getTime("Heure_fermeture"),
+                            resultSet.getTime("Heure_fin_inscription")
+                    );
+                    attractions.add(attraction);
                 }
             }
 
-            else if  (search_criteria == 2) {
-                if (connection != null) {
-                    try {
-                        String sql = "SELECT * FROM attraction WHERE Ouvert = 1";
-                        PreparedStatement statement = connection.prepareStatement(sql);
-
-                        ResultSet resultSet = statement.executeQuery();
-
-                        while (resultSet.next()) {
-                            int id = resultSet.getInt("id_attraction");
-                            String nom = resultSet.getString("Nom");
-                            int nbPlacesTot = resultSet.getInt("Nb_places_tot");
-                            int nbPlacesDispo = resultSet.getInt("Nb_places_dispo");
-                            boolean ouvert = resultSet.getBoolean("Ouvert");
-                            double tarif = resultSet.getDouble("Tarif");
-                            String categorie = resultSet.getString("Categorie");
-                            Time heureOuverture = resultSet.getTime("Heure_ouverture");
-                            Time heureFermeture = resultSet.getTime("Heure_fermeture");
-                            Time heureFinInscription = resultSet.getTime("Heure_fin_inscription");
-
-                            Attraction attraction = new Attraction(id, nom, nbPlacesTot, nbPlacesDispo, tarif, ouvert,
-                                    categorie, heureOuverture, heureFermeture, heureFinInscription);
-
-                            attractions.add(attraction);
-                        }
-
-                        resultSet.close();
-                        statement.close();
-                        connection.close();
-
-                    } catch (Exception e) {
-                        System.out.println("Erreur lors de la recherche : " + e.getMessage());
-                    }
-                }
-            }
-
-            else if (search_criteria == 3) {
-                if (connection != null) {
-                    try {
-                        String sql = "SELECT * FROM attraction WHERE Nb_places_dispo >  ?";
-                        PreparedStatement statement = connection.prepareStatement(sql);
-
-                        statement.setInt(1, Integer.parseInt(search)); // ou catch NumberFormatException
-
-                        ResultSet resultSet = statement.executeQuery();
-
-                        while (resultSet.next()) {
-                            int id = resultSet.getInt("id_attraction");
-                            String nom = resultSet.getString("Nom");
-                            int nbPlacesTot = resultSet.getInt("Nb_places_tot");
-                            int nbPlacesDispo = resultSet.getInt("Nb_places_dispo");
-                            boolean ouvert = resultSet.getBoolean("Ouvert");
-                            double tarif = resultSet.getDouble("Tarif");
-                            String categorie = resultSet.getString("Categorie");
-                            Time heureOuverture = resultSet.getTime("Heure_ouverture");
-                            Time heureFermeture = resultSet.getTime("Heure_fermeture");
-                            Time heureFinInscription = resultSet.getTime("Heure_fin_inscription");
-
-                            Attraction attraction = new Attraction(id, nom, nbPlacesTot, nbPlacesDispo, tarif, ouvert,
-                                    categorie, heureOuverture, heureFermeture, heureFinInscription);
-
-                            attractions.add(attraction);
-                        }
-
-                        resultSet.close();
-                        statement.close();
-                        connection.close();
-
-                    } catch (Exception e) {
-                        System.out.println("Erreur lors de la recherche : " + e.getMessage());
-                    }
-                }
-            }
-
-            else if (search_criteria == 4) {
-                if (connection != null) {
-                    try {
-                        String sql = "SELECT * FROM attraction WHERE Categorie LIKE  ?";
-                        PreparedStatement statement = connection.prepareStatement(sql);
-                        statement.setString(1, "%" + search + "%");
-
-                        ResultSet resultSet = statement.executeQuery();
-
-                        while (resultSet.next()) {
-                            int id = resultSet.getInt("id_attraction");
-                            String nom = resultSet.getString("Nom");
-                            int nbPlacesTot = resultSet.getInt("Nb_places_tot");
-                            int nbPlacesDispo = resultSet.getInt("Nb_places_dispo");
-                            boolean ouvert = resultSet.getBoolean("Ouvert");
-                            double tarif = resultSet.getDouble("Tarif");
-                            String categorie = resultSet.getString("Categorie");
-                            Time heureOuverture = resultSet.getTime("Heure_ouverture");
-                            Time heureFermeture = resultSet.getTime("Heure_fermeture");
-                            Time heureFinInscription = resultSet.getTime("Heure_fin_inscription");
-
-                            Attraction attraction = new Attraction(id, nom, nbPlacesTot, nbPlacesDispo, tarif, ouvert,
-                                    categorie, heureOuverture, heureFermeture, heureFinInscription);
-
-                            attractions.add(attraction);
-                        }
-
-                        resultSet.close();
-                        statement.close();
-                        connection.close();
-
-                    } catch (Exception e) {
-                        System.out.println("Erreur lors de la recherche : " + e.getMessage());
-                    }
-                }
-            }
-
-
-
+        } catch (SQLException e) {
+            throw new Exceptions_Database("Erreur lors de la récupération des attractions.", e);
         }
 
         attractionTable.getItems().setAll(attractions);
-
         return attractions;
     }
 }
-
-

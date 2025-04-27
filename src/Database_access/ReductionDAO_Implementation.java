@@ -3,10 +3,7 @@ package Database_access;
 import Model.Reduction;
 import javafx.fxml.FXML;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Time;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,44 +43,43 @@ public class ReductionDAO_Implementation {
     }
 
     @FXML
-    public List<Reduction> ReductionDAO_GetAll(){
+    public List<Reduction> ReductionDAO_GetAll() throws Exceptions_Database {
         List<Reduction> reductions = new ArrayList<>();
         Connection connection = Database_connection.connect();
 
-        if (connection != null) {
-            try {
-                String sql = "SELECT * FROM reduction";
-                PreparedStatement statement = connection.prepareStatement(sql);
-                ResultSet resultSet = statement.executeQuery();
-
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id_reduction");
-                    int pourcentage = resultSet.getInt("Pourcentage");
-                    String concerne = resultSet.getString("Concerne");
-                    int idattraction = resultSet.getInt("id_attraction");
-
-                    Reduction reduction = new Reduction(id, pourcentage, concerne, idattraction);
-
-                    reductions.add(reduction);
-                }
-
-                resultSet.close();
-                statement.close();
-                connection.close();
-
-            } catch (Exception e) {
-                System.out.println("Erreur lors de la recherche : " + e.getMessage());
-            }
-        } else {
-            System.out.println("Connexion à la base de données échouée.");
+        if (connection == null) {
+            throw new Exceptions_Database("Connexion à la base de données échouée.");
         }
 
-        // For debug
+        try {
+            String sql = "SELECT * FROM reduction";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
 
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_reduction");
+                int pourcentage = resultSet.getInt("Pourcentage");
+                String concerne = resultSet.getString("Concerne");
+                int idattraction = resultSet.getInt("id_attraction");
+
+                Reduction reduction = new Reduction(id, pourcentage, concerne, idattraction);
+                reductions.add(reduction);
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+
+        } catch (Exception e) {
+            throw new Exceptions_Database("Erreur lors de la récupération des réductions.", e);
+        }
+
+        // Debug
         for (Reduction a : reductions) {
             System.out.println(a);
         }
 
         return reductions;
     }
+
 }
