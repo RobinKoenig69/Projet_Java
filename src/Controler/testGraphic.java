@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 
+import Encryption.AES.*;
+
 public class testGraphic extends Application {
 
    public static String UserName = "John";

@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,6 +14,8 @@ import java.sql.*;
 
 import static Controler.testGraphic.UserID;
 import static Controler.testGraphic.UserName;
+import static Encryption.AES.encrypt;
+import static Encryption.AES.generateKey;
 
 public class UtilisateurDAO_Implementation {
 
@@ -38,19 +42,19 @@ public class UtilisateurDAO_Implementation {
 
                 String tranche_age = "";
 
-                if (age <15){
+                if (age < 15) {
                     tranche_age = "Enfant";
                 }
 
-                if (age >15 && age < 18){
+                if (age > 15 && age < 18) {
                     tranche_age = "Jeune Adultre";
                 }
 
-                if  (age > 18 && age < 60){
+                if (age > 18 && age < 60) {
                     tranche_age = "Adulte";
                 }
 
-                if  (age > 60){
+                if (age > 60) {
                     tranche_age = "Senior";
                 }
 
@@ -81,7 +85,7 @@ public class UtilisateurDAO_Implementation {
     }
 
     @FXML
-    public void initialize() throws  Exceptions_Database {
+    public void initialize() throws Exceptions_Database {
         Utilisateur user = UtilisateurDAO_getInfo();
 
         if (user != null) {
@@ -147,39 +151,19 @@ public class UtilisateurDAO_Implementation {
 
 
     /*
-    public Utilisateur UtilisateurDAO_Login() throws Exceptions_Database, AES.InvalidKeyLengthException, AES.StrongEncryptionNotAvailableException, IOException {
+    public Utilisateur UtilisateurDAO_Login() throws Exception {
         Connection connection = Database_connection.connect();
 
-        // Ton mot de passe à encoder
-        String motDePasseAEncoder = "MonSuperMotDePasse123";
+        String Pwd = Mdp.getText();
 
-        // Le mot de passe utilisé pour générer la clé de chiffrement
-        char[] passwordPourChiffrement = "MotDePasseDeChiffrement".toCharArray();
+        String Key_AES = "ECE";
 
-        // Convertir le String en InputStream
-        ByteArrayInputStream input = new ByteArrayInputStream(motDePasseAEncoder.getBytes("UTF-8"));
+        SecretKey key = generateKey(Key_AES);
 
-        // Préparer un OutputStream pour récupérer le résultat
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        String Pwd_encrypted = encrypt(Pwd, key);
 
-        // Appeler la fonction encrypt
-        AES.encrypt(128, passwordPourChiffrement, input, output);
 
-        // Récupérer le contenu chiffré
-        byte[] donneesChiffrees = output.toByteArray();
-
-        // (optionnel) Encoder en Base64 pour l'afficher facilement
-        String donneesChiffreesBase64 = java.util.Base64.getEncoder().encodeToString(donneesChiffrees);
-
-        System.out.println("Mot de passe chiffré (Base64) : " + donneesChiffreesBase64);
-
-        if (connection != null) {
-            try{
-                String sql = "SELECT id_utilisateur, Prenom FROM utilisateur WHERE Email = ? AND Mdp = ?";
-            }
-        }
     }
-
-     */
+    */
 }
 
