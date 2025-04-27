@@ -1,13 +1,14 @@
 package Database_access;
 
-import Model.Attraction;
 import Model.Utilisateur;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
 
 import static Controler.testGraphic.UserID;
 import static Controler.testGraphic.UserName;
@@ -16,6 +17,12 @@ public class UtilisateurDAO_Implementation {
 
     @FXML
     private TextArea UserInfo;
+
+    @FXML
+    private TextField Email;
+
+    @FXML
+    private TextField Mdp;
 
 
     public UtilisateurDAO_Implementation() {
@@ -137,5 +144,42 @@ public class UtilisateurDAO_Implementation {
 
         return user;
     }
+
+
+    /*
+    public Utilisateur UtilisateurDAO_Login() throws Exceptions_Database, AES.InvalidKeyLengthException, AES.StrongEncryptionNotAvailableException, IOException {
+        Connection connection = Database_connection.connect();
+
+        // Ton mot de passe à encoder
+        String motDePasseAEncoder = "MonSuperMotDePasse123";
+
+        // Le mot de passe utilisé pour générer la clé de chiffrement
+        char[] passwordPourChiffrement = "MotDePasseDeChiffrement".toCharArray();
+
+        // Convertir le String en InputStream
+        ByteArrayInputStream input = new ByteArrayInputStream(motDePasseAEncoder.getBytes("UTF-8"));
+
+        // Préparer un OutputStream pour récupérer le résultat
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+
+        // Appeler la fonction encrypt
+        AES.encrypt(128, passwordPourChiffrement, input, output);
+
+        // Récupérer le contenu chiffré
+        byte[] donneesChiffrees = output.toByteArray();
+
+        // (optionnel) Encoder en Base64 pour l'afficher facilement
+        String donneesChiffreesBase64 = java.util.Base64.getEncoder().encodeToString(donneesChiffrees);
+
+        System.out.println("Mot de passe chiffré (Base64) : " + donneesChiffreesBase64);
+
+        if (connection != null) {
+            try{
+                String sql = "SELECT id_utilisateur, Prenom FROM utilisateur WHERE Email = ? AND Mdp = ?";
+            }
+        }
+    }
+
+     */
 }
 

@@ -6,7 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 
 public class testGraphic extends Application {
@@ -31,7 +34,7 @@ public class testGraphic extends Application {
       }
    }
 
-   public static void main(String[] args) throws FileNotFoundException {
+   public static void main(String[] args) throws IOException {
       Log.startLogging("console_output.txt");
 
       //Enregistrement de tous les évènements console dans un fichier spécifique :

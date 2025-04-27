@@ -33,6 +33,7 @@ create table utilisateur (
                              Adresse VARCHAR(255),
                              Derniere_visite DATE,
                              Attraction_preferee_id INT,
+                             Mdp VARCHAR(60),
                              FOREIGN KEY (Attraction_preferee_id) REFERENCES Attraction(id_attraction)
 );
 
