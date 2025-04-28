@@ -2,20 +2,24 @@ package Database_access;
 
 import Model.Utilisateur;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.*;
 
 import static Controler.testGraphic.UserID;
 import static Controler.testGraphic.UserName;
-import static Encryption.AES.encrypt;
-import static Encryption.AES.generateKey;
+import static Encryption.MD5.hash;
+
+import Encryption.MD5.*;
 
 public class UtilisateurDAO_Implementation {
 
@@ -28,12 +32,28 @@ public class UtilisateurDAO_Implementation {
     @FXML
     private TextField Mdp;
 
+    @FXML
+    private TextField nom;
+
+    @FXML
+    private TextField prenom;
+
+
+    @FXML
+    private Spinner age;
+
+    @FXML
+    private TextField adresse;
+
+    @FXML
+    private TextFlow Error_message;
+
 
     public UtilisateurDAO_Implementation() {
 
     }
 
-    public void UtilisateurDAO_Add(String nom, String prenom, int age, String email, String adresse) throws Exceptions_Database {
+    public void UtilisateurDAO_Add(String nom, String prenom, int age, String email, String adresse, String Mdp) throws Exceptions_Database {
 
         Connection connection = Database_connection.connect();
 
@@ -58,7 +78,7 @@ public class UtilisateurDAO_Implementation {
                     tranche_age = "Senior";
                 }
 
-                String sql = "INSERT INTO Utilisateur (Nom, Prenom, Client_type, Tranche_Age, Email, Adresse) VALUES (?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO Utilisateur (Nom, Prenom, Client_type, Tranche_Age, Email, Adresse, Mdp) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, nom);
                 statement.setString(2, prenom);
@@ -66,6 +86,7 @@ public class UtilisateurDAO_Implementation {
                 statement.setString(4, tranche_age);
                 statement.setString(5, email);
                 statement.setString(6, adresse);
+                statement.setString(7, Mdp);
 
                 int rowsInserted = statement.executeUpdate();
 
@@ -85,7 +106,6 @@ public class UtilisateurDAO_Implementation {
     }
 
     @FXML
-
     public void initialize() throws Exceptions_Database {
         Utilisateur user = UtilisateurDAO_getInfo();
 
@@ -184,17 +204,15 @@ public class UtilisateurDAO_Implementation {
 
         String Pwd = Mdp.getText();
 
-        String Key_AES = "ECE";
+        String Pwd_encrypted = hash(Pwd);
 
-        SecretKey key = generateKey(Key_AES);
-
-        String Pwd_encrypted = encrypt(Pwd, key);
+        //System.out.println(Pwd_encrypted);
 
         Utilisateur user = null;
 
         if (connection != null) {
             try {
-                String sql = "SELECT id_utilisateur, Prenom FROM utilisateur WHERE Email = ? AND Mdp = ?";
+                String sql = "SELECT * FROM utilisateur WHERE Email = ? AND Mdp = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1,  Email.getText());
                 statement.setString(2, Pwd_encrypted);
@@ -216,10 +234,15 @@ public class UtilisateurDAO_Implementation {
 
                     UserID = id;
                     UserName = prenom;
-                } else {
-                    throw new Exceptions_Database("Le compte n'existe pas");
 
-                    //renvoi eventuel sur une autre page permettant de se creer un compte
+                    UtilisateurDAO_LoginRegister_redirect(id);
+                } else {
+                    System.out.println("Utilisateur n'existe pas");
+                    Error_message.getChildren().clear(); // Nettoyer d'abord l'ancien message
+                    Text errorText = new Text("L'utilisateur n'existe pas !");
+                    errorText.setStyle("-fx-fill: red; -fx-font-size: 24px;");
+                    Error_message.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+                    Error_message.getChildren().add(errorText);
                 }
 
                 resultSet.close();
@@ -234,6 +257,81 @@ public class UtilisateurDAO_Implementation {
         }
 
         return user;
+    }
+
+    @FXML
+    private void UtilisateurDAO_Login_redirect() throws Exception {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Register.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+            Scene scene = new Scene(root, 1920, 1080);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void UtilisateurDAO_LoginRegister_redirect(int userID) throws Exception {
+
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT * FROM administrateur WHERE id_utilisateur = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setInt(1,  userID);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+                        Scene scene = new Scene(root, 1920, 1080);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+                        Scene scene = new Scene(root, 1920, 1080);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                resultSet.close();
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur lors de la recherche", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
+    }
+
+
+    @FXML
+    private void UtilisateurDAO_Register() throws Exception {
+
+        String Pwd = Mdp.getText();
+
+        String Pwd_encrypted = hash(Pwd);
+
+        UtilisateurDAO_Add(nom.getText(), prenom.getText(), Integer.parseInt(age.getValue().toString()), Email.getText(), adresse.getText(), Pwd_encrypted);
+
     }
 
 
