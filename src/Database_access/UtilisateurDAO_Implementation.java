@@ -85,6 +85,33 @@ public class UtilisateurDAO_Implementation {
     }
 
     @FXML
+
+    public void initialize() throws Exceptions_Database {
+        Utilisateur user = UtilisateurDAO_getInfo();
+
+        if (UserInfo != null) { // Vérifie que UserInfo existe avant d'y accéder
+            if (user != null) {
+                String infos = String.format(
+                        "Nom : %s\nPrénom : %s\nType de client : %s\nTranche d'âge : %s\nEmail : %s\nAdresse : %s\nDernière visite : %s\nAttraction préférée (ID) : %d",
+                        user.getNom(),
+                        user.getPrenom(),
+                        user.getClientType(),
+                        user.getTrancheAge(),
+                        user.getEmail(),
+                        user.getAdresse(),
+                        user.getDerniereVisite() != null ? user.getDerniereVisite().toString() : "Aucune",
+                        user.getAttractionPrefereeId()
+                );
+                UserInfo.setText(infos);
+            } else {
+                UserInfo.setText("Aucun utilisateur trouvé.");
+            }
+        } else {
+            System.out.println("UserInfo n'est pas lié dans le FXML."); // Debug simple
+        }
+    }
+
+    /*
     public void initialize() throws Exceptions_Database {
         Utilisateur user = UtilisateurDAO_getInfo();
 
@@ -105,6 +132,8 @@ public class UtilisateurDAO_Implementation {
             UserInfo.setText("Aucun utilisateur trouvé.");
         }
     }
+
+     */
 
     @FXML
     public Utilisateur UtilisateurDAO_getInfo() throws Exceptions_Database {
@@ -149,6 +178,7 @@ public class UtilisateurDAO_Implementation {
         return user;
     }
 
+    @FXML
     public Utilisateur UtilisateurDAO_Login() throws Exception {
         Connection connection = Database_connection.connect();
 
@@ -188,6 +218,8 @@ public class UtilisateurDAO_Implementation {
                     UserName = prenom;
                 } else {
                     throw new Exceptions_Database("Le compte n'existe pas");
+
+                    //renvoi eventuel sur une autre page permettant de se creer un compte
                 }
 
                 resultSet.close();
@@ -203,5 +235,14 @@ public class UtilisateurDAO_Implementation {
 
         return user;
     }
+
+
+    @FXML
+    public void Print_input(){
+        System.out.println(Mdp.getText());
+        System.out.println(Email.getText());
+    }
+
+
 }
 

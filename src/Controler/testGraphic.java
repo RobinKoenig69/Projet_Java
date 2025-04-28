@@ -26,7 +26,6 @@ public class testGraphic extends Application {
          Parent root = FXMLLoader.load(getClass().getResource("../Database_access/Stats.fxml"));
 
          Scene scene = new Scene(root, 1920, 1080);
-
          primaryStage.setTitle("Test JavaFX avec FXML");
          primaryStage.setScene(scene);
          primaryStage.setFullScreen(false);

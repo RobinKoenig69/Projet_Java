@@ -58,3 +58,149 @@ Connexion réussie !
 Connexion réussie !
 
 
+
+
+Début des logs en date du :Mon Apr 28 11:08:04 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Mon Apr 28 11:37:05 CEST 2025
+
+Erreur de connexion : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+
+
+Début des logs en date du :Mon Apr 28 13:34:01 CEST 2025
+
+
+
+Début des logs en date du :Mon Apr 28 13:39:07 CEST 2025
+
+Erreur de connexion : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+
+
+Début des logs en date du :Mon Apr 28 13:39:36 CEST 2025
+
+Connexion réussie !
+
+
+Début des logs en date du :Mon Apr 28 13:41:55 CEST 2025
+
+Connexion réussie !
+
+
+Début des logs en date du :Mon Apr 28 13:44:13 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+Début des logs en date du :Mon Apr 28 13:45:55 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+mot de passe
+John
+
+
+Début des logs en date du :Mon Apr 28 13:46:35 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+mdp
+email
+
+
+Début des logs en date du :Mon Apr 28 13:57:31 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Mon Apr 28 13:59:43 CEST 2025
+
+
+
+Début des logs en date du :Mon Apr 28 14:05:15 CEST 2025
+
+
+
+Début des logs en date du :Mon Apr 28 14:05:57 CEST 2025
+
+
+
+Début des logs en date du :Mon Apr 28 14:06:22 CEST 2025
+
+
+
+
+
+Début des logs en date du :Mon Apr 28 14:07:45 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Mon Apr 28 14:10:21 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+motpasse
+coucou
+
+
+Début des logs en date du :Mon Apr 28 14:18:57 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Mon Apr 28 14:34:59 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Mon Apr 28 14:42:33 CEST 2025
+
