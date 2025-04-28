@@ -1,7 +1,7 @@
 package Model;
 
 import java.time.LocalDateTime;
-
+    
 public class Reservation {
     private int id_reservation;
     private LocalDateTime Date_reservation;
@@ -21,12 +21,7 @@ public class Reservation {
         this.estAnnulee = false;
     }
 
-    // Constructor simplifié 
-    public Reservation(LocalDateTime DATETIME, float Prix, 
-                      int id_utilisateur, int id_attraction) {
-        this(0, DATETIME, Prix, id_utilisateur, id_attraction);
-    }
-
+   
     // Getters
     public int getId_reservation() { return id_reservation; }
     public LocalDateTime getDate_reservation() { return Date_reservation; }
