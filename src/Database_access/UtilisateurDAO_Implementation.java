@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import static Controler.testGraphic.UserID;
 import static Controler.testGraphic.UserName;
 import static Encryption.MD5.hash;
+import static java.sql.Types.NULL;
 
 import Encryption.MD5.*;
 
@@ -68,7 +69,7 @@ public class UtilisateurDAO_Implementation {
                 }
 
                 if (age > 15 && age < 18) {
-                    tranche_age = "Jeune Adultre";
+                    tranche_age = "Jeune Adulte";
                 }
 
                 if (age > 18 && age < 60) {
@@ -279,48 +280,59 @@ public class UtilisateurDAO_Implementation {
 
         Connection connection = Database_connection.connect();
 
-        if (connection != null) {
-            try {
-                String sql = "SELECT * FROM administrateur WHERE id_utilisateur = ?";
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setInt(1,  userID);
-
-                ResultSet resultSet = statement.executeQuery();
-
-                if (resultSet.next()) {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
-                        Parent root = loader.load();
-                        Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
-                        Scene scene = new Scene(root, 1920, 1080);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
-                        Parent root = loader.load();
-                        Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
-                        Scene scene = new Scene(root, 1920, 1080);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                resultSet.close();
-                statement.close();
-                connection.close();
-
-            } catch (Exception e) {
-                throw new Exceptions_Database("Erreur lors de la recherche", e);
-            }
+        if (userID == -1) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+            Scene scene = new Scene(root, 1920, 1080);
+            stage.setScene(scene);
+            stage.show();
         } else {
-            throw new Exceptions_Database("La connexion à la base de données a échoué");
+            if (connection != null) {
+                try {
+                    String sql = "SELECT * FROM administrateur WHERE id_utilisateur = ?";
+                    PreparedStatement statement = connection.prepareStatement(sql);
+                    statement.setInt(1,  userID);
+
+                    ResultSet resultSet = statement.executeQuery();
+
+                    if (resultSet.next()) {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
+                            Parent root = loader.load();
+                            Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+                            Scene scene = new Scene(root, 1920, 1080);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
+                            Parent root = loader.load();
+                            Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+                            Scene scene = new Scene(root, 1920, 1080);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    resultSet.close();
+                    statement.close();
+                    connection.close();
+
+                } catch (Exception e) {
+                    throw new Exceptions_Database("Erreur lors de la recherche", e);
+                }
+            } else {
+                throw new Exceptions_Database("La connexion à la base de données a échoué");
+            }
         }
+
+
     }
 
 
@@ -333,6 +345,7 @@ public class UtilisateurDAO_Implementation {
 
         UtilisateurDAO_Add(nom.getText(), prenom.getText(), Integer.parseInt(age.getValue().toString()), Email.getText(), adresse.getText(), Pwd_encrypted);
 
+        UtilisateurDAO_LoginRegister_redirect(-1);
     }
 
 
