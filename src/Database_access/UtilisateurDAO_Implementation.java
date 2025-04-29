@@ -40,7 +40,6 @@ public class UtilisateurDAO_Implementation {
     @FXML
     private TextField prenom;
 
-
     @FXML
     private Spinner age;
 
@@ -336,8 +335,58 @@ public class UtilisateurDAO_Implementation {
     }
 
 
+    private boolean validateInputs() {
+        Error_message.getChildren().clear();
+
+        boolean isValid = true;
+        StringBuilder errors = new StringBuilder();
+
+        if (nom.getText().trim().isEmpty()) {
+            errors.append("Le nom est requis.\n");
+            isValid = false;
+        }
+
+        if (prenom.getText().trim().isEmpty()) {
+            errors.append("Le prénom est requis.\n");
+            isValid = false;
+        }
+
+        if (age.getValue() == null) {
+            errors.append("L'âge est requis.\n");
+            isValid = false;
+        }
+
+        if (Email.getText().trim().isEmpty() || !Email.getText().matches("^\\S+@\\S+\\.\\S+$")) {
+            errors.append("Adresse email invalide.\n");
+            isValid = false;
+        }
+
+        if (adresse.getText().trim().isEmpty()) {
+            errors.append("L'adresse est requise.\n");
+            isValid = false;
+        }
+
+        if (Mdp.getText().trim().isEmpty() || Mdp.getText().length() < 6) {
+            errors.append("Le mot de passe est requis (au moins 6 caractères).\n");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            Text errorText = new Text(errors.toString());
+            errorText.setStyle("-fx-fill: red; -fx-font-size: 18px;");
+            Error_message.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+            Error_message.getChildren().add(errorText);
+        }
+
+        return isValid;
+    }
+
+
     @FXML
     private void UtilisateurDAO_Register() throws Exception {
+        if (!validateInputs()) {
+            return;
+        }
 
         String Pwd = Mdp.getText();
 

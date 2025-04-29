@@ -35,7 +35,6 @@ public class testGraphic extends Application {
    public static void main(String[] args) throws IOException {
       Log.startLogging("console_output.txt");
 
-      //Enregistrement de tous les évènements console dans un fichier spécifique :
       System.out.print("\n\nDébut des logs en date du :");
 
       System.out.println(new Date() +"\n");
