@@ -1,6 +1,7 @@
 # :computer: Projet JAVA : Attractions
 
 🌟 Highlights
+
 Gestion complète de réservations d'attractions avec remises selon le type de client
 
 Application Java respectant l'architecture MVC avec accès à la BDD via JDBC (pattern DAO)
