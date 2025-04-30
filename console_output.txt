@@ -598,3 +598,40 @@ Insertion réussie !
 Connexion réussie !
 Connexion réussie !
 Connexion réussie !
+
+
+Début des logs en date du :Wed Apr 30 10:03:33 CEST 2025
+
+Erreur de connexion : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+
+
+Début des logs en date du :Wed Apr 30 10:07:27 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Wed Apr 30 10:08:12 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Wed Apr 30 10:11:57 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Connexion réussie !
+
+

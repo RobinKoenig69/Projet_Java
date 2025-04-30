@@ -105,11 +105,15 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="1920.0">
                      <children>
-                        <Hyperlink alignment="CENTER" contentDisplay="CENTER" onAction="#UtilisateurDAO_Login_redirect" text="Créer un nouveau Compte" textAlignment="CENTER">
-                           <font>
-                              <Font size="37.0" />
-                           </font>
-                        </Hyperlink>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="788.0" onAction="#UtilisateurDAO_GuestAccess" text="Se connecter en tant qu'invité" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Hyperlink>
+                           </children>
+                        </AnchorPane>
                         <TextFlow fx:id="Error_message" prefHeight="315.0" prefWidth="960.0" />
                      </children>
                   </VBox>

@@ -1,5 +1,6 @@
 package Controler;
 
+import Model.Session;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,8 +12,11 @@ import java.util.Date;
 
 public class testGraphic extends Application {
 
-   public static String UserName = "John";
-   public static int UserID = 1;
+   public static String UserName = "";
+   public static int UserID = 0;
+
+   Session newsession = new Session(UserName, UserID);
+
 
    public String Current_page = "Login";
 

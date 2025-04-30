@@ -1,5 +1,6 @@
 package Database_access;
 
+import Model.Session;
 import Model.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
 import static Controler.testGraphic.UserID;
@@ -95,6 +97,7 @@ public class UtilisateurDAO_Implementation {
                     System.out.println("Insertion réussie !");
                 }
 
+
                 statement.close();
                 connection.close();
 
@@ -104,6 +107,59 @@ public class UtilisateurDAO_Implementation {
         } else {
             throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
+
+        connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+
+                String tranche_age = "";
+
+                if (age < 15) {
+                    tranche_age = "Enfant";
+                }
+
+                if (age > 15 && age < 18) {
+                    tranche_age = "Jeune Adulte";
+                }
+
+                if (age > 18 && age < 60) {
+                    tranche_age = "Adulte";
+                }
+
+                if (age > 60) {
+                    tranche_age = "Senior";
+                }
+
+                String sql = "SELECT *  FROM Utilisateur where Nom = ? AND Prenom = ? AND Client_type = ? AND Tranche_Age = ? AND Email = ? AND Adresse= ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, nom);
+                statement.setString(2, prenom);
+                statement.setString(3, "Nouveau");
+                statement.setString(4, tranche_age);
+                statement.setString(5, email);
+                statement.setString(6, adresse);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    int id = resultSet.getInt("id_utilisateur");
+
+                    Session.setUserID(id);
+                    Session.setUserName(prenom);
+                }
+
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur de insertion", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
+
+
     }
 
     @FXML
@@ -162,12 +218,21 @@ public class UtilisateurDAO_Implementation {
 
         Connection connection = Database_connection.connect();
 
+        Date date = new Date(0);
+
+        if (Session.getUserID() == -1) {
+            user = new Utilisateur(-1, "Guest", "", "", "","","", date, -1);
+
+            return user;
+        }
+
+
         if (connection != null) {
             try {
                 String sql = "SELECT * FROM utilisateur WHERE Prenom LIKE ? AND id_utilisateur = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setString(1, "%" + UserName + "%");
-                statement.setInt(2, UserID);
+                statement.setString(1, "%" + Session.getUserName() + "%");
+                statement.setInt(2, Session.getUserID());
 
                 ResultSet resultSet = statement.executeQuery();
 
@@ -261,7 +326,7 @@ public class UtilisateurDAO_Implementation {
     }
 
     @FXML
-    private void UtilisateurDAO_Login_redirect() throws Exception {
+    public void UtilisateurDAO_Login_redirect() throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Register.fxml"));
             Parent root = loader.load();
@@ -275,7 +340,7 @@ public class UtilisateurDAO_Implementation {
     }
 
     @FXML
-    private void UtilisateurDAO_LoginRegister_redirect(int userID) throws Exception {
+    public void UtilisateurDAO_LoginRegister_redirect(int userID) throws Exception {
 
         Connection connection = Database_connection.connect();
 
@@ -335,7 +400,7 @@ public class UtilisateurDAO_Implementation {
     }
 
 
-    private boolean validateInputs() {
+    public boolean validateInputs() {
         Error_message.getChildren().clear();
 
         boolean isValid = true;
@@ -383,7 +448,7 @@ public class UtilisateurDAO_Implementation {
 
 
     @FXML
-    private void UtilisateurDAO_Register() throws Exception {
+    public void UtilisateurDAO_Register() throws Exception {
         if (!validateInputs()) {
             return;
         }
@@ -395,6 +460,23 @@ public class UtilisateurDAO_Implementation {
         UtilisateurDAO_Add(nom.getText(), prenom.getText(), Integer.parseInt(age.getValue().toString()), Email.getText(), adresse.getText(), Pwd_encrypted);
 
         UtilisateurDAO_LoginRegister_redirect(-1);
+    }
+
+    @FXML
+    public void UtilisateurDAO_GuestAccess(){
+        Session.setUserName("Guest");
+        Session.setUserID(-1);
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+            Scene scene = new Scene(root, 1920, 1080);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

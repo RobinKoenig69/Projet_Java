@@ -34,8 +34,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
@@ -49,16 +49,12 @@
 
 <VBox prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Database_access.UtilisateurDAO_Implementation">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="Retour au menu" />
-      </menus>
-    </MenuBar>
+    <MenuBar VBox.vgrow="NEVER" />
       <VBox prefHeight="1073.0" prefWidth="1920.0">
          <children>
-      <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="139.0" prefWidth="1920.0">
+      <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="172.0" prefWidth="1920.0">
         <children>
-          <Label alignment="CENTER" layoutX="817.0" layoutY="16.0" style="&#10;" text="Inscription :" textAlignment="CENTER" wrapText="false">
+          <Label alignment="CENTER" layoutX="809.0" layoutY="32.0" style="&#10;" text="Inscription :" textAlignment="CENTER" wrapText="false">
                      <font>
                 <Font size="59.0" fx:id="x1" />
                      </font>
@@ -70,7 +66,7 @@
       </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <HBox layoutX="240.0" layoutY="49.0" prefHeight="100.0" prefWidth="1520.0">
+                  <HBox layoutX="200.0" layoutY="49.0" prefHeight="100.0" prefWidth="1520.0">
                      <children>
                         <TextField fx:id="nom" alignment="CENTER" prefHeight="100.0" promptText="Nom">
                            <font>
@@ -101,7 +97,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="adresse" alignment="CENTER" layoutX="229.0" layoutY="26.0" prefHeight="100.0" prefWidth="1520.0" promptText="Adresse">
+                  <TextField fx:id="adresse" alignment="CENTER" layoutX="200.0" layoutY="26.0" prefHeight="100.0" prefWidth="1520.0" promptText="Adresse">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -110,7 +106,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="Email" alignment="CENTER" layoutX="229.0" layoutY="23.0" prefHeight="100.0" prefWidth="1520.0" promptText="Email">
+                  <TextField fx:id="Email" alignment="CENTER" layoutX="200.0" layoutY="23.0" prefHeight="100.0" prefWidth="1520.0" promptText="Email">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -119,7 +115,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="Mdp" alignment="CENTER" layoutX="229.0" layoutY="19.0" prefHeight="100.0" prefWidth="1520.0" promptText="Mot de Passe">
+                  <TextField fx:id="Mdp" alignment="CENTER" layoutX="200.0" layoutY="19.0" prefHeight="100.0" prefWidth="1520.0" promptText="Mot de Passe">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -128,11 +124,20 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="645.0" layoutY="57.0" mnemonicParsing="false" onAction="#UtilisateurDAO_Register" prefHeight="75.0" prefWidth="707.0" text="S'inscrire">
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="606.0" layoutY="56.0" mnemonicParsing="false" onAction="#UtilisateurDAO_Register" prefHeight="75.0" prefWidth="707.0" text="S'inscrire">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="85.0" prefWidth="1920.0">
+               <children>
+                  <Hyperlink layoutX="788.0" layoutY="7.0" onAction="#UtilisateurDAO_GuestAccess" text="Se connecter en tant qu'invité">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Hyperlink>
                </children>
             </AnchorPane>
             <TextFlow fx:id="Error_message" prefHeight="200.0" prefWidth="200.0" />
