@@ -344,58 +344,48 @@ public class UtilisateurDAO_Implementation {
 
         Connection connection = Database_connection.connect();
 
-        if (userID == -1) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
-            Scene scene = new Scene(root, 1920, 1080);
-            stage.setScene(scene);
-            stage.show();
-        } else {
-            if (connection != null) {
-                try {
-                    String sql = "SELECT * FROM administrateur WHERE id_utilisateur = ?";
-                    PreparedStatement statement = connection.prepareStatement(sql);
-                    statement.setInt(1,  userID);
+        if (connection != null) {
+            try {
+                String sql = "SELECT * FROM administrateur WHERE id_utilisateur = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setInt(1,  userID);
 
-                    ResultSet resultSet = statement.executeQuery();
+                ResultSet resultSet = statement.executeQuery();
 
-                    if (resultSet.next()) {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
-                            Parent root = loader.load();
-                            Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
-                            Scene scene = new Scene(root, 1920, 1080);
-                            stage.setScene(scene);
-                            stage.show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
-                            Parent root = loader.load();
-                            Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
-                            Scene scene = new Scene(root, 1920, 1080);
-                            stage.setScene(scene);
-                            stage.show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                if (resultSet.next()) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+                        Scene scene = new Scene(root, 1920, 1080);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-
-                    resultSet.close();
-                    statement.close();
-                    connection.close();
-
-                } catch (Exception e) {
-                    throw new Exceptions_Database("Erreur lors de la recherche", e);
+                } else {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) Email.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+                        Scene scene = new Scene(root, 1920, 1080);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            } else {
-                throw new Exceptions_Database("La connexion à la base de données a échoué");
-            }
-        }
 
+                resultSet.close();
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur lors de la recherche", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
 
     }
 
@@ -479,13 +469,51 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    @FXML
+    public void UtilisateurDAO_redirectMenu() throws Exception {
+
+        int iduser = Session.getUserID();
+
+        UtilisateurDAO_LoginRegister_redirect(iduser);
+    }
 
     @FXML
-    public void Print_input(){
-        System.out.println(Mdp.getText());
-        System.out.println(Email.getText());
+    public void UtilisateurDAO_redirectDelete(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Delete_Account.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) UserInfo.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+            Scene scene = new Scene(root, 1920, 1080);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
-}
+    @FXML
+    public void UtilisateurDAO_DeleteAccount() throws Exceptions_Database {
 
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "DELETE FROM utilisateur WHERE id_utilisateur = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setInt(1,  Session.getUserID());
+
+                ResultSet resultSet = statement.executeQuery();
+
+                resultSet.close();
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur lors de la suppression", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
+    }
+}

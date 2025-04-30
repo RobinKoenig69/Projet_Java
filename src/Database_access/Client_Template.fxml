@@ -48,7 +48,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Database_access.UtilisateurDAO_Implementation">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -71,6 +71,11 @@
                   <MenuItem mnemonicParsing="false" text="Offres passées" />
           </items>
         </Menu>
+            <Menu mnemonicParsing="false" text="Mon Compte">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_redirectDelete" text="Supprimer mon compte" />
+               </items>
+            </Menu>
       </menus>
     </MenuBar>
     <SplitPane dividerPositions="0.24498886414253898" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
