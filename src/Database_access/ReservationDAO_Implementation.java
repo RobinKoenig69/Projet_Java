@@ -3,12 +3,19 @@ package Database_access;
 import Model.Reservation;
 import Model.Session;
 import Model.Utilisateur;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -132,7 +139,7 @@ public class ReservationDAO_Implementation {
     }
 
     @FXML
-    public void ReservationDAO_Book() throws Exceptions_Database {
+    public void ReservationDAO_Book(ActionEvent event) throws Exceptions_Database {
         int id_attraction = Session.getUserBooking();
         int id_user = Session.getUserID();
 
@@ -203,7 +210,24 @@ public class ReservationDAO_Implementation {
         } catch (SQLException e) {
             throw new Exceptions_Database("Erreur lors de l'enregistrement de la réservation", e);
         }
+
+        ReservationDAO_redirectMenu(event);
     }
 
+    public void ReservationDAO_redirectMenu(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Search.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root, 1920, 1080);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
