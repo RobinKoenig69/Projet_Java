@@ -1,11 +1,17 @@
 package Database_access;
 
 import Model.Attraction;
+import Model.Session;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Time;
@@ -127,15 +133,6 @@ public class AttractionDAO_Implementation {
             throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
 
-        // For debug
-
-        /*
-        for (Attraction a : attractions) {
-            System.out.println(a);
-        }
-
-         */
-
         return attractions;
     }
 
@@ -164,7 +161,42 @@ public class AttractionDAO_Implementation {
         colTarif.setMaxWidth(1f * Integer.MAX_VALUE * 15);
         colOuvert.setMaxWidth(1f * Integer.MAX_VALUE * 15);
         colCategorie.setMaxWidth(1f * Integer.MAX_VALUE * 23);
+
+
+        colAction.setCellFactory(param -> new TableCell<>() {
+            private final Button btn = new Button("Reserver");
+
+            {
+                btn.setOnAction(event -> {
+                    Attraction attraction = getTableView().getItems().get(getIndex());
+                    Session.setUserBooking(attraction.getId());
+
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Book.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) inputtext_attraction.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+                        Scene scene = new Scene(root, 1920, 1080);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btn);
+                }
+            }
+        });
     }
+
+
 
     @FXML
     public List<Attraction> AttractionDAO_Get() throws Exceptions_Database {

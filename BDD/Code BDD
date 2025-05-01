@@ -42,6 +42,7 @@ create table reservation (
                              Date_reservation DATETIME,
                              Prix float CHECK ( Prix > 0),
                              id_utilisateur int,
+                             nb_personnes int,
                              FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
                              id_attraction int,
                              FOREIGN KEY (id_attraction) REFERENCES Attraction(id_attraction)
