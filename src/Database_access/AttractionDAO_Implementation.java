@@ -197,7 +197,6 @@ public class AttractionDAO_Implementation {
     }
 
 
-
     @FXML
     public List<Attraction> AttractionDAO_Get() throws Exceptions_Database {
         List<Attraction> attractions = new ArrayList<>();

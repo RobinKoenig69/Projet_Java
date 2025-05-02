@@ -81,15 +81,7 @@
       <items>
         <AnchorPane prefHeight="551.0" prefWidth="1199.0">
           <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="194.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Réservations à venir" textAlignment="CENTER" wrapText="false">
-              <font>
-                <Font size="18.0" fx:id="x1" />
-              </font>
-              <textFill>
-                <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
-              </textFill>
-            </Label>
-                  <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Mon profil" textAlignment="CENTER" wrapText="false">
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Statut du parc :" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" fx:id="x11" />
                      </font>
@@ -103,10 +95,13 @@
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
-                <Label alignment="CENTER" layoutX="14.0" layoutY="32.0" style="&#10;" text="Carte du Parc" textAlignment="CENTER" textFill="$x2" wrapText="false">
+                <Label alignment="CENTER" layoutX="14.0" layoutY="32.0" style="&#10;" text="Carte du Parc" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="26.0" />
-                           </font></Label>
+                           </font>
+                           <textFill>
+                      <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
+                           </textFill></Label>
                         <ImageView fitHeight="477.0" fitWidth="640.0" layoutX="14.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../Downloads/plan_ete_2024.jpg" />
