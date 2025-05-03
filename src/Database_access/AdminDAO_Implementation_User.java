@@ -2,6 +2,7 @@ package Database_access;
 
 import Model.Session;
 import Model.Utilisateur;
+import Model.Attraction;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -62,6 +63,10 @@ public class AdminDAO_Implementation_User {
 
     @FXML
     private Spinner pref_txt;
+
+
+    @FXML
+    private TextArea afficher_attractions;
 
     /*
      * public AdminDAO_Implementation() {
@@ -176,6 +181,59 @@ public class AdminDAO_Implementation_User {
 
 
     @FXML
+    public List<Attraction> AdminDAO_GetAttractions() throws Exceptions_Database {
+        List<Attraction> attractions = new ArrayList<>();
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT * FROM attraction";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    int id_attraction = resultSet.getInt("id_attraction");
+                    String nom_attraction = resultSet.getString("Nom");
+                    int nb_places_tot = resultSet.getInt("Nb_places_tot");
+                    int Nb_places_dispo = resultSet.getInt("Nb_places_dispo");
+                    boolean ouvert = resultSet.getBoolean("Ouvert");
+                    int tarif = resultSet.getInt("Tarif");
+                    String categorie = resultSet.getString("Categorie");
+                    Time heure_ouverture = resultSet.getTime("Heure_ouverture");
+                    Time heure_fermeture = resultSet.getTime("Heure_fermeture");
+                    Time heure_fin_inscription = resultSet.getTime("Heure_fin_inscription");
+
+                    Attraction attraction = new Attraction(
+                        id_attraction,
+                        nom_attraction,
+                        Nb_places_dispo,
+                        nb_places_tot,
+                        tarif,
+                        ouvert,
+                        categorie,
+                        heure_ouverture,
+                        heure_fermeture,
+                        heure_fin_inscription
+                    );
+                    attractions.add(attraction);
+                }
+
+                resultSet.close();
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur lors de la recherche", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
+
+        return attractions;
+    }
+
+
+    @FXML
     public List<Utilisateur> AdminDAO_GetUsers() throws Exceptions_Database {
         List<Utilisateur> utilisateurs = new ArrayList<>();
         Connection connection = Database_connection.connect();
@@ -220,19 +278,19 @@ public class AdminDAO_Implementation_User {
     @FXML
     public void initialize() throws Exceptions_Database {
         List<Utilisateur> utilisateurs = AdminDAO_GetUsers();
+        List<Attraction> attractions = AdminDAO_GetAttractions();
 
         if (!utilisateurs.isEmpty()) {
             StringBuilder infos = new StringBuilder();
 
             for (Utilisateur utilisateur : utilisateurs) {
                 infos.append(String.format(
-                        "ID : %s\nNom : %s\nPrenom : %s\nType : %s\nTranche age : %s\nType : %s\nEmail : %s\nAdresse : %s\nDerniere visite : %s\nAttraction pref ID : %s\n\n",
+                        "ID : %s\nNom : %s\nPrenom : %s\nType : %s\nTranche age : %s\nEmail : %s\nAdresse : %s\nDerniere visite : %s\nAttraction pref ID : %s\n\n",
                         utilisateur.getId_utilisateur(),
                         utilisateur.getNom(),
                         utilisateur.getPrenom(),
                         utilisateur.getClientType(),
                         utilisateur.getTrancheAge(),
-                        utilisateur.getClientType(),
                         utilisateur.getEmail(),
                         utilisateur.getAdresse(),
                         utilisateur.getDerniereVisite(),
@@ -247,9 +305,38 @@ public class AdminDAO_Implementation_User {
 
         } else {
             if (clients_info != null) {
-                clients_info.setText("Aucune réservation trouvée pour cet utilisateur.");
+                clients_info.setText("Aucun utilisateur trouvé.");
             }
         }
+
+        if(!attractions.isEmpty()){
+            StringBuilder infos_attractions = new StringBuilder();
+            
+            for(Attraction attraction : attractions){
+                infos_attractions.append(String.format(
+                    "ID : %s\nNom : %s\nNombre de places disponibles : %s\nNombre de places total : %s\nTarif : %s\nOuvert : %s\nCategorie : %s\nHeure ouverture : %s\nHeure fermeture : %s\nHeure fin inscription : %s\n\n",
+                    attraction.getId(),
+                    attraction.getNom(),
+                    attraction.getNb_places_dispo(),
+                    attraction.getNb_places_tot(),
+                    attraction.getTarif(),
+                    attraction.isOuvert(),
+                    attraction.getCategorie(),
+                    attraction.getHeureOuverture(),
+                    attraction.getHeureFermeture(),
+                    attraction.getHeureFinInscription()
+                ));
+            }
+
+            if(afficher_attractions!=null){
+                afficher_attractions.setText(infos_attractions.toString());
+            }
+        } else {
+            if (clients_info != null) {
+                clients_info.setText("Aucune attractions trouvées.");
+            }
+        }
+
     }
 
 }

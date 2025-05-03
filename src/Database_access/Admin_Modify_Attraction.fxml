@@ -37,6 +37,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -44,7 +46,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Database_access.UtilisateurDAO_Implementation">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Database_access.AdminDAO_Implementation_User">
   <children>
       <MenuBar>
         <menus>
@@ -59,7 +61,7 @@
       <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TextArea layoutX="14.0" layoutY="41.0" prefHeight="37.0" prefWidth="418.0" promptText="ID" />
+                  <TextArea layoutX="14.0" layoutY="41.0" prefHeight="37.0" prefWidth="204.0" promptText="ID" />
                   <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Modifier/Créer une attraction" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" fx:id="x111" />
@@ -68,16 +70,42 @@
                         <Color red="0.624" green="0.624" blue="0.624" fx:id="x211" />
                      </textFill>
                   </Label>
-                  <TextArea layoutX="14.0" layoutY="89.0" prefHeight="38.0" prefWidth="418.0" promptText="Nom" />
-                  <TextArea layoutX="14.0" layoutY="138.0" prefHeight="38.0" prefWidth="418.0" promptText="Nombre de places totale" />
-                  <TextArea layoutX="14.0" layoutY="190.0" prefHeight="38.0" prefWidth="418.0" promptText="Nombre de places disponibles" />
-                  <TextArea layoutX="14.0" layoutY="240.0" prefHeight="38.0" prefWidth="418.0" promptText="Ouvert" />
-                  <TextArea layoutX="14.0" layoutY="287.0" prefHeight="38.0" prefWidth="418.0" promptText="Tarif" />
-                  <TextArea layoutX="14.0" layoutY="335.0" prefHeight="38.0" prefWidth="418.0" promptText="Catégorie" />
-                  <TextArea layoutX="14.0" layoutY="384.0" prefHeight="38.0" prefWidth="418.0" promptText="Heure d'ouverture" />
-                  <TextArea layoutX="14.0" layoutY="435.0" prefHeight="38.0" prefWidth="418.0" promptText="Heure de fermeture" />
-                  <Button layoutX="369.0" layoutY="534.0" mnemonicParsing="false" text="Valider" />
-                  <TextArea layoutX="14.0" layoutY="481.0" prefHeight="38.0" prefWidth="418.0" promptText="Heure de fermeture des inscriptions" />
+                  <TextArea fx:id="nom_attraction_txt" layoutX="14.0" layoutY="89.0" prefHeight="38.0" prefWidth="418.0" promptText="Nom" />
+                  <TextArea editable="false" layoutX="14.0" layoutY="138.0" prefHeight="38.0" prefWidth="204.0" promptText="Nombre de places totale" />
+                  <TextArea editable="false" layoutX="14.0" layoutY="190.0" prefHeight="38.0" prefWidth="204.0" promptText="Nombre de places disponibles" />
+                  <TextArea editable="false" layoutX="14.0" layoutY="240.0" prefHeight="38.0" prefWidth="204.0" promptText="Ouvert" />
+                  <TextArea editable="false" layoutX="14.0" layoutY="287.0" prefHeight="38.0" prefWidth="204.0" promptText="Tarif" />
+                  <TextArea fx:id="categorie_txt" layoutX="14.0" layoutY="335.0" prefHeight="38.0" prefWidth="418.0" promptText="Catégorie" />
+                  <TextArea fx:id="ouverture_txt" layoutX="14.0" layoutY="384.0" prefHeight="38.0" prefWidth="418.0" promptText="Heure d'ouverture" />
+                  <TextArea fx:id="fermeture_txt" layoutX="14.0" layoutY="435.0" prefHeight="38.0" prefWidth="418.0" promptText="Heure de fermeture" />
+                  <Button fx:id="valider_attractions" layoutX="369.0" layoutY="534.0" mnemonicParsing="false" text="Valider" />
+                  <TextArea fx:id="fermeture_inscriptions_txt" layoutX="14.0" layoutY="481.0" prefHeight="38.0" prefWidth="418.0" promptText="Heure de fermeture des inscriptions" />
+                  <Spinner fx:id="id_attraction_txt" editable="true" layoutX="218.0" layoutY="41.0" prefHeight="37.0" prefWidth="213.0">
+                     <valueFactory>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="150" min="0" />
+                     </valueFactory>
+                  </Spinner>
+                  <Spinner fx:id="places_tot_txt" editable="true" layoutX="218.0" layoutY="138.0" prefHeight="38.0" prefWidth="213.0">
+                     <valueFactory>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="150" min="0" />
+                     </valueFactory>
+                  </Spinner>
+                  <Spinner fx:id="places_dispo_txt" editable="true" layoutX="218.0" layoutY="190.0" prefHeight="38.0" prefWidth="213.0">
+                     <valueFactory>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="150" min="0" />
+                     </valueFactory>
+                  </Spinner>
+                  <Spinner fx:id="tarif_txt" editable="true" layoutX="218.0" layoutY="287.0" prefHeight="38.0" prefWidth="213.0">
+                     <valueFactory>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="150" min="0" />
+                     </valueFactory>
+                  </Spinner>
+                  <TextArea fx:id="reduction_txt" layoutX="14.0" layoutY="528.0" prefHeight="38.0" prefWidth="197.0" promptText="Réduction" />
+                  <Spinner fx:id="ouvert_txt" editable="true" layoutX="218.0" layoutY="240.0" prefHeight="38.0" prefWidth="213.0">
+                     <valueFactory>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="150" min="0" />
+                     </valueFactory>
+                  </Spinner>
                </children>
             </AnchorPane>
         <AnchorPane prefHeight="551.0" prefWidth="1199.0">
@@ -90,7 +118,7 @@
                         <Color red="0.624" green="0.624" blue="0.624" fx:id="x21" />
                      </textFill>
                   </Label>
-                  <TextArea editable="false" layoutX="14.0" layoutY="41.0" prefHeight="481.0" prefWidth="406.0" />
+                  <TextArea fx:id="afficher_attractions" editable="false" layoutX="14.0" layoutY="41.0" onDragDetected="#AdminDAO_GetAttractions" prefHeight="481.0" prefWidth="406.0" />
           </children>
         </AnchorPane>
       </items>
