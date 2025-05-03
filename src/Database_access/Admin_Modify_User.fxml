@@ -90,6 +90,7 @@
                         <SpinnerValueFactory.IntegerSpinnerValueFactory max="150" min="0" />
                      </valueFactory>
                   </Spinner>
+                  <Button fx:id="supprimer" layoutX="14.0" layoutY="520.0" mnemonicParsing="false" onAction="#AdminDAO_Delete_User" text="Supprimer l'utilisateur" />
                </children>
             </AnchorPane>
         <AnchorPane prefHeight="551.0" prefWidth="1199.0">
@@ -103,6 +104,7 @@
                      </textFill>
                   </Label>
                   <TextArea fx:id="clients_info" editable="false" layoutX="14.0" layoutY="41.0" onDragDetected="#AdminDAO_GetUsers" prefHeight="468.0" prefWidth="406.0" />
+                  <Button fx:id="actualiser" layoutX="352.0" layoutY="520.0" mnemonicParsing="false" onAction="#initialize" text="Actualiser" />
           </children>
         </AnchorPane>
       </items>

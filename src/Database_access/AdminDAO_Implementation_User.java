@@ -67,7 +67,44 @@ public class AdminDAO_Implementation_User {
      * public AdminDAO_Implementation() {
      * 
      * }
-     */
+    */
+
+
+    public void AdminDAO_Delete_User() throws Exceptions_Database{
+        int id = (int)id_txt.getValue();
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT COUNT(*) FROM utilisateur WHERE id_utilisateur = ?";
+
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next() && rs.getInt(1) > 0) {
+                    String updateQuery = "DELETE FROM utilisateur WHERE id_utilisateur = ?";
+                    try (PreparedStatement updateStmt = connection.prepareStatement(updateQuery)) {
+                        updateStmt.setInt(1, id);
+
+                        updateStmt.executeUpdate();
+                    }
+                } else {
+                    System.out.println("L'utilisateur avec cet id n'existe pas");
+                }
+
+
+                stmt.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new  Exceptions_Database("Erreur lors de l'insertion", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
+
+    }
+    
 
     public void AdminDAO_Add_Or_Modify_User() throws Exceptions_Database {
 
