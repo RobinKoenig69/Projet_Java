@@ -55,16 +55,12 @@
         <Menu mnemonicParsing="false" text="Statistiques" />
         <Menu mnemonicParsing="false" text="Attractions">
           <items>
-            <MenuItem mnemonicParsing="false" text="Nouvelle attraction" />
-            <MenuItem mnemonicParsing="false" text="Modifier attraction" />
-                  <MenuItem mnemonicParsing="false" text="Supprimer attraction" />
+            <MenuItem mnemonicParsing="false" text="Gerer attractions" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Clients">
           <items>
-            <MenuItem mnemonicParsing="false" text="Ajouter client" />
-                  <MenuItem mnemonicParsing="false" text="Modifier client" />
-                  <MenuItem mnemonicParsing="false" text="Supprimer client" />
+            <MenuItem mnemonicParsing="false" text="Gérer clients" />
           </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Réductions">
