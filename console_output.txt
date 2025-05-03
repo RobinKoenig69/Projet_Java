@@ -1050,3 +1050,128 @@ Début des logs en date du :Sat May 03 17:41:21 CEST 2025
 Connexion réussie !
 
 
+
+
+Début des logs en date du :Sat May 03 18:19:03 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 18:20:14 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 18:21:09 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 18:21:43 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 18:25:48 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 18:33:21 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 18:33:43 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 18:34:02 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 18:35:07 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 18:37:21 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 18:37:48 CEST 2025
+
+Connexion réussie !
+ID: 0
+Nom: 
+Prénom: 
+Type: 
+Âge: 
+Email: 
+Adresse: 
+Visite: null
+Préférence: 0
+ID: 3
+Nom: toto
+Prénom: tata
+Type: ancien
+Âge: adulte
+Email: toto.tata@gmail.com
+Adresse: lyon
+Visite: 2025-05-01
+Préférence: 7
+
+
+Début des logs en date du :Sat May 03 20:35:40 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sat May 03 20:35:57 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 20:36:42 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+ID x existe déjà.
+Connexion réussie !
+ID x n'existe pas.
+
+
+
+
+Début des logs en date du :Sat May 03 20:44:31 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sat May 03 21:00:15 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sat May 03 21:02:06 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
