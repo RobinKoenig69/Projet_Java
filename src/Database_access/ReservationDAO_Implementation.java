@@ -84,6 +84,7 @@ public class ReservationDAO_Implementation {
 
         if (!reservations.isEmpty()) {
             StringBuilder infos = new StringBuilder();
+            StringBuilder infos_past = new StringBuilder();
 
             for (Reservation reservation : reservations) {
                 infos.append(String.format(
@@ -93,31 +94,8 @@ public class ReservationDAO_Implementation {
                         reservation.getPrix(),
                         reservation.getId_attraction()
                 ));
-            }
-
-            if (ReservationInfo != null) {
-                ReservationInfo.setText(infos.toString());
-            }
-
-
-        } else {
-            if (ReservationInfo != null){
-                ReservationInfo.setText("Aucune réservation trouvée pour cet utilisateur.");
-            }
-        }
-    }
-
-
-    @FXML
-    public void initialize_past() throws Exceptions_Database {
-        List<Reservation> reservations = ReservationDAO_getInfo();
-
-        if (!reservations.isEmpty()) {
-            StringBuilder infos = new StringBuilder();
-
-            for (Reservation reservation : reservations) {
                 if(reservation.getDate_reservation().isBefore(LocalDateTime.now())){
-                    infos.append(String.format(
+                    infos_past.append(String.format(
                             "Code de réservation : %s\nDate : %s\nPrix : %s\nId Attraction : %s\n\n",
                             reservation.getId_reservation(),
                             reservation.getDate_reservation(),
@@ -127,14 +105,18 @@ public class ReservationDAO_Implementation {
                 }
             }
 
-            if (past_res != null) {
-                past_res.setText(infos.toString());
+            if (ReservationInfo != null) {
+                ReservationInfo.setText(infos.toString());
+            }
+
+            if(past_res!=null){
+                past_res.setText(infos_past.toString());
             }
 
 
         } else {
-            if (past_res != null){
-                past_res.setText("Aucune réservation trouvée pour cet utilisateur.");
+            if (ReservationInfo != null){
+                ReservationInfo.setText("Aucune réservation trouvée pour cet utilisateur.");
             }
         }
     }

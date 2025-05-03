@@ -804,3 +804,127 @@ Connexion réussie !
 Connexion réussie !
 Connexion réussie !
 Réservation effectuée avec succès !
+
+
+Début des logs en date du :Sat May 03 14:57:02 CEST 2025
+
+Connexion réussie !
+false
+
+
+
+
+Début des logs en date du :Sat May 03 15:02:14 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:03:16 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:03:36 CEST 2025
+
+Connexion réussie !
+hello
+
+
+
+
+Début des logs en date du :Sat May 03 15:03:46 CEST 2025
+
+Connexion réussie !
+hello
+hello
+hello
+hello
+hello
+
+
+
+
+Début des logs en date du :Sat May 03 15:04:36 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:08:20 CEST 2025
+
+Connexion réussie !
+[Réservation #2 - Attraction: 1 - User: 1 - Prix: 50,00€, Réservation #3 - Attraction: 2 - User: 1 - Prix: 30,00€, Réservation #4 - Attraction: 3 - User: 1 - Prix: 40,00€, Réservation #5 - Attraction: 4 - User: 1 - Prix: 20,00€, Réservation #6 - Attraction: 5 - User: 1 - Prix: 55,00€]
+
+
+Début des logs en date du :Sat May 03 15:08:55 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:15:34 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:18:57 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Sat May 03 15:21:02 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:25:53 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:28:18 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 15:29:14 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:30:31 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:31:03 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sat May 03 15:31:23 CEST 2025
+
+Connexion réussie !
+
+

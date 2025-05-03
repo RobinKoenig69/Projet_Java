@@ -13,12 +13,13 @@ import java.util.Date;
 public class testGraphic extends Application {
 
    public static String UserName = "";
-   public static int UserID = 13;
+   public static int UserID = 7;
 
    Session newsession = new Session(UserName, UserID, -1);
 
 
    public String Current_page = "User_anciennes_reservations";
+   //public String Current_page = "Client_Template";
 
    @Override
    public void start(Stage primaryStage) {
