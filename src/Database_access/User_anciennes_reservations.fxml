@@ -37,10 +37,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -48,42 +46,22 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Database_access.UtilisateurDAO_Implementation">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Database_access.ReservationDAO_Implementation">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Mes réservations">
+        <Menu mnemonicParsing="false" text="Retour">
           <items>
-            <MenuItem mnemonicParsing="false" text="Nouvelle réservation" />
-            <MenuItem mnemonicParsing="false" text="Annuler réservation" />
-                  <MenuItem mnemonicParsing="false" text="Anciennes réservations" />
+            <MenuItem mnemonicParsing="false" text="Retour au profil" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Attractions">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Nos attractions" />
-            <MenuItem mnemonicParsing="false" text="A venir" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Réductions en cours">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Nos Offres en cours" />
-                  <MenuItem mnemonicParsing="false" text="Offres à venir" />
-                  <MenuItem mnemonicParsing="false" text="Offres passées" />
-          </items>
-        </Menu>
-            <Menu mnemonicParsing="false" text="Mon Compte">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_redirectDelete" text="Supprimer mon compte" />
-               </items>
-            </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.24498886414253898" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Mon profil" textAlignment="CENTER" wrapText="false">
+                  <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Mes anciennes réservations" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" fx:id="x11" />
                      </font>
@@ -94,42 +72,13 @@
                         <Insets left="15.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-
-            <fx:include source="User_profile.fxml" />
-            <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Réservations à venir" textAlignment="CENTER" wrapText="false">
-              <font>
-                <Font size="18.0" fx:id="x1" />
-              </font>
-              <textFill>
-                <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
-              </textFill>
-                     <padding>
-                        <Insets left="15.0" top="10.0" />
-                     </padding>
-            </Label>
-                   <fx:include source="User_reservation.fxml" />
+                  <AnchorPane prefHeight="518.0" prefWidth="898.0">
+                     <children>
+                        <TextArea fx:id="past_res" layoutX="14.0" layoutY="14.0" onDragDetected="#initialize_past" prefHeight="483.0" prefWidth="304.0" text="text par defaut" />
+                     </children>
+                  </AnchorPane>
                </children>
             </VBox>
-        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
-          <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
-              <children>
-                <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Carte du Parc" textAlignment="CENTER" wrapText="false">
-                           <font>
-                              <Font size="32.0" fx:id="x22" />
-                           </font>
-                           <textFill>
-                              <Color red="0.624" green="0.624" blue="0.624" fx:id="x23" />
-                           </textFill></Label>
-                        <ImageView fitHeight="429.0" fitWidth="607.0" layoutX="14.0" layoutY="83.0">
-                           <image>
-                              <Image url="@../../Map.png" />
-                           </image>
-                        </ImageView>
-              </children>
-            </AnchorPane>
-          </content>
-        </ScrollPane>
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">

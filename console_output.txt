@@ -804,3 +804,332 @@ Connexion réussie !
 Connexion réussie !
 Connexion réussie !
 Réservation effectuée avec succès !
+
+
+Début des logs en date du :Thu May 01 15:05:33 CEST 2025
+
+
+
+
+
+Début des logs en date du :Thu May 01 15:06:29 CEST 2025
+
+
+
+
+
+Début des logs en date du :Thu May 01 16:02:55 CEST 2025
+
+Erreur de connexion : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+
+
+Début des logs en date du :Thu May 01 16:03:10 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Thu May 01 16:12:56 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Thu May 01 16:21:50 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Thu May 01 16:24:29 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Thu May 01 16:24:59 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Thu May 01 16:27:32 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Thu May 01 16:27:41 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Thu May 01 16:47:36 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Utilisateur n'existe pas
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Thu May 01 16:48:08 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Insertion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Thu May 01 17:19:29 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Thu May 01 17:21:48 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Thu May 01 17:22:34 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Insertion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Thu May 01 18:50:46 CEST 2025
+
+
+
+Début des logs en date du :Thu May 01 18:54:40 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Thu May 01 18:55:13 CEST 2025
+
+
+
+Début des logs en date du :Thu May 01 18:57:19 CEST 2025
+
+
+
+Début des logs en date du :Thu May 01 18:58:02 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 13:19:44 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 13:20:16 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 13:22:59 CEST 2025
+
+
+
+Début des logs en date du :Sat May 03 13:23:00 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+
+
+Début des logs en date du :Sat May 03 13:23:07 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 13:23:31 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 13:24:56 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 13:25:37 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 13:26:12 CEST 2025
+
+Connexion réussie !
+
+
+Début des logs en date du :Sat May 03 13:26:36 CEST 2025
+
+hello
+Connexion réussie !
+
+
+Début des logs en date du :Sat May 03 13:26:53 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 13:28:16 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 14:26:27 CEST 2025
+
+Connexion réussie !
+
+
+Début des logs en date du :Sat May 03 14:26:57 CEST 2025
+
+Connexion réussie !
+hello
+
+
+
+
+Début des logs en date du :Sat May 03 14:27:24 CEST 2025
+
+Connexion réussie !
+hello
+
+
+
+
+Début des logs en date du :Sat May 03 14:27:53 CEST 2025
+
+Connexion réussie !
+hello
+
+
+
+
+Début des logs en date du :Sat May 03 14:28:15 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 14:28:36 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 14:52:32 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 14:53:43 CEST 2025
+
+Connexion réussie !
+hello
+
+
+
+
+Début des logs en date du :Sat May 03 14:54:20 CEST 2025
+
+Connexion réussie !
+false

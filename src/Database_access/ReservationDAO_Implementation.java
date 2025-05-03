@@ -37,6 +37,9 @@ public class ReservationDAO_Implementation {
     @FXML
     private Spinner spinner;
 
+    @FXML
+    private TextArea past_res;
+
 
     public ReservationDAO_Implementation() {
 
@@ -100,6 +103,38 @@ public class ReservationDAO_Implementation {
         } else {
             if (ReservationInfo != null){
                 ReservationInfo.setText("Aucune réservation trouvée pour cet utilisateur.");
+            }
+        }
+    }
+
+
+    @FXML
+    public void initialize_past() throws Exceptions_Database {
+        List<Reservation> reservations = ReservationDAO_getInfo();
+
+        if (!reservations.isEmpty()) {
+            StringBuilder infos = new StringBuilder();
+
+            for (Reservation reservation : reservations) {
+                if(reservation.getDate_reservation().isBefore(LocalDateTime.now())){
+                    infos.append(String.format(
+                            "Code de réservation : %s\nDate : %s\nPrix : %s\nId Attraction : %s\n\n",
+                            reservation.getId_reservation(),
+                            reservation.getDate_reservation(),
+                            reservation.getPrix(),
+                            reservation.getId_attraction()
+                    ));
+                }
+            }
+
+            if (past_res != null) {
+                past_res.setText(infos.toString());
+            }
+
+
+        } else {
+            if (past_res != null){
+                past_res.setText("Aucune réservation trouvée pour cet utilisateur.");
             }
         }
     }

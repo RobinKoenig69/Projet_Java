@@ -18,7 +18,7 @@ public class testGraphic extends Application {
    Session newsession = new Session(UserName, UserID, -1);
 
 
-   public String Current_page = "Search";
+   public String Current_page = "User_anciennes_reservations";
 
    @Override
    public void start(Stage primaryStage) {
