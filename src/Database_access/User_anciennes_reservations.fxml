@@ -74,7 +74,7 @@
                   </Label>
                   <AnchorPane prefHeight="518.0" prefWidth="898.0">
                      <children>
-                        <TextArea fx:id="past_res" layoutX="14.0" layoutY="14.0" onDragDetected="#ReservationDAO_getInfo" prefHeight="483.0" prefWidth="304.0" text="text par defaut" />
+                        <TextArea fx:id="past_res" editable="false" layoutX="14.0" layoutY="14.0" onDragDetected="#ReservationDAO_getInfo" prefHeight="483.0" prefWidth="304.0" text="text par defaut" />
                      </children>
                   </AnchorPane>
                </children>

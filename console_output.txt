@@ -928,3 +928,58 @@ Début des logs en date du :Sat May 03 15:31:23 CEST 2025
 Connexion réussie !
 
 
+
+
+Début des logs en date du :Sat May 03 15:34:42 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Sat May 03 15:36:02 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Sat May 03 15:36:57 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Sat May 03 15:46:52 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:48:00 CEST 2025
+
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sat May 03 15:48:25 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Sat May 03 15:50:19 CEST 2025
+
+Connexion réussie !
+
+
