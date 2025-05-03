@@ -44,7 +44,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Database_access.UtilisateurDAO_Implementation">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Database_access.AdminDAO_Implementation_User">
   <children>
       <MenuBar>
         <menus>
@@ -89,7 +89,7 @@
                         <Color red="0.624" green="0.624" blue="0.624" fx:id="x21" />
                      </textFill>
                   </Label>
-                  <TextArea editable="false" layoutX="14.0" layoutY="41.0" prefHeight="468.0" prefWidth="406.0" />
+                  <TextArea fx:id="clients_info" editable="false" layoutX="14.0" layoutY="41.0" onDragDetected="#AdminDAO_GetUsers" prefHeight="468.0" prefWidth="406.0" />
           </children>
         </AnchorPane>
       </items>
