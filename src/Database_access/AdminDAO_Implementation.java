@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminDAO_Implementation_User {
+public class AdminDAO_Implementation {
 
     @FXML
     private TextArea clients_info;
@@ -80,15 +80,15 @@ public class AdminDAO_Implementation_User {
     @FXML
     private TextArea afficher_attractions;
 
-    /*
-     * public AdminDAO_Implementation() {
-     * 
-     * }
-    */
+    
+    public AdminDAO_Implementation() {
+    
+    }
+    
 
 
 
-
+    @FXML
     public void AdminDAO_Delete_Attraction() throws Exceptions_Database{
         int id = (int)id_attraction_txt.getValue();
         Connection connection = Database_connection.connect();
@@ -124,6 +124,7 @@ public class AdminDAO_Implementation_User {
 
     }
 
+    @FXML
     public void AdminDAO_Add_Or_Modify_Attraction() throws Exceptions_Database {
         int id_attraction = (Integer) id_attraction_txt.getValue();
         String nom_attraction = nom_attraction_txt.getText();
@@ -194,6 +195,7 @@ public class AdminDAO_Implementation_User {
 
     }
 
+    @FXML
     public void AdminDAO_Delete_User() throws Exceptions_Database{
         int id = (int)id_txt.getValue();
         Connection connection = Database_connection.connect();
@@ -230,6 +232,7 @@ public class AdminDAO_Implementation_User {
     }
     
 
+    @FXML
     public void AdminDAO_Add_Or_Modify_User() throws Exceptions_Database {
 
         int id = (int)id_txt.getValue();
