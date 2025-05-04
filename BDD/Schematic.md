@@ -1,6 +1,6 @@
 ```mermaid
 erDiagram
-    Attraction {
+    attraction {
         INT id_attraction PK
         VARCHAR Nom
         INT Nb_places_tot
@@ -13,14 +13,14 @@ erDiagram
         TIME Heure_fin_inscription
     }
 
-    Reduction {
+    reduction {
         INT id_reduction PK
         INT Pourcentage
         ENUM Concerne
         INT id_attraction FK
     }
 
-    Utilisateur {
+    utilisateur {
         INT id_utilisateur PK
         VARCHAR Nom
         VARCHAR Prenom
@@ -30,24 +30,27 @@ erDiagram
         VARCHAR Adresse
         DATE Derniere_visite
         INT Attraction_preferee_id FK
+        VARCHAR Mdp
     }
 
-    Reservation {
+    reservation {
         INT id_reservation PK
         DATETIME Date_reservation
         FLOAT Prix
         INT id_utilisateur FK
+        INT nb_personnes
         INT id_attraction FK
     }
 
-    Administrateur {
+    administrateur {
         INT id_administrateur PK
         INT id_utilisateur FK
     }
 
-    Attraction ||--o{ Reduction : "has"
-    Attraction ||--o{ Reservation : "used in"
-    Attraction ||--o{ Utilisateur : "preferred by"
-    Utilisateur ||--o{ Reservation : "makes"
-    Utilisateur ||--|| Administrateur : "is"
+    attraction ||--o{ reduction : "has"
+    attraction ||--o{ utilisateur : "is preferred by"
+    attraction ||--o{ reservation : "is reserved in"
+    utilisateur ||--o{ reservation : "makes"
+    utilisateur ||--|| administrateur : "is"
+
 ```
