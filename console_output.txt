@@ -1424,3 +1424,207 @@ Connexion réussie !
 UserInfo n'est pas lié dans le FXML.
 
 
+
+
+Début des logs en date du :Sun May 04 13:55:02 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 13:59:41 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 14:01:09 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 14:10:21 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 14:19:18 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 14:19:25 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 14:20:05 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 14:28:38 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 14:29:05 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 14:33:21 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 14:37:25 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 14:38:42 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 14:40:36 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 14:42:50 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 14:45:58 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 14:46:31 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+=== Données saisies pour l'attraction ===
+ID Attraction            : 0
+Nom Attraction           : 
+Nombre de places totales: 0
+Nombre de places dispo   : 0
+Ouvert                   : false
+Tarif                    : 0.0
+Catégorie                : 
+Heure d'ouverture        : 
+Heure de fermeture       : 
+Fin des inscriptions     : 
+=========================================
+
+
+Début des logs en date du :Sun May 04 14:48:38 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+=== Données saisies pour l'attraction ===
+ID Attraction            : 0
+Nom Attraction           : 
+Nombre de places totales: 0
+Nombre de places dispo   : 0
+Ouvert                   : false
+Tarif                    : 
+Catégorie                : 
+Heure d'ouverture        : 
+Heure de fermeture       : 
+Fin des inscriptions     : 
+=========================================
+=== Données saisies pour l'attraction ===
+ID Attraction            : 9
+Nom Attraction           : test
+Nombre de places totales: 25
+Nombre de places dispo   : 26
+Ouvert                   : false
+Tarif                    : 28.8
+Catégorie                : Autres
+Heure d'ouverture        : 13:00:00
+Heure de fermeture       : 15:00:00
+Fin des inscriptions     : 14:00:00
+=========================================
+=== Données saisies pour l'attraction ===
+ID Attraction            : 9
+Nom Attraction           : test
+Nombre de places totales: 25
+Nombre de places dispo   : 26
+Ouvert                   : true
+Tarif                    : 28.8
+Catégorie                : Autres
+Heure d'ouverture        : 13:00:00
+Heure de fermeture       : 15:00:00
+Fin des inscriptions     : 14:00:00
+=========================================
+
+
+Début des logs en date du :Sun May 04 14:54:01 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 14:59:43 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 15:01:50 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+

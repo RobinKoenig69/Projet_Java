@@ -1,33 +1,14 @@
 package Database_access;
 
-import Model.Session;
 import Model.Utilisateur;
 import Model.Attraction;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.concurrent.TimeUnit;
 
-import com.mysql.cj.util.Util;
-
-import static Controler.testGraphic.UserID;
-import static Controler.testGraphic.UserName;
-import static Encryption.MD5.hash;
-import static java.sql.Types.NULL;
-
-import Encryption.MD5.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +45,37 @@ public class AdminDAO_Implementation_User {
     @FXML
     private Spinner pref_txt;
 
+    @FXML
+    private Spinner id_attraction_txt;
+
+    @FXML
+    private TextArea nom_attraction_txt;
+
+    @FXML
+    private Spinner places_tot_txt;
+
+    @FXML
+    private Spinner places_dispo_txt;
+
+    @FXML
+    private Spinner ouvert_txt;
+
+    @FXML
+    private TextArea tarif_txt;
+
+    @FXML
+    private TextArea categorie_txt;
+
+    @FXML
+    private TextArea ouverture_txt;
+
+    @FXML
+    private TextArea fermeture_txt;
+
+    @FXML
+    private TextArea fermeture_inscriptions_txt;
+
+
 
     @FXML
     private TextArea afficher_attractions;
@@ -74,6 +86,113 @@ public class AdminDAO_Implementation_User {
      * }
     */
 
+
+
+
+    public void AdminDAO_Delete_Attraction() throws Exceptions_Database{
+        int id = (int)id_attraction_txt.getValue();
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT COUNT(*) FROM attraction WHERE id_attraction = ?";
+
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next() && rs.getInt(1) > 0) {
+                    String updateQuery = "DELETE FROM attraction WHERE id_attraction = ?";
+                    try (PreparedStatement updateStmt = connection.prepareStatement(updateQuery)) {
+                        updateStmt.setInt(1, id);
+
+                        updateStmt.executeUpdate();
+                    }
+                } else {
+                    System.out.println("L'attraction avec cet id n'existe pas");
+                }
+
+
+                stmt.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new  Exceptions_Database("Erreur lors de l'insertion", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
+
+    }
+
+    public void AdminDAO_Add_Or_Modify_Attraction() throws Exceptions_Database {
+        int id_attraction = (Integer) id_attraction_txt.getValue();
+        String nom_attraction = nom_attraction_txt.getText();
+        int nb_places_tot = (Integer) places_tot_txt.getValue();
+        int nb_places_dispo = (Integer) places_dispo_txt.getValue();
+        boolean ouvert = ((Integer) ouvert_txt.getValue()) == 1; // ou (Boolean) ouvert_txt.getValue()
+        Float tarif = Float.parseFloat(tarif_txt.getText());
+        String categorie = categorie_txt.getText();
+        String heure_ouverture = ouverture_txt.getText();
+        String heure_fermeture = fermeture_txt.getText();
+        String heure_fin_inscription = fermeture_inscriptions_txt.getText();
+
+
+
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT COUNT(*) FROM attraction WHERE id_attraction = ?";
+
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, id_attraction);
+                ResultSet rs = stmt.executeQuery();
+                
+                if (rs.next() && rs.getInt(1) > 0) {
+                    String updateQuery = "UPDATE attraction SET Nom = ?, Nb_places_tot = ?, Nb_places_dispo = ?, Ouvert = ?, Tarif = ?, Categorie = ?, Heure_ouverture = ?, Heure_fermeture = ?, Heure_fin_inscription = ? WHERE id_attraction = ?";
+                    try (PreparedStatement updateStmt = connection.prepareStatement(updateQuery)) {
+                        updateStmt.setString(1, nom_attraction);
+                        updateStmt.setInt(2, nb_places_tot);
+                        updateStmt.setInt(3, nb_places_dispo);
+                        updateStmt.setBoolean(4, ouvert);
+                        updateStmt.setFloat(5, tarif);
+                        updateStmt.setString(6, categorie);
+                        updateStmt.setString(7, heure_ouverture);
+                        updateStmt.setString(8, heure_fermeture);
+                        updateStmt.setString(9, heure_fin_inscription);
+                        updateStmt.setInt(10, id_attraction);
+                        updateStmt.executeUpdate();
+                    }
+                } else {
+                    String insertQuery = "INSERT INTO attraction (id_attraction, Nom, Nb_places_tot, Nb_places_dispo, Ouvert, Tarif, Categorie, Heure_ouverture, Heure_fermeture, Heure_fin_inscription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
+                        insertStmt.setInt(1, id_attraction);
+                        insertStmt.setString(2, nom_attraction);
+                        insertStmt.setInt(3, nb_places_tot);
+                        insertStmt.setInt(4, nb_places_dispo);
+                        insertStmt.setBoolean(5, ouvert);
+                        insertStmt.setFloat(6, tarif);
+                        insertStmt.setString(7, categorie);
+                        insertStmt.setString(8, heure_ouverture);
+                        insertStmt.setString(9, heure_fermeture);
+                        insertStmt.setString(10, heure_fin_inscription);
+                        insertStmt.executeUpdate();
+                    }
+                }
+
+
+
+                stmt.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new  Exceptions_Database("Erreur lors de l'insertion", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
+
+    }
 
     public void AdminDAO_Delete_User() throws Exceptions_Database{
         int id = (int)id_txt.getValue();
@@ -197,7 +316,7 @@ public class AdminDAO_Implementation_User {
                     int nb_places_tot = resultSet.getInt("Nb_places_tot");
                     int Nb_places_dispo = resultSet.getInt("Nb_places_dispo");
                     boolean ouvert = resultSet.getBoolean("Ouvert");
-                    int tarif = resultSet.getInt("Tarif");
+                    float tarif = resultSet.getFloat("Tarif");
                     String categorie = resultSet.getString("Categorie");
                     Time heure_ouverture = resultSet.getTime("Heure_ouverture");
                     Time heure_fermeture = resultSet.getTime("Heure_fermeture");
@@ -311,7 +430,7 @@ public class AdminDAO_Implementation_User {
 
         if(!attractions.isEmpty()){
             StringBuilder infos_attractions = new StringBuilder();
-            
+
             for(Attraction attraction : attractions){
                 infos_attractions.append(String.format(
                     "ID : %s\nNom : %s\nNombre de places disponibles : %s\nNombre de places total : %s\nTarif : %s\nOuvert : %s\nCategorie : %s\nHeure ouverture : %s\nHeure fermeture : %s\nHeure fin inscription : %s\n\n",

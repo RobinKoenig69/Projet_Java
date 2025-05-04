@@ -74,11 +74,11 @@
                   <TextArea editable="false" layoutX="14.0" layoutY="138.0" prefHeight="38.0" prefWidth="204.0" promptText="Nombre de places totale" />
                   <TextArea editable="false" layoutX="14.0" layoutY="190.0" prefHeight="38.0" prefWidth="204.0" promptText="Nombre de places disponibles" />
                   <TextArea editable="false" layoutX="14.0" layoutY="240.0" prefHeight="38.0" prefWidth="204.0" promptText="Ouvert" />
-                  <TextArea editable="false" layoutX="14.0" layoutY="287.0" prefHeight="38.0" prefWidth="204.0" promptText="Tarif" />
+                  <TextArea fx:id="tarif_txt" layoutX="14.0" layoutY="287.0" prefHeight="38.0" prefWidth="418.0" promptText="Tarif" />
                   <TextArea fx:id="categorie_txt" layoutX="14.0" layoutY="335.0" prefHeight="38.0" prefWidth="418.0" promptText="Catégorie" />
                   <TextArea fx:id="ouverture_txt" layoutX="14.0" layoutY="384.0" prefHeight="38.0" prefWidth="418.0" promptText="Heure d'ouverture" />
                   <TextArea fx:id="fermeture_txt" layoutX="14.0" layoutY="435.0" prefHeight="38.0" prefWidth="418.0" promptText="Heure de fermeture" />
-                  <Button fx:id="valider_attractions" layoutX="369.0" layoutY="534.0" mnemonicParsing="false" text="Valider" />
+                  <Button fx:id="valider_attractions" layoutX="369.0" layoutY="534.0" mnemonicParsing="false" onAction="#AdminDAO_Add_Or_Modify_Attraction" text="Valider" />
                   <TextArea fx:id="fermeture_inscriptions_txt" layoutX="14.0" layoutY="481.0" prefHeight="38.0" prefWidth="418.0" promptText="Heure de fermeture des inscriptions" />
                   <Spinner fx:id="id_attraction_txt" editable="true" layoutX="218.0" layoutY="41.0" prefHeight="37.0" prefWidth="213.0">
                      <valueFactory>
@@ -95,17 +95,13 @@
                         <SpinnerValueFactory.IntegerSpinnerValueFactory max="150" min="0" />
                      </valueFactory>
                   </Spinner>
-                  <Spinner fx:id="tarif_txt" editable="true" layoutX="218.0" layoutY="287.0" prefHeight="38.0" prefWidth="213.0">
-                     <valueFactory>
-                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="150" min="0" />
-                     </valueFactory>
-                  </Spinner>
                   <TextArea fx:id="reduction_txt" layoutX="14.0" layoutY="528.0" prefHeight="38.0" prefWidth="197.0" promptText="Réduction" />
                   <Spinner fx:id="ouvert_txt" editable="true" layoutX="218.0" layoutY="240.0" prefHeight="38.0" prefWidth="213.0">
                      <valueFactory>
                         <SpinnerValueFactory.IntegerSpinnerValueFactory max="150" min="0" />
                      </valueFactory>
                   </Spinner>
+                  <Button fx:id="supprimer_attractions" layoutX="223.0" layoutY="534.0" mnemonicParsing="false" onAction="#AdminDAO_Delete_Attraction" text="Supprimer l'attraction" />
                </children>
             </AnchorPane>
         <AnchorPane prefHeight="551.0" prefWidth="1199.0">
@@ -119,7 +115,7 @@
                      </textFill>
                   </Label>
                   <TextArea fx:id="afficher_attractions" editable="false" layoutX="14.0" layoutY="41.0" onDragDetected="#AdminDAO_GetAttractions" prefHeight="481.0" prefWidth="406.0" />
-                  <Button fx:id="actualiser_attractions" layoutX="352.0" layoutY="534.0" mnemonicParsing="false" text="Actualiser" />
+                  <Button fx:id="actualiser_attractions" layoutX="352.0" layoutY="534.0" mnemonicParsing="false" onAction="#initialize" text="Actualiser" />
           </children>
         </AnchorPane>
       </items>
