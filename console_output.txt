@@ -1311,3 +1311,46 @@ Connexion réussie !
 Connexion réussie !
 
 
+
+
+Début des logs en date du :Sun May 04 11:56:04 CEST 2025
+
+Erreur de connexion : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+
+
+Début des logs en date du :Sun May 04 11:56:19 CEST 2025
+
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 11:56:41 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+
+
+
+Début des logs en date du :Sun May 04 11:57:25 CEST 2025
+
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 12:11:16 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+
+
+Début des logs en date du :Sun May 04 12:13:54 CEST 2025
+
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+
+

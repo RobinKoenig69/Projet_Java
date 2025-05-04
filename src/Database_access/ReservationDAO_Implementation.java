@@ -77,6 +77,43 @@ public class ReservationDAO_Implementation {
         }
     }
 
+    @FXML
+    public String getNomAttraction(int id_att) throws Exceptions_Database {
+
+        String nom="";
+
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT * FROM attraction WHERE id_attraction = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1 , String.valueOf(id_att));
+                ResultSet resultSet = statement.executeQuery();
+
+
+
+
+                if (resultSet.next()) {
+                    nom = resultSet.getString("Nom");
+                } else {
+                    System.out.println("Aucune attraction trouvée pour l'id : " + id_att);
+                }
+
+                resultSet.close();
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur lors de la recherche", e);
+            }
+        } else {
+            throw new Exceptions_Database("La connexion à la base de données a échoué");
+        }
+        
+        return nom;
+    }
+
 
     @FXML
     public void initialize() throws Exceptions_Database {
@@ -100,7 +137,7 @@ public class ReservationDAO_Implementation {
                             reservation.getId_reservation(),
                             reservation.getDate_reservation(),
                             reservation.getPrix(),
-                            reservation.getId_attraction()
+                            getNomAttraction(reservation.getId_attraction())
                     ));
                 }
             }
