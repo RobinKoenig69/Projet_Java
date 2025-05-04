@@ -125,15 +125,15 @@ public class ReservationDAO_Implementation {
 
             for (Reservation reservation : reservations) {
                 infos.append(String.format(
-                        "Code de réservation : %s\nDate : %s\nPrix : %s\nId Attraction : %s\n\n",
+                        "Code de réservation : %s\nDate : %s\nPrix : %s\nAttraction : %s\n\n",
                         reservation.getId_reservation(),
                         reservation.getDate_reservation(),
                         reservation.getPrix(),
-                        reservation.getId_attraction()
+                        getNomAttraction(reservation.getId_attraction())
                 ));
                 if(reservation.getDate_reservation().isBefore(LocalDateTime.now())){
                     infos_past.append(String.format(
-                            "Code de réservation : %s\nDate : %s\nPrix : %s\nId Attraction : %s\n\n",
+                            "Code de réservation : %s\nDate : %s\nPrix : %s\nAttraction : %s\n\n",
                             reservation.getId_reservation(),
                             reservation.getDate_reservation(),
                             reservation.getPrix(),
