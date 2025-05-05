@@ -53,7 +53,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Retour">
             <items>
-              <MenuItem mnemonicParsing="false" text="Retour au tableau de bord" />
+              <MenuItem mnemonicParsing="false" onAction="#AdminDAO_redirectMenu" text="Retour au tableau de bord" />
             </items>
           </Menu>
         </menus>

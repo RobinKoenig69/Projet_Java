@@ -52,7 +52,7 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Retour au menu" />
+        <Menu mnemonicParsing="false" onAction="#AttractionDAO_redirectMenu" text="Retour au menu" />
       </menus>
     </MenuBar>
       <VBox prefHeight="1073.0" prefWidth="1920.0">
@@ -164,7 +164,7 @@
         <TableColumn fx:id="colTarif" prefWidth="128.0" text="Tarif (€)" />
         <TableColumn fx:id="colOuvert" prefWidth="138.0" text="Ouvert" />
         <TableColumn fx:id="colCategorie" prefWidth="138.0" text="Categorie" />
-        <TableColumn fx:id="colAction" text="Reserver"/>
+        <TableColumn fx:id="colAction" text="Reserver" />
       </columns>
       </TableView>
          </children>

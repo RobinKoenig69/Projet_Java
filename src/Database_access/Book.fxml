@@ -52,10 +52,9 @@
   <children>
       <MenuBar>
          <menus>
-            <Menu mnemonicParsing="false" text="Retour au menu" />
+            <Menu mnemonicParsing="false" onAction="#ReservationDAO_redirectMenu" text="Retour au menu" />
          </menus>
       </MenuBar>
-    <MenuBar VBox.vgrow="NEVER" />
       <VBox prefHeight="1073.0" prefWidth="1920.0">
          <children>
       <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="239.0" prefWidth="1920.0">

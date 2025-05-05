@@ -52,7 +52,7 @@
       <menus>
         <Menu mnemonicParsing="false" text="Retour">
           <items>
-            <MenuItem mnemonicParsing="false" text="Retour au profil" />
+            <MenuItem mnemonicParsing="false" onAction="#ReservationDAO_redirectMenu" text="Retour au profil" />
           </items>
         </Menu>
       </menus>

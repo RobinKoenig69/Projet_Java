@@ -50,7 +50,7 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Retour au menu" />
+        <Menu mnemonicParsing="false" onAction="#Stats_redirectMenu" text="Retour au menu" />
       </menus>
     </MenuBar>
       <VBox prefHeight="1073.0" prefWidth="1920.0">

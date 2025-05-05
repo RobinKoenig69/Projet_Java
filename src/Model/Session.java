@@ -4,11 +4,13 @@ public class Session {
     private static String userName;
     private static int userID;
     private static int userBooking;
+    private static boolean admin;
 
-    public Session(String userName, int userID, int  userBooking) {
+    public Session(String userName, int userID, int  userBooking, boolean admin) {
         Session.userName = userName;
         Session.userID = userID;
         Session.userBooking = userBooking;
+        Session.admin = admin;
     }
 
     public static String getUserName() {
@@ -30,4 +32,8 @@ public class Session {
     public static int getUserBooking() { return userBooking; }
 
     public static void setUserBooking(int  booking) { userBooking = booking; }
+
+    public static boolean getAdmin() { return admin; }
+
+    public static void setAdmin(boolean admin) { admin = admin; }
 }

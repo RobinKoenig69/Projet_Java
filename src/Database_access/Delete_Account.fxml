@@ -51,7 +51,7 @@
          <menus>
             <Menu mnemonicParsing="false" text="Retour au menu">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_redirectMenu" text="Action 1" />
               </items>
             </Menu>
          </menus></MenuBar>

@@ -1,5 +1,6 @@
 package Controler;
 
+import Database_access.UtilisateurDAO_Implementation;
 import Model.Session;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +14,9 @@ import java.util.Date;
 public class testGraphic extends Application {
 
    public static String UserName = "";
-   public static int UserID = 7;
+   public static int UserID = -1;
 
-   Session newsession = new Session(UserName, UserID, -1);
+   Session newsession = new Session(UserName, UserID, -1, false);
 
 
    //public String Current_page = "User_Anciennes_Reservations";
