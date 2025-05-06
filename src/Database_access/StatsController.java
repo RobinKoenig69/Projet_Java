@@ -12,12 +12,16 @@ import javafx.scene.chart.PieChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
 
 public class StatsController {
+
+    @FXML
+    private Button generateReportButton; // Ajoutez ce bouton dans votre fichier FXML
 
     @FXML
     public void initialize() {
@@ -31,6 +35,13 @@ public class StatsController {
         loadTopAttractions();
     }
 
+    // Méthode pour générer un rapport PDF
+    @FXML
+    public void generatePdfReport(ActionEvent event) {
+        ReportGenerator.generateAndOpenReport();
+    }
+
+    // Le reste du code reste inchangé
     @FXML
     private PieChart reservationParAttraction;
 

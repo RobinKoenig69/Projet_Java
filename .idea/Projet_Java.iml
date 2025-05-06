@@ -12,5 +12,7 @@
     <orderEntry type="library" name="javafx.base" level="project" />
     <orderEntry type="library" name="mysql-connector-j-9.2.0" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="jfreechart-1.5.5" level="project" />
+    <orderEntry type="library" name="itextpdf.maven.itextdoc" level="project" />
   </component>
 </module>
