@@ -49,13 +49,13 @@
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Database_access.AdminDAO_Implementation">
   <children>
       <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="Retour">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#AdminDAO_redirectMenu" text="Retour au tableau de bord" />
-            </items>
-          </Menu>
-        </menus>
+         <menus>
+            <Menu mnemonicParsing="false" text="Retour">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#AdminDAO_redirectMenu" text="Retour au tableau de bord" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
     <SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>

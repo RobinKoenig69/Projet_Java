@@ -52,25 +52,29 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Statistiques" />
+        <Menu mnemonicParsing="false" text="Statistiques">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_redirectStats" text="Voir les statistiques" />
+               </items></Menu>
         <Menu mnemonicParsing="false" text="Attractions">
           <items>
-            <MenuItem mnemonicParsing="false" text="Gerer attractions" />
+            <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_redirectManageAttraction" text="Gerer attractions" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Clients">
           <items>
-            <MenuItem mnemonicParsing="false" text="Gérer clients" />
+            <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_redirectManageUser" text="Gérer clients" />
           </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Réductions">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Ajouter réduction" />
-                  <MenuItem mnemonicParsing="false" text="Modifier réduction" />
-                  <MenuItem mnemonicParsing="false" text="Supprimer réduction" />
+                  <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_redirectManageReduction" text="Modifier les réductions" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Rechercher" />
+            <Menu mnemonicParsing="false" text="Rechercher">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_RedirectSearch" text="Rechercher des attractions" />
+               </items></Menu>
       </menus>
     </MenuBar>
     <SplitPane dividerPositions="0.24498886414253898" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">

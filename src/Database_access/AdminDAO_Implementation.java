@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
@@ -644,16 +645,18 @@ public class AdminDAO_Implementation {
 
  */
 
-        afficherReductions();
+        if (afficher_reductions!=null){
+            afficherReductions();
+        }
     }
 
     public void AdminDAO_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admion_Template.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
                 Parent root = loader.load();
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
                 Scene scene = new Scene(root, 1920, 1080);
                 stage.setScene(scene);
@@ -667,7 +670,7 @@ public class AdminDAO_Implementation {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
                 Parent root = loader.load();
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
                 Scene scene = new Scene(root, 1920, 1080);
                 stage.setScene(scene);

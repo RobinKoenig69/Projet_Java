@@ -583,7 +583,7 @@ public class UtilisateurDAO_Implementation {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Search.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
             Scene scene = new Scene(root, 1920, 1080);
             stage.setScene(scene);
@@ -644,6 +644,83 @@ public class UtilisateurDAO_Implementation {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void UtilisateurDAO_redirectStats(ActionEvent event) {
+        if (Session.getAdmin()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Stats.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+
+                Scene scene = new Scene(root, 1920, 1080);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void UtilisateurDAO_redirectManageAttraction(ActionEvent event) {
+        if (Session.getAdmin()){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Modify_Attraction.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+
+                Scene scene = new Scene(root, 1920, 1080);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    @FXML
+    public void UtilisateurDAO_redirectManageReduction(ActionEvent event) {
+        if (Session.getAdmin()){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Modify_Reduction.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+
+                Scene scene = new Scene(root, 1920, 1080);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void UtilisateurDAO_redirectManageUser(ActionEvent event) {
+        if (Session.getAdmin()){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Modify_User.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+
+                Scene scene = new Scene(root, 1920, 1080);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

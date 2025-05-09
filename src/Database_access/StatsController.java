@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -265,10 +266,10 @@ public class StatsController {
     public void Stats_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admion_Template.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
                 Parent root = loader.load();
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
                 Scene scene = new Scene(root, 1920, 1080);
                 stage.setScene(scene);
@@ -282,7 +283,7 @@ public class StatsController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
                 Parent root = loader.load();
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
                 Scene scene = new Scene(root, 1920, 1080);
                 stage.setScene(scene);
