@@ -23,7 +23,7 @@ public class testGraphic extends Application {
    //public String Current_page = "User_Anciennes_Reservations";
    //public String Current_page = "Admin_Template";
    public String Current_page = "Book";
-   //public String Current_page = "Client_Template";
+   ///public String Current_page = "Client_Template";
 
    @Override
    public void start(Stage primaryStage) {
