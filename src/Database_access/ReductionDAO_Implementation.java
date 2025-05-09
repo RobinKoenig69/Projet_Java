@@ -1,6 +1,7 @@
 package Database_access;
 
 import Model.Reduction;
+import Model.Session;
 import javafx.fxml.FXML;
 
 import java.sql.*;
@@ -21,7 +22,7 @@ public class ReductionDAO_Implementation {
         if (connection != null) {
             try {
 
-                String sql = "INSERT INTO Attraction (Pourcentage, concerne, id_attraction) VALUES (?, ?, ?)";
+                String sql = "INSERT INTO reduction (Pourcentage, concerne, id_attraction) VALUES (?, ?, ?)";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setInt(1, pourcentage);
                 statement.setString(2, concerne);

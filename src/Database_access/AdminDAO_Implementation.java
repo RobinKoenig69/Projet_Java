@@ -1,5 +1,6 @@
 package Database_access;
 
+import Model.Reduction;
 import Model.Session;
 import Model.Utilisateur;
 import Model.Attraction;
@@ -55,7 +56,7 @@ public class AdminDAO_Implementation {
     private Spinner pref_txt;
 
     @FXML
-    private Spinner id_attraction_txt;
+    private Spinner<Integer> id_attraction_txt;
 
     @FXML
     private TextArea nom_attraction_txt;
@@ -93,8 +94,153 @@ public class AdminDAO_Implementation {
     public AdminDAO_Implementation() {
     
     }
-    
 
+    @FXML
+    private Spinner<Integer> id_reduction_txt;
+
+    @FXML
+    private Spinner<Integer> pourcentage_reduction_txt;
+
+    @FXML
+    private TextArea concerne;
+
+    @FXML
+    private TextArea afficher_reductions;
+
+    // Ajouter ou modifier une réduction
+    @FXML
+    public void AdminDAO_Add_Or_Modify_Reduction() throws Exceptions_Database {
+        int id = id_reduction_txt.getValue();
+        double pourcentage = pourcentage_reduction_txt.getValue();
+        String concerns = concerne.getText();
+        int id_attraction = id_attraction_txt.getValue();
+
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT COUNT(*) FROM reduction WHERE id_reduction = ?";
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next() && rs.getInt(1) > 0) {
+                    String updateQuery = "UPDATE reduction SET Concerne = ?, Pourcentage = ?, id_attraction = ? WHERE id_reduction = ?";
+                    try (PreparedStatement updateStmt = connection.prepareStatement(updateQuery)) {
+                        updateStmt.setString(1, concerns);
+                        updateStmt.setDouble(2, pourcentage);
+                        updateStmt.setInt(3, id_attraction);
+                        updateStmt.setInt(4, id);
+                        updateStmt.executeUpdate();
+                    }
+                } else {
+                    String insertQuery = "INSERT INTO reduction (Concerne, Pourcentage, id_attraction) VALUES (?, ?, ?)";
+                    try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
+                        insertStmt.setString(1, concerns);
+                        insertStmt.setDouble(2, pourcentage);
+                        insertStmt.setInt(3, id_attraction);
+                        insertStmt.executeUpdate();
+                    }
+                }
+
+                stmt.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur lors de l'ajout/modification d'une réduction", e);
+            }
+        } else {
+            throw new Exceptions_Database("Connexion à la base de données échouée");
+        }
+    }
+
+    // Supprimer une réduction
+    @FXML
+    public void AdminDAO_Delete_Reduction() throws Exceptions_Database {
+        int id = id_reduction_txt.getValue();
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT COUNT(*) FROM reduction WHERE id_reduction = ?";
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next() && rs.getInt(1) > 0) {
+                    String deleteQuery = "DELETE FROM reduction WHERE id_reduction = ?";
+                    try (PreparedStatement deleteStmt = connection.prepareStatement(deleteQuery)) {
+                        deleteStmt.setInt(1, id);
+                        deleteStmt.executeUpdate();
+                    }
+                } else {
+                    System.out.println("La réduction avec cet id n'existe pas");
+                }
+
+                stmt.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur lors de la suppression de la réduction", e);
+            }
+        } else {
+            throw new Exceptions_Database("Connexion à la base de données échouée");
+        }
+    }
+
+    // Récupérer la liste des réductions
+    @FXML
+    public List<Reduction> AdminDAO_GetReductions() throws Exceptions_Database {
+        List<Reduction> reductions = new ArrayList<>();
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT * FROM reduction";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id_reduction");
+                    String concerne = resultSet.getString("Concerne");
+                    int pourcentage = resultSet.getInt("Pourcentage");
+                    int id_attraction = resultSet.getInt("id_attraction");
+
+                    reductions.add(new Reduction(id, pourcentage, concerne, id_attraction ));
+                }
+
+                resultSet.close();
+                statement.close();
+                connection.close();
+
+            } catch (Exception e) {
+                throw new Exceptions_Database("Erreur lors de la récupération des réductions", e);
+            }
+        } else {
+            throw new Exceptions_Database("Connexion à la base de données échouée");
+        }
+
+        return reductions;
+    }
+
+    // Affichage dans l'interface
+    @FXML
+    public void afficherReductions() throws Exceptions_Database {
+        List<Reduction> reductions = AdminDAO_GetReductions();
+
+        if (!reductions.isEmpty()) {
+            StringBuilder infos = new StringBuilder();
+            for (Reduction red : reductions) {
+                infos.append(String.format(
+                        "ID : %d\nConcerne : %s\nPourcentage : %d\nAttraction concernée : %s\n\n",
+                        red.getIdReduction(), red.getConcerne(), red.getPourcentage(), red.getIdAttraction()
+                ));
+            }
+            afficher_reductions.setText(infos.toString());
+        } else {
+            afficher_reductions.setText("Aucune réduction trouvée.");
+        }
+    }
 
 
     @FXML
@@ -410,6 +556,7 @@ public class AdminDAO_Implementation {
     public void initialize() throws Exceptions_Database {
         List<Utilisateur> utilisateurs = AdminDAO_GetUsers();
         List<Attraction> attractions = AdminDAO_GetAttractions();
+        List<Reduction> reductions = AdminDAO_GetReductions();
 
         if (!utilisateurs.isEmpty()) {
             StringBuilder infos = new StringBuilder();
@@ -467,7 +614,37 @@ public class AdminDAO_Implementation {
                 clients_info.setText("Aucune attractions trouvées.");
             }
         }
+/*
+        if (!reductions.isEmpty()) {
+            StringBuilder infos = new StringBuilder();
 
+            for (Utilisateur utilisateur : utilisateurs) {
+                infos.append(String.format(
+                        "ID : %s\nNom : %s\nPrenom : %s\nType : %s\nTranche age : %s\nEmail : %s\nAdresse : %s\nDerniere visite : %s\nAttraction pref ID : %s\n\n",
+                        utilisateur.getId_utilisateur(),
+                        utilisateur.getNom(),
+                        utilisateur.getPrenom(),
+                        utilisateur.getClientType(),
+                        utilisateur.getTrancheAge(),
+                        utilisateur.getEmail(),
+                        utilisateur.getAdresse(),
+                        utilisateur.getDerniereVisite(),
+                        utilisateur.getAttractionPrefereeId()
+                ));
+            }
+
+            if (afficher_reductions != null) {
+                afficher_reductions.setText(infos.toString());
+            }
+        } else {
+            if (afficher_reductions != null) {
+                afficher_reductions.setText("Aucun utilisateur trouvé.");
+            }
+        }
+
+ */
+
+        afficherReductions();
     }
 
     public void AdminDAO_redirectMenu(ActionEvent event) {
@@ -501,5 +678,4 @@ public class AdminDAO_Implementation {
             }
         }
     }
-
 }

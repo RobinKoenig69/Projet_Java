@@ -300,6 +300,8 @@ public class UtilisateurDAO_Implementation {
 
                     user = new Utilisateur(id, nom, prenom, client_type, tranche_age, email, adresse, derniere_visite, id_attractionpref);
 
+                    Session.setCategorie(client_type);
+
                     UserID = id;
                     UserName = prenom;
 
@@ -451,6 +453,8 @@ public class UtilisateurDAO_Implementation {
         String Pwd_encrypted = hash(Pwd);
 
         UtilisateurDAO_Add(nom.getText(), prenom.getText(), Integer.parseInt(age.getValue().toString()), Email.getText(), adresse.getText(), Pwd_encrypted);
+
+        Session.setCategorie("Nouveau");
 
         UtilisateurDAO_LoginRegister_redirect(-1);
     }

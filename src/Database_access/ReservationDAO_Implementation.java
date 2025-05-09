@@ -32,10 +32,13 @@ public class ReservationDAO_Implementation {
     private TextArea ReservationInfo;
 
     @FXML
+    private TextArea ordersummary;
+
+    @FXML
     private DatePicker datePicker;
 
     @FXML
-    private Spinner spinner;
+    private Spinner<Integer> spinner;
 
     @FXML
     private TextArea past_res;
@@ -44,6 +47,46 @@ public class ReservationDAO_Implementation {
     public ReservationDAO_Implementation() {
 
     }
+
+    public int ReservationnDAO_GetPercentage(int id_attraction, String concerne) throws Exceptions_Database {
+
+        int pourcentage = 1; // Valeur par défaut s'il n'y a pas de réduction
+
+        Connection connection = Database_connection.connect();
+
+        if (connection == null) {
+            throw new Exceptions_Database("Connexion à la base de données échouée.");
+        }
+
+        try {
+            String sql = "SELECT * FROM reduction WHERE id_attraction = ? AND Concerne = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, id_attraction);
+            statement.setString(2, concerne);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                pourcentage = resultSet.getInt("Pourcentage");
+
+            } else {
+                System.out.println("Aucune réduction trouvée pour attraction " + id_attraction + " et concerne = " + concerne);
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+
+        } catch (Exception e) {
+            throw new Exceptions_Database("Erreur lors de la récupération des réductions.", e);
+        }
+
+        return pourcentage;
+    }
+
+
+
 
     public void ReservationDAO_Add(LocalDateTime date_reservation, float prix, int id_attraction, int id_utilisateur) throws  Exceptions_Database {
 
@@ -114,6 +157,31 @@ public class ReservationDAO_Implementation {
         return nom;
     }
 
+    public static float getAttractionPrice(int idAttraction) throws Exceptions_Database {
+        float prix = 0.0f;
+
+        Connection connection = Database_connection.connect();
+
+        if (connection != null) {
+            try {
+                String sql = "SELECT Tarif FROM attraction WHERE id_attraction = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setInt(1, idAttraction);
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    prix = resultSet.getInt("Tarif");
+                }
+
+            } catch (SQLException e) {
+                throw new Exceptions_Database("Erreur lors de la récupération du prix de l'attraction.", e);
+            }
+        }
+
+        return prix;
+    }
+
+
 
     @FXML
     public void initialize() throws Exceptions_Database {
@@ -156,6 +224,35 @@ public class ReservationDAO_Implementation {
                 ReservationInfo.setText("Aucune réservation trouvée pour cet utilisateur.");
             }
         }
+
+
+        if (Session.getCartvalue() != 0) {
+            StringBuilder infos = new StringBuilder();
+            StringBuilder infos_past = new StringBuilder();
+
+            Session.setNbpersonnes(Session.getCartvalue());
+
+            //System.out.println(ReservationnDAO_GetPercentage(Session.getUserBooking(), Session.getCategorie()));
+
+            float pourcentage = ReservationnDAO_GetPercentage(Session.getUserBooking(), Session.getCategorie());
+            float prixfinal = Session.getCartvalue()*(getAttractionPrice(Session.getUserBooking())) * (1 - pourcentage / 100f);
+
+            System.out.println(prixfinal);
+
+            Session.setCartvalue(prixfinal);
+
+            //Session.setCartvalue(prixfinal);
+
+            infos.append(String.format(
+                    "Réservation pour : %s\nMontant : %.2f",
+                    Session.getUserName(),
+                    prixfinal
+            ));
+
+            if (ordersummary != null) {
+                ordersummary.setText(infos.toString());
+            }
+            }
     }
 
 
@@ -200,7 +297,7 @@ public class ReservationDAO_Implementation {
         int prix = 0;
         int nb_places_tot = 0;
 
-        // Étape 1 : Récupérer le tarif et le nombre de places totales
+        // Étape 1 : Récupérer le tarif et le nombre de places totales de l'attraction
         try (Connection connection = Database_connection.connect()) {
             String sql = "SELECT Nb_places_tot, Tarif FROM attraction WHERE id_attraction = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -218,15 +315,19 @@ public class ReservationDAO_Implementation {
             throw new Exceptions_Database("Erreur lors de la récupération des informations d'attraction", e);
         }
 
-        // Étape 2 : Calculer le nombre de réservations déjà existantes pour cette date
+        // Étape 2 : Vérifier le nombre de réservations existantes pour la date choisie
         int nb_reservations_existantes = 0;
-        LocalDateTime dateChoisie = datePicker.getValue().atStartOfDay();
+        Date dateChoisie = Session.getDatebooking();  // Doit être un Timestamp
+
+        if (dateChoisie == null) {
+            throw new Exceptions_Database("Date de réservation non définie.");
+        }
 
         try (Connection connection = Database_connection.connect()) {
-            String sql = "SELECT COUNT(*) FROM reservation WHERE id_attraction = ? AND DATE(Date_reservation) = ?";
+            String sql = "SELECT SUM(nb_personnes) FROM reservation WHERE id_attraction = ? AND DATE(Date_reservation) = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id_attraction);
-                statement.setDate(2, java.sql.Date.valueOf(datePicker.getValue()));
+                statement.setDate(2, new java.sql.Date(dateChoisie.getTime()));  // Pour matcher avec DATE() SQL
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
                         nb_reservations_existantes = resultSet.getInt(1);
@@ -237,8 +338,8 @@ public class ReservationDAO_Implementation {
             throw new Exceptions_Database("Erreur lors de la vérification des réservations existantes", e);
         }
 
-        // Étape 3 : Vérifier si la réservation est possible
-        int nbDemandes = (int) spinner.getValue();
+
+        int nbDemandes = (int) Session.getNbpersonnes();
         if (nbDemandes + nb_reservations_existantes > nb_places_tot * 24) {
             throw new Exceptions_Database("Nombre de places insuffisant pour cette date.");
         }
@@ -247,10 +348,9 @@ public class ReservationDAO_Implementation {
         try (Connection connection = Database_connection.connect()) {
             String sql = "INSERT INTO reservation (Date_reservation, Prix, id_utilisateur, id_attraction, nb_personnes) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                Timestamp timestamp = Timestamp.valueOf(dateChoisie);
-                float prixTotal = prix * nbDemandes;
+                float prixTotal = Session.getCartvalue();  // prix déjà réduit
 
-                statement.setTimestamp(1, timestamp);
+                statement.setDate(1, dateChoisie);
                 statement.setFloat(2, prixTotal);
                 statement.setInt(3, id_user);
                 statement.setInt(4, id_attraction);
@@ -259,19 +359,44 @@ public class ReservationDAO_Implementation {
                 int rowsInserted = statement.executeUpdate();
                 if (rowsInserted > 0) {
                     System.out.println("Réservation effectuée avec succès !");
+                } else {
+                    throw new Exceptions_Database("Échec de l'enregistrement de la réservation.");
                 }
             }
         } catch (SQLException e) {
             throw new Exceptions_Database("Erreur lors de l'enregistrement de la réservation", e);
         }
 
+        // Redirection vers le menu après confirmation
         ReservationDAO_redirectMenu(event);
+    }
+
+
+    @FXML
+    public void ReservationDAO_redirectConfirm(ActionEvent event) {
+
+        Session.setCartvalue(spinner.getValue());
+        Session.setDatebooking(Date.valueOf(datePicker.getValue()));
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Confirm_booking.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root, 1920, 1080);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void ReservationDAO_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()){
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admion_Template.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
                 Parent root = loader.load();
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

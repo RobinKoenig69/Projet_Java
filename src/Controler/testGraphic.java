@@ -14,9 +14,10 @@ import java.util.Date;
 public class testGraphic extends Application {
 
    public static String UserName = "";
-   public static int UserID = -1;
+   public static int UserID = 1;
 
-   Session newsession = new Session(UserName, UserID, -1, false);
+   Session newsession = new Session(UserName, UserID, 2, false, "Nouveau");
+
 
 
    //public String Current_page = "User_Anciennes_Reservations";
@@ -27,7 +28,7 @@ public class testGraphic extends Application {
    @Override
    public void start(Stage primaryStage) {
       try {
-         // Load the FXML file (assuming it's located in /resources/Controler/main_view.fxml)
+
          Parent root = FXMLLoader.load(getClass().getResource("../Database_access/" +Current_page +".fxml"));
 
          Scene scene = new Scene(root, 1920, 1080);
