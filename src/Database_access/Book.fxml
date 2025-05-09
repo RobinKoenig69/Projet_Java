@@ -38,6 +38,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.control.TextField?>
@@ -52,7 +53,11 @@
   <children>
       <MenuBar>
          <menus>
-            <Menu mnemonicParsing="false" onAction="#ReservationDAO_redirectMenu" text="Retour au menu" />
+            <Menu mnemonicParsing="false" text="Retour au menu">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ReservationDAO_redirectMenu" text="Retour au menu" />
+               </items>
+            </Menu>
          </menus>
       </MenuBar>
       <VBox prefHeight="1073.0" prefWidth="1920.0">

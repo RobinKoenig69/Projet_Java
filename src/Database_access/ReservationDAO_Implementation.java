@@ -9,9 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -399,7 +397,7 @@ public class ReservationDAO_Implementation {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
                 Parent root = loader.load();
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
                 Scene scene = new Scene(root, 1920, 1080);
                 stage.setScene(scene);
@@ -414,7 +412,7 @@ public class ReservationDAO_Implementation {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
                 Parent root = loader.load();
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
                 Scene scene = new Scene(root, 1920, 1080);
                 stage.setScene(scene);
@@ -423,6 +421,48 @@ public class ReservationDAO_Implementation {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @FXML
+    private Spinner<Integer> spinnerReservationId; // Assure-toi qu'il est bien lié à ton FXML
+
+    @FXML
+    public void ReservationDAO_cancel() {
+        int userId = Session.getUserID();
+        Integer reservationId = spinnerReservationId.getValue();
+
+        String sql = "DELETE FROM reservation WHERE id_utilisateur = ? AND id_reservation = ?";
+
+        try (Connection conn = Database_connection.connect();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            stmt.setInt(2, reservationId);
+
+            int affectedRows = stmt.executeUpdate();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Annulation de réservation");
+
+            if (affectedRows > 0) {
+                alert.setHeaderText("Succès");
+                alert.setContentText("La réservation a été annulée avec succès.");
+            } else {
+                alert.setAlertType(Alert.AlertType.WARNING);
+                alert.setHeaderText("Aucune réservation trouvée");
+                alert.setContentText("Aucune réservation ne correspond à cet identifiant pour votre compte.");
+            }
+
+            alert.showAndWait();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Erreur");
+            errorAlert.setHeaderText("Échec de l’annulation");
+            errorAlert.setContentText("Une erreur est survenue : " + e.getMessage());
+            errorAlert.showAndWait();
         }
     }
 }

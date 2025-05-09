@@ -52,29 +52,25 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Mes réservations">
+        <Menu mnemonicParsing="false" text="Réservations">
           <items>
-            <MenuItem mnemonicParsing="false" text="Nouvelle réservation" />
+            <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_RedirectNewReservation" text="Nouvelle réservation" />
             <MenuItem mnemonicParsing="false" text="Annuler réservation" />
-                  <MenuItem mnemonicParsing="false" text="Anciennes réservations" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Attractions">
           <items>
-            <MenuItem mnemonicParsing="false" text="Nos attractions" />
-            <MenuItem mnemonicParsing="false" text="A venir" />
+            <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_RedirectNewReservation" text="Nos attractions" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Réductions en cours">
           <items>
-            <MenuItem mnemonicParsing="false" text="Nos Offres en cours" />
-                  <MenuItem mnemonicParsing="false" text="Offres à venir" />
-                  <MenuItem mnemonicParsing="false" text="Offres passées" />
+            <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_RedirectReductions" text="Nos Offres en cours" />
           </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Mon Compte">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_redirectDelete" text="Supprimer mon compte" />
+                  <MenuItem mnemonicParsing="false" onAction="#UtilisateurDAO_RedirectDelete" text="Supprimer mon compte" />
                </items>
             </Menu>
       </menus>

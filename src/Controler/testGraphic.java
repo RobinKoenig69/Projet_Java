@@ -14,16 +14,16 @@ import java.util.Date;
 public class testGraphic extends Application {
 
    public static String UserName = "";
-   public static int UserID = 1;
+   public static int UserID = -1;
 
-   Session newsession = new Session(UserName, UserID, 2, false, "Nouveau");
+   Session newsession = new Session(UserName, UserID, 2, false, "");
 
 
 
    //public String Current_page = "User_Anciennes_Reservations";
    //public String Current_page = "Admin_Template";
-   public String Current_page = "Book";
-   //public String Current_page = "Client_Template";
+   //public String Current_page = "Book";
+   public String Current_page = "Reservation_cancel";
 
    @Override
    public void start(Stage primaryStage) {

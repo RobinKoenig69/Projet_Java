@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -484,20 +485,6 @@ public class UtilisateurDAO_Implementation {
         UtilisateurDAO_LoginRegister_redirect(iduser);
     }
 
-    @FXML
-    public void UtilisateurDAO_redirectDelete(){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Delete_Account.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) UserInfo.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
-            Scene scene = new Scene(root, 1920, 1080);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     @FXML
     public void UtilisateurDAO_DeleteAccount() throws Exceptions_Database {
@@ -524,11 +511,11 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
-
+    @FXML
     public void UtilisateurDAO_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admion_Template.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
                 Parent root = loader.load();
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -557,6 +544,40 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    @FXML
+    public void UtilisateurDAO_redirectMenu2(ActionEvent event) {
+        if (Session.getAdmin()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+
+                Scene scene = new Scene(root, 1920, 1080);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+
+                Scene scene = new Scene(root, 1920, 1080);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
     public void UtilisateurDAO_RedirectSearch(ActionEvent event){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Search.fxml"));
@@ -573,12 +594,49 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    @FXML
     public void UtilisateurDAO_RedirectDelete(ActionEvent event){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Delete_Account.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+
+            Scene scene = new Scene(root, 1920, 1080);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void UtilisateurDAO_RedirectNewReservation(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Search.fxml"));
+            Parent root = loader.load();
+
+            // Obtenir la fenêtre à partir d'un quelconque élément de l'interface
+            Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+
+            Scene scene = new Scene(root, 1920, 1080);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    public void UtilisateurDAO_RedirectReductions(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Reductions.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
             Scene scene = new Scene(root, 1920, 1080);
             stage.setScene(scene);

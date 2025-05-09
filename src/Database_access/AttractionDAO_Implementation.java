@@ -170,18 +170,20 @@ public class AttractionDAO_Implementation {
 
             {
                 btn.setOnAction(event -> {
-                    Attraction attraction = getTableView().getItems().get(getIndex());
-                    Session.setUserBooking(attraction.getId());
+                    if (Session.getUserID() != -1) {
+                        Attraction attraction = getTableView().getItems().get(getIndex());
+                        Session.setUserBooking(attraction.getId());
 
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Book.fxml"));
-                        Parent root = loader.load();
-                        Stage stage = (Stage) inputtext_attraction.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
-                        Scene scene = new Scene(root, 1920, 1080);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Book.fxml"));
+                            Parent root = loader.load();
+                            Stage stage = (Stage) inputtext_attraction.getScene().getWindow(); // Email est ton champ de login, donc il est déjà dans la fenêtre !
+                            Scene scene = new Scene(root, 1920, 1080);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             }
@@ -296,10 +298,10 @@ public class AttractionDAO_Implementation {
     public void AttractionDAO_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admion_Template.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Admin_Template.fxml"));
                 Parent root = loader.load();
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
                 Scene scene = new Scene(root, 1920, 1080);
                 stage.setScene(scene);
@@ -313,7 +315,7 @@ public class AttractionDAO_Implementation {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Database_access/Client_Template.fxml"));
                 Parent root = loader.load();
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
                 Scene scene = new Scene(root, 1920, 1080);
                 stage.setScene(scene);
