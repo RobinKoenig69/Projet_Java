@@ -16,14 +16,16 @@ public class testGraphic extends Application {
    public static String UserName = "";
    public static int UserID = -1;
 
-   Session newsession = new Session(UserName, UserID, 2, true, "");
+   Session newsession = new Session(UserName, UserID, 2, false, "");
 
 
 
    //public String Current_page = "User_Anciennes_Reservations";
-   public String Current_page = "Admin_Template";
+   //public String Current_page = "Admin_Template";
    //public String Current_page = "Book";
    //public String Current_page = "Reservation_cancel";
+
+   public String Current_page = "Login";
 
    @Override
    public void start(Stage primaryStage) {
@@ -32,7 +34,7 @@ public class testGraphic extends Application {
          Parent root = FXMLLoader.load(getClass().getResource("../Database_access/" +Current_page +".fxml"));
 
          Scene scene = new Scene(root, 1920, 1080);
-         primaryStage.setTitle("Test JavaFX avec FXML");
+         primaryStage.setTitle("Logiciel de gestion du Parc : ECE-Tycoon !");
          primaryStage.setScene(scene);
          primaryStage.setFullScreen(false);
          primaryStage.show();

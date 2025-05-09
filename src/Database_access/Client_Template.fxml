@@ -117,10 +117,10 @@
                            <textFill>
                               <Color red="0.624" green="0.624" blue="0.624" fx:id="x23" />
                            </textFill></Label>
-                        <ImageView fitHeight="429.0" fitWidth="607.0" layoutX="14.0" layoutY="83.0">
-                           <image>
-                              <Image url="@../../Map.png" />
-                           </image>
+                        <ImageView fitHeight="715.0" fitWidth="960.0" layoutX="14.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="Map.png" />
+                            </image>
                         </ImageView>
               </children>
             </AnchorPane>

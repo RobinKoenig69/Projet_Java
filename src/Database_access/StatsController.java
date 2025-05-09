@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,6 +24,9 @@ public class StatsController {
 
     @FXML
     private Button generateReportButton; // Ajoutez ce bouton dans votre fichier FXML
+
+    @FXML
+    private TextArea infos_parc;
 
     @FXML
     public void initialize() {
@@ -294,4 +298,6 @@ public class StatsController {
             }
         }
     }
+
+
 }
