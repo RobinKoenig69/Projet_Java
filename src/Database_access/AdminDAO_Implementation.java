@@ -24,6 +24,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * La classe AdminDAO_Implementation gère les opérations CRUD pour les entités Reduction, Attraction et Utilisateur.
+ */
+
+
 public class AdminDAO_Implementation {
 
     @FXML
@@ -91,7 +97,11 @@ public class AdminDAO_Implementation {
     @FXML
     private TextArea afficher_attractions;
 
-    
+
+    /**
+      * Constructeur par défaut de la classe AdminDAO_Implementation.
+      */
+
     public AdminDAO_Implementation() {
     
     }
@@ -107,6 +117,14 @@ public class AdminDAO_Implementation {
 
     @FXML
     private TextArea afficher_reductions;
+
+
+    /**
+      * Ajoute ou modifie une réduction dans la base de données.
+      *
+      * @throws Exceptions_Database Si une erreur survient lors de l'ajout ou de la modification.
+      */
+
 
     // Ajouter ou modifier une réduction
     @FXML
@@ -155,6 +173,14 @@ public class AdminDAO_Implementation {
         }
     }
 
+
+    /**
+     * Supprime une réduction de la base de données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de la suppression.
+     */
+
+
     // Supprimer une réduction
     @FXML
     public void AdminDAO_Delete_Reduction() throws Exceptions_Database {
@@ -188,6 +214,15 @@ public class AdminDAO_Implementation {
             throw new Exceptions_Database("Connexion à la base de données échouée");
         }
     }
+
+
+    /**
+      * Récupère la liste des réductions de la base de données.
+      *
+      * @return La liste des réductions.
+      * @throws Exceptions_Database Si une erreur survient lors de la récupération.
+      */
+
 
     // Récupérer la liste des réductions
     @FXML
@@ -224,6 +259,14 @@ public class AdminDAO_Implementation {
         return reductions;
     }
 
+
+    /**
+     * Affiche les réductions dans l'interface utilisateur.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de l'affichage.
+     */
+
+
     // Affichage dans l'interface
     @FXML
     public void afficherReductions() throws Exceptions_Database {
@@ -242,6 +285,13 @@ public class AdminDAO_Implementation {
             afficher_reductions.setText("Aucune réduction trouvée.");
         }
     }
+
+
+    /**
+     * Supprime une attraction de la base de données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de la suppression.
+     */
 
 
     @FXML
@@ -279,6 +329,14 @@ public class AdminDAO_Implementation {
         }
 
     }
+
+
+    /**
+     * Ajoute ou modifie une attraction dans la base de données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de l'ajout ou de la modification.
+     */
+
 
     @FXML
     public void AdminDAO_Add_Or_Modify_Attraction() throws Exceptions_Database {
@@ -351,6 +409,12 @@ public class AdminDAO_Implementation {
 
     }
 
+    /**
+     * Supprime un utilisateur de la base de données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de la suppression.
+     */
+
     @FXML
     public void AdminDAO_Delete_User() throws Exceptions_Database{
         int id = (int)id_txt.getValue();
@@ -386,7 +450,14 @@ public class AdminDAO_Implementation {
         }
 
     }
-    
+
+
+    /**
+     * Ajoute ou modifie un utilisateur dans la base de données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de l'ajout ou de la modification.
+     */
+
 
     @FXML
     public void AdminDAO_Add_Or_Modify_User() throws Exceptions_Database {
@@ -457,6 +528,12 @@ public class AdminDAO_Implementation {
     }
 
 
+    /**
+     * Récupère les attractions depuis la base de données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de la recherche.
+     */
+
 
     @FXML
     public List<Attraction> AdminDAO_GetAttractions() throws Exceptions_Database {
@@ -510,6 +587,11 @@ public class AdminDAO_Implementation {
         return attractions;
     }
 
+    /**
+     * Récupère les utilisateurs depuis la base de données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de la recherche.
+     */
 
     @FXML
     public List<Utilisateur> AdminDAO_GetUsers() throws Exceptions_Database {
@@ -552,6 +634,12 @@ public class AdminDAO_Implementation {
 
         return utilisateurs;
     }
+
+    /**
+     * Initialise les pages utilisateur à partir des fonctions complémentaires.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de la recherche.
+     */
 
     @FXML
     public void initialize() throws Exceptions_Database {
@@ -649,6 +737,10 @@ public class AdminDAO_Implementation {
             afficherReductions();
         }
     }
+
+    /**
+     * Redirige l'administrateur vers le menu.
+     */
 
     public void AdminDAO_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()) {

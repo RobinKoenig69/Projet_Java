@@ -8,12 +8,26 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Classe utilitaire pour générer les rapports de statistiques
+ * La classe {@code ReportGenerator} est une classe utilitaire responsable de la génération et
+ * de l’ouverture d’un rapport PDF contenant des statistiques graphiques.
+ * <p>
+ * Elle s’appuie sur {@code Jfreechart_DAO} pour générer le fichier, utilise un thread séparé via
+ * {@code javafx.concurrent.Task} pour ne pas bloquer l’interface utilisateur, et fournit un retour visuel
+ * à l’utilisateur via des boîtes de dialogue.
+ * </p>
+ *
+ * @author Robin KOENIG & Marius LEPERE & Sofia CAILLAUD
+ * @version 3.5
  */
+
 public class ReportGenerator {
 
     /**
-     * Génère un rapport PDF de statistiques et l'ouvre si généré avec succès
+     * Lance la génération du rapport PDF en tâche de fond, puis ouvre le fichier PDF
+     * si la génération a été effectuée avec succès.
+     * <p>
+     * Affiche également une boîte de dialogue pour informer l'utilisateur du succès ou de l'échec.
+     * </p>
      */
     public static void generateAndOpenReport() {
         // Création d'une tâche en arrière-plan pour ne pas bloquer l'interface utilisateur
@@ -44,8 +58,9 @@ public class ReportGenerator {
     }
 
     /**
-     * Affiche une boîte de dialogue de succès
-     * @param pdfPath Chemin du fichier PDF généré
+     * Affiche une boîte de dialogue d'information signalant que le rapport a été généré avec succès.
+     *
+     * @param pdfPath Le chemin du fichier PDF généré.
      */
     private static void showSuccessDialog(String pdfPath) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -56,8 +71,9 @@ public class ReportGenerator {
     }
 
     /**
-     * Affiche une boîte de dialogue d'erreur
-     * @param errorMessage Message d'erreur à afficher
+     * Affiche une boîte de dialogue d’erreur contenant un message détaillant le problème rencontré.
+     *
+     * @param errorMessage Le message d'erreur à afficher à l’utilisateur.
      */
     private static void showErrorDialog(String errorMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -68,8 +84,9 @@ public class ReportGenerator {
     }
 
     /**
-     * Ouvre le fichier PDF avec l'application par défaut
-     * @param pdfPath Chemin du fichier PDF à ouvrir
+     * Tente d’ouvrir le fichier PDF généré en utilisant l’application par défaut du système.
+     *
+     * @param pdfPath Le chemin du fichier PDF à ouvrir.
      */
     private static void openPdfFile(String pdfPath) {
         try {

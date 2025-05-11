@@ -1,7 +1,12 @@
 package Model;
 
 import java.time.LocalDateTime;
-    
+
+/**
+ * Représente une réservation effectuée par un utilisateur.
+ * Contient les informations de date, de prix et d'annulation.
+ */
+
 public class Reservation {
     private int id_reservation;
     private LocalDateTime Date_reservation;
@@ -9,6 +14,16 @@ public class Reservation {
     private int id_utilisateur;
     private int id_attraction;
     private boolean estAnnulee;
+
+    /**
+     * Constructeur de réservation.
+     *
+     * @param id_reservation ID de la réservation
+     * @param DATETIME       Date et heure de la réservation
+     * @param Prix           Prix payé
+     * @param id_utilisateur ID de l'utilisateur
+     * @param id_attraction  ID de l’attraction réservée
+     */
 
     // Constructor
     public Reservation(int id_reservation, LocalDateTime DATETIME, float Prix, 
@@ -34,6 +49,12 @@ public class Reservation {
     public void setEstAnnulee(boolean estAnnulee) { 
         this.estAnnulee = estAnnulee; 
     }
+
+    /**
+     * Calcule et applique une réduction au prix total.
+     *
+     * @param tauxReduction Taux de réduction entre 0 et 1 (ex: 0.2 pour 20%)
+     */
 
     // Méthode métier
     public void calculerPrixAvecReduction(float tauxReduction) {

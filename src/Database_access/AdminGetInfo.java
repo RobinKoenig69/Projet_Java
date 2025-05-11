@@ -10,15 +10,36 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+
+/**
+ * La classe AdminGetInfo permet de récupérer et d'afficher des informations sur le parc.
+ */
+
+
 public class AdminGetInfo implements Initializable {
 
     @FXML
     private TextArea infos_parc;
 
+
+    /**
+     * Initialise la classe et affiche les informations du parc.
+     *
+     * @param location L'emplacement utilisé pour résoudre les chemins relatifs pour l'objet racine, ou null si l'emplacement n'est pas connu.
+     * @param resources Les ressources utilisées pour localiser l'objet racine, ou null si les ressources ne sont pas connues.
+     */
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         afficherInfosParc();
     }
+
+
+    /**
+     * Récupère et affiche les informations du parc, telles que le chiffre d'affaires total, le nombre d'utilisateurs, le nombre de réservations et le nombre d'attractions.
+     */
+
 
     public void afficherInfosParc() {
         Connection connection = Database_connection.connect();

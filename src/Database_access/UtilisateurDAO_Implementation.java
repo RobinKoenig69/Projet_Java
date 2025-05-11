@@ -28,6 +28,15 @@ import static java.sql.Types.NULL;
 
 import Encryption.MD5.*;
 
+/**
+ * Implémentation du DAO (Data Access Object) pour gérer les opérations
+ * liées à l'entité {@link Utilisateur} dans la base de données.
+ * Gère notamment l'inscription, la connexion, l'accès invité et les redirections de scène.
+ * <p>
+ * Cette classe utilise JavaFX pour les composants de l'interface utilisateur.
+ * </p>
+ */
+
 public class UtilisateurDAO_Implementation {
 
     @FXML
@@ -54,10 +63,25 @@ public class UtilisateurDAO_Implementation {
     @FXML
     private TextFlow Error_message;
 
+    /**
+     * Constructeur vide de la classe UtilisateurDAO_Implementation.
+     */
 
     public UtilisateurDAO_Implementation() {
 
     }
+
+    /**
+     * Ajoute un nouvel utilisateur à la base de données.
+     *
+     * @param nom      Le nom de l'utilisateur.
+     * @param prenom   Le prénom de l'utilisateur.
+     * @param age      L'âge de l'utilisateur.
+     * @param email    L'adresse email.
+     * @param adresse  L'adresse postale.
+     * @param Mdp      Le mot de passe (déjà hashé).
+     * @throws Exceptions_Database en cas d'erreur lors de l'insertion.
+     */
 
     public void UtilisateurDAO_Add(String nom, String prenom, int age, String email, String adresse, String Mdp) throws Exceptions_Database {
 
@@ -161,9 +185,13 @@ public class UtilisateurDAO_Implementation {
         } else {
             throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
-
-
     }
+
+    /**
+     * Initialise les champs de l'interface avec les informations utilisateur si disponibles.
+     *
+     * @throws Exceptions_Database en cas d'erreur lors de la récupération des données.
+     */
 
     @FXML
     public void initialize() throws Exceptions_Database {
@@ -191,28 +219,11 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
-    /*
-    public void initialize() throws Exceptions_Database {
-        Utilisateur user = UtilisateurDAO_getInfo();
-
-        if (user != null) {
-            String infos = String.format(
-                    "Nom : %s\nPrénom : %s\nType de client : %s\nTranche d'âge : %s\nEmail : %s\nAdresse : %s\nDernière visite : %s\nAttraction préférée (ID) : %d",
-                    user.getNom(),
-                    user.getPrenom(),
-                    user.getClientType(),
-                    user.getTrancheAge(),
-                    user.getEmail(),
-                    user.getAdresse(),
-                    user.getDerniereVisite() != null ? user.getDerniereVisite().toString() : "Aucune",
-                    user.getAttractionPrefereeId()
-            );
-            UserInfo.setText(infos);
-        } else {
-            UserInfo.setText("Aucun utilisateur trouvé.");
-        }
-    }
-
+    /**
+     * Récupère les informations complètes de l'utilisateur connecté depuis la base de données.
+     *
+     * @return Un objet {@link Utilisateur} rempli ou un invité par défaut.
+     * @throws Exceptions_Database en cas d'erreur de connexion ou de requête SQL.
      */
 
     @FXML
@@ -266,6 +277,13 @@ public class UtilisateurDAO_Implementation {
 
         return user;
     }
+
+    /**
+     * Authentifie un utilisateur en comparant l'email et le mot de passe hashé avec la base de données.
+     *
+     * @return L'utilisateur connecté s'il existe, sinon null.
+     * @throws Exception En cas d'erreur de base ou de connexion.
+     */
 
     @FXML
     public Utilisateur UtilisateurDAO_Login() throws Exception {
@@ -330,6 +348,12 @@ public class UtilisateurDAO_Implementation {
         return user;
     }
 
+    /**
+     * Redirige vers l'écran d'inscription (Register.fxml).
+     *
+     * @throws Exception si le fichier FXML n'est pas trouvé.
+     */
+
     @FXML
     public void UtilisateurDAO_Login_redirect() throws Exception {
         try {
@@ -343,6 +367,13 @@ public class UtilisateurDAO_Implementation {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Redirige vers le template utilisateur ou administrateur selon l'ID utilisateur.
+     *
+     * @param userID L'identifiant de l'utilisateur connecté.
+     * @throws Exception En cas d'erreur de redirection ou de base.
+     */
 
     @FXML
     public void UtilisateurDAO_LoginRegister_redirect(int userID) throws Exception {
@@ -395,6 +426,11 @@ public class UtilisateurDAO_Implementation {
 
     }
 
+    /**
+     * Valide les champs de saisie pour l'inscription.
+     *
+     * @return true si tous les champs sont valides, false sinon.
+     */
 
     public boolean validateInputs() {
         Error_message.getChildren().clear();
@@ -442,6 +478,11 @@ public class UtilisateurDAO_Implementation {
         return isValid;
     }
 
+    /**
+     * Gère l'inscription d'un nouvel utilisateur après validation des champs.
+     *
+     * @throws Exception en cas d'erreur d'insertion ou de redirection.
+     */
 
     @FXML
     public void UtilisateurDAO_Register() throws Exception {
@@ -460,6 +501,10 @@ public class UtilisateurDAO_Implementation {
         UtilisateurDAO_LoginRegister_redirect(-1);
     }
 
+    /**
+     * Active l'accès invité et redirige vers l'interface client.
+     */
+
     @FXML
     public void UtilisateurDAO_GuestAccess(){
         Session.setUserName("Guest");
@@ -477,6 +522,12 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    /**
+     * Redirige vers le menu principal selon l'ID utilisateur actuel dans la session.
+     *
+     * @throws Exception en cas d'erreur de redirection.
+     */
+
     @FXML
     public void UtilisateurDAO_redirectMenu() throws Exception {
 
@@ -485,6 +536,11 @@ public class UtilisateurDAO_Implementation {
         UtilisateurDAO_LoginRegister_redirect(iduser);
     }
 
+    /**
+     * Supprime le compte de l'utilisateur actuellement connecté.
+     *
+     * @throws Exceptions_Database si une erreur survient pendant la suppression.
+     */
 
     @FXML
     public void UtilisateurDAO_DeleteAccount() throws Exceptions_Database {
@@ -510,6 +566,12 @@ public class UtilisateurDAO_Implementation {
             throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
     }
+
+    /**
+     * Redirige l'utilisateur vers l'écran principal selon son statut (admin ou client).
+     *
+     * @param event L'événement JavaFX déclencheur.
+     */
 
     @FXML
     public void UtilisateurDAO_redirectMenu(ActionEvent event) {
@@ -544,6 +606,12 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    /**
+     * Variante de redirection vers le menu depuis une option de MenuItem.
+     *
+     * @param event L'événement déclencheur provenant d'un MenuItem.
+     */
+
     @FXML
     public void UtilisateurDAO_redirectMenu2(ActionEvent event) {
         if (Session.getAdmin()) {
@@ -577,6 +645,12 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    /**
+     * Redirige vers la page de recherche (Search.fxml).
+     *
+     * @param event L'événement déclencheur.
+     */
+
     @FXML
     public void UtilisateurDAO_RedirectSearch(ActionEvent event){
         try {
@@ -594,6 +668,12 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    /**
+     * Redirige vers la page de suppression de compte.
+     *
+     * @param event L'événement déclencheur.
+     */
+
     @FXML
     public void UtilisateurDAO_RedirectDelete(ActionEvent event){
         try {
@@ -610,6 +690,12 @@ public class UtilisateurDAO_Implementation {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Redirige vers la page de réservation (Search.fxml).
+     *
+     * @param event L'événement déclencheur.
+     */
 
     @FXML
     public void UtilisateurDAO_RedirectNewReservation(ActionEvent event){
@@ -629,6 +715,11 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    /**
+     * Redirige vers la page des réductions.
+     *
+     * @param event L'événement déclencheur.
+     */
 
     @FXML
     public void UtilisateurDAO_RedirectReductions(ActionEvent event){
@@ -646,6 +737,12 @@ public class UtilisateurDAO_Implementation {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Redirige vers les statistiques si l'utilisateur est un administrateur.
+     *
+     * @param event L'événement déclencheur.
+     */
 
     @FXML
     public void UtilisateurDAO_redirectStats(ActionEvent event) {
@@ -666,6 +763,12 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    /**
+     * Redirige vers la gestion des attractions si l'utilisateur est administrateur.
+     *
+     * @param event L'événement déclencheur.
+     */
+
     @FXML
     public void UtilisateurDAO_redirectManageAttraction(ActionEvent event) {
         if (Session.getAdmin()){
@@ -685,6 +788,11 @@ public class UtilisateurDAO_Implementation {
         }
     }
 
+    /**
+     * Redirige vers la gestion des réductions si l'utilisateur est administrateur.
+     *
+     * @param event L'événement déclencheur.
+     */
 
     @FXML
     public void UtilisateurDAO_redirectManageReduction(ActionEvent event) {
@@ -704,6 +812,12 @@ public class UtilisateurDAO_Implementation {
             }
         }
     }
+
+    /**
+     * Redirige vers la gestion des utilisateurs si l'utilisateur est administrateur.
+     *
+     * @param event L'événement déclencheur.
+     */
 
     @FXML
     public void UtilisateurDAO_redirectManageUser(ActionEvent event) {

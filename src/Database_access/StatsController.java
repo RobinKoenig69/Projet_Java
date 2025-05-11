@@ -20,6 +20,23 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * La classe {@code StatsController} est responsable de l'affichage des statistiques
+ * dans l'interface graphique sous forme de graphiques (camembert et histogramme).
+ * <p>
+ * Elle interroge la base de données pour afficher :
+ * <ul>
+ *     <li>La répartition des réservations par attraction ou catégorie</li>
+ *     <li>Les utilisateurs par tranche d'âge</li>
+ *     <li>Les réductions appliquées selon le type de client</li>
+ *     <li>Les revenus générés par attraction</li>
+ *     <li>Le nombre de places disponibles par catégorie</li>
+ *     <li>Les 5 attractions les plus réservées</li>
+ * </ul>
+ * Elle permet aussi de générer un rapport PDF via {@link ReportGenerator}.
+ * </p>
+ */
+
 public class StatsController {
 
     @FXML
@@ -27,6 +44,11 @@ public class StatsController {
 
     @FXML
     private TextArea infos_parc;
+
+    /**
+     * Méthode appelée automatiquement lors de l'initialisation du contrôleur.
+     * Elle charge toutes les statistiques nécessaires à l'affichage.
+     */
 
     @FXML
     public void initialize() {
@@ -40,6 +62,12 @@ public class StatsController {
         loadTopAttractions();
     }
 
+    /**
+     * Génère un rapport PDF des statistiques via {@link ReportGenerator}.
+     *
+     * @param event L'événement déclencheur (clic sur le bouton).
+     */
+
     // Méthode pour générer un rapport PDF
     @FXML
     public void generatePdfReport(ActionEvent event) {
@@ -49,6 +77,10 @@ public class StatsController {
     // Le reste du code reste inchangé
     @FXML
     private PieChart reservationParAttraction;
+
+    /**
+     * Charge la répartition des réservations par attraction dans un graphique en camembert.
+     */
 
     public void loadReservationParAttraction() {
         ObservableList<PieChart.Data> dataList = FXCollections.observableArrayList();
@@ -82,6 +114,10 @@ public class StatsController {
     @FXML
     private PieChart reservationsParCategorie;
 
+    /**
+     * Charge la répartition des réservations par catégorie d’attraction dans un graphique en camembert.
+     */
+
     public void loadReservationsParCategorie() {
         ObservableList<PieChart.Data> dataList = FXCollections.observableArrayList();
 
@@ -112,6 +148,10 @@ public class StatsController {
 
     @FXML
     private PieChart utilisateursParTrancheAge;
+
+    /**
+     * Charge la répartition des utilisateurs par tranche d’âge dans un graphique en camembert.
+     */
 
     public void loadUtilisateursParTrancheAge() {
         ObservableList<PieChart.Data> dataList = FXCollections.observableArrayList();
@@ -144,6 +184,10 @@ public class StatsController {
     @FXML
     private PieChart reductionsParTypeClient;
 
+    /**
+     * Charge le nombre de réductions appliquées par type de client dans un graphique en camembert.
+     */
+
     public void loadReductionsParTypeClient() {
         ObservableList<PieChart.Data> dataList = FXCollections.observableArrayList();
 
@@ -173,6 +217,10 @@ public class StatsController {
 
     @FXML
     private BarChart<String, Number> revenuParAttraction;
+
+    /**
+     * Charge le chiffre d'affaires généré par chaque attraction dans un histogramme.
+     */
 
     public void loadRevenuParAttraction() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
@@ -206,6 +254,10 @@ public class StatsController {
     @FXML
     private BarChart<String, Number> placesDispoParCategorie;
 
+    /**
+     * Charge le nombre total de places disponibles par catégorie dans un histogramme.
+     */
+
     public void loadPlacesDispoParCategorie() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Places disponibles");
@@ -237,6 +289,10 @@ public class StatsController {
     @FXML
     private BarChart<String, Number> topAttractions;
 
+    /**
+     * Charge les 5 attractions les plus populaires (en nombre de réservations) dans un histogramme.
+     */
+
     public void loadTopAttractions() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Top 5 Réservations");
@@ -266,6 +322,12 @@ public class StatsController {
 
         topAttractions.getData().add(series);
     }
+
+    /**
+     * Redirige l'utilisateur vers le menu principal approprié (admin ou client).
+     *
+     * @param event L'événement déclenché par le menu.
+     */
 
     public void Stats_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()) {

@@ -3,6 +3,12 @@ package Model;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
+/**
+ * Classe utilitaire de session pour stocker les données utilisateur courantes.
+ *
+ * Toutes les données sont statiques : cette classe joue le rôle de singleton implicite.
+ */
+
 public class Session {
     private static String userName;
     private static int userID;
@@ -12,6 +18,16 @@ public class Session {
     private static float nbpersonnes;
     private static String categorie;
     private static Date datebooking;
+
+    /**
+     * Initialise une session utilisateur.
+     *
+     * @param userName     Nom d’utilisateur
+     * @param userID       ID utilisateur
+     * @param userBooking  Nombre de réservations en cours
+     * @param admin        Statut administrateur
+     * @param categorie    Catégorie de client
+     */
 
     public Session(String userName, int userID, int  userBooking, boolean admin, String categorie) {
         Session.userName = userName;

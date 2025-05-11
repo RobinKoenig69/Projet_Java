@@ -23,6 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * La classe AttractionDAO permet de récupérer et d'afficher des informations concernant les attractions.
+ */
+
 public class AttractionDAO_Implementation {
 
     @FXML
@@ -52,10 +56,19 @@ public class AttractionDAO_Implementation {
     @FXML
     private ToggleGroup Select_option;
 
+    /**
+     * Constructeur par défaut de la classe AttractionDAO_Implementation.
+     */
 
     public AttractionDAO_Implementation() {
         // constructeur vide requis par FXMLLoader
     }
+
+    /**
+     * Ajoute une attraction dans la Base de Données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de la recherche.
+     */
 
     @FXML
     public void AttractionDAO_Add(String nom, int nb_places_tot, String categorie, Boolean ouvert, int prix, Time heure_ouverture, Time heure_fermeture, Time fin_inscription) throws Exceptions_Database {
@@ -93,6 +106,12 @@ public class AttractionDAO_Implementation {
             throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
     }
+
+    /**
+     * Recherche l'ensemble des attractions depuis la Base de Données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de la recherche.
+     */
 
     @FXML
     public List<Attraction> AttractionDAO_GetAll() throws Exceptions_Database {
@@ -138,6 +157,9 @@ public class AttractionDAO_Implementation {
         return attractions;
     }
 
+    /**
+     * Initialise la classe et affiche les informations relatives aux attractions.
+     */
 
     @FXML
     public void initialize() {
@@ -200,6 +222,11 @@ public class AttractionDAO_Implementation {
         });
     }
 
+    /**
+     * Récupère toutes les attractions depuis la base de données.
+     *
+     * @throws Exceptions_Database Si une erreur survient lors de la recherche.
+     */
 
     @FXML
     public List<Attraction> AttractionDAO_Get() throws Exceptions_Database {
@@ -294,6 +321,10 @@ public class AttractionDAO_Implementation {
         attractionTable.getItems().setAll(attractions);
         return attractions;
     }
+
+    /**
+     * Redirige l'utilisateur vers le menu.
+     */
 
     public void AttractionDAO_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()) {

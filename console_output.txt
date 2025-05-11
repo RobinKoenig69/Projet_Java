@@ -2785,3 +2785,51 @@ Connexion réussie !
 UserInfo n'est pas lié dans le FXML.
 
 
+
+
+Début des logs en date du :Sat May 10 13:58:39 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+Début des logs en date du :Sat May 10 13:58:47 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Insertion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+Début des logs en date du :Sat May 10 13:59:52 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+
+
+
+Début des logs en date du :Sat May 10 14:00:41 CEST 2025
+
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+Connexion réussie !
+Connexion réussie !
+Connexion réussie !
+UserInfo n'est pas lié dans le FXML.
+
+

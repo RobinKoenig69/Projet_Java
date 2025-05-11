@@ -3,6 +3,11 @@ package Model;
 import java.sql.Time;
 import java.time.LocalDateTime;
 
+/**
+ * Représente une attraction dans le parc.
+ * Contient des informations sur les horaires, la capacité et les tarifs.
+ */
+
 public class Attraction {
     private int id;
     private String nom;
@@ -14,6 +19,21 @@ public class Attraction {
     private Time heure_ouverture;
     private Time heure_fermeture;
     private Time heure_fin_inscription;
+
+    /**
+     * Constructeur de l'attraction.
+     *
+     * @param id                    ID de l’attraction
+     * @param Nom                   Nom de l’attraction
+     * @param Nb_places_dispo       Nombre de places disponibles
+     * @param Nb_places_tot         Nombre total de places
+     * @param tarif                 Tarif de l’attraction
+     * @param ouvert                État d’ouverture
+     * @param categorie             Catégorie de l’attraction
+     * @param heure_ouverture       Heure d’ouverture
+     * @param heure_fermeture       Heure de fermeture
+     * @param heure_fin_inscription Heure de fin d’inscription
+     */
 
     //constructor
     public Attraction(int id, String Nom, int Nb_places_dispo,

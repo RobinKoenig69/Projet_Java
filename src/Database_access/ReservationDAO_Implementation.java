@@ -24,6 +24,18 @@ import static Controler.testGraphic.UserName;
 import static Encryption.MD5.hash;
 import static javafx.application.Application.getUserAgentStylesheet;
 
+/**
+ * La classe {@code ReservationDAO_Implementation} gère les opérations liées aux réservations :
+ * ajout, annulation, affichage, vérification de disponibilités, et application de réductions.
+ * <p>
+ * Elle interagit directement avec la base de données pour insérer ou extraire des données concernant
+ * les réservations et les attractions.
+ * </p>
+ *
+ * @author Robin KOENIG & Marius LEPERE & Sofia CAILLAUD & Marie ALLEMANDOU
+ * @version 5.2
+ */
+
 public class ReservationDAO_Implementation {
 
     @FXML
@@ -46,6 +58,14 @@ public class ReservationDAO_Implementation {
 
     }
 
+    /**
+     * Récupère le pourcentage de réduction applicable pour une attraction donnée et une catégorie.
+     *
+     * @param id_attraction L'identifiant de l'attraction.
+     * @param concerne La catégorie concernée (étudiant, senior, etc.).
+     * @return Le pourcentage de réduction.
+     * @throws Exceptions_Database En cas d'erreur d'accès à la base de données.
+     */
     public int ReservationnDAO_GetPercentage(int id_attraction, String concerne) throws Exceptions_Database {
 
         int pourcentage = 1; // Valeur par défaut s'il n'y a pas de réduction
@@ -83,8 +103,15 @@ public class ReservationDAO_Implementation {
         return pourcentage;
     }
 
-
-
+    /**
+     * Ajoute une nouvelle réservation dans la base de données.
+     *
+     * @param date_reservation La date de réservation.
+     * @param prix Le prix payé.
+     * @param id_attraction L'identifiant de l'attraction.
+     * @param id_utilisateur L'identifiant de l'utilisateur.
+     * @throws Exceptions_Database En cas d'erreur d'insertion.
+     */
 
     public void ReservationDAO_Add(LocalDateTime date_reservation, float prix, int id_attraction, int id_utilisateur) throws  Exceptions_Database {
 
@@ -117,6 +144,14 @@ public class ReservationDAO_Implementation {
             throw new Exceptions_Database("La connexion à la base de données a échoué");
         }
     }
+
+    /**
+     * Récupère le nom d'une attraction à partir de son identifiant.
+     *
+     * @param id_att L'identifiant de l'attraction.
+     * @return Le nom de l'attraction.
+     * @throws Exceptions_Database En cas d'erreur lors de la récupération.
+     */
 
     @FXML
     public String getNomAttraction(int id_att) throws Exceptions_Database {
@@ -155,6 +190,14 @@ public class ReservationDAO_Implementation {
         return nom;
     }
 
+    /**
+     * Récupère le prix d'une attraction.
+     *
+     * @param idAttraction L'identifiant de l'attraction.
+     * @return Le tarif.
+     * @throws Exceptions_Database En cas d'erreur de récupération.
+     */
+
     public static float getAttractionPrice(int idAttraction) throws Exceptions_Database {
         float prix = 0.0f;
 
@@ -179,7 +222,12 @@ public class ReservationDAO_Implementation {
         return prix;
     }
 
-
+    /**
+     * Initialise les données d'affichage des réservations actuelles et passées de l'utilisateur,
+     * et affiche également un résumé si une commande est en cours.
+     *
+     * @throws Exceptions_Database En cas d'erreur de récupération.
+     */
 
     @FXML
     public void initialize() throws Exceptions_Database {
@@ -253,6 +301,12 @@ public class ReservationDAO_Implementation {
             }
     }
 
+    /**
+     * Récupère la liste des réservations pour l'utilisateur actuellement connecté.
+     *
+     * @return Liste des réservations.
+     * @throws Exceptions_Database En cas d'erreur d'accès à la base de données.
+     */
 
     @FXML
     public List<Reservation> ReservationDAO_getInfo() throws Exceptions_Database{
@@ -286,6 +340,16 @@ public class ReservationDAO_Implementation {
 
         return reservations;
     }
+
+    /**
+     * Valide une réservation en fonction de la disponibilité et enregistre l'information dans la base.
+     * <p>
+     * Si la réservation est acceptée, l'utilisateur est redirigé vers le menu approprié.
+     * </p>
+     *
+     * @param event L'événement déclenché (ex. clic sur bouton).
+     * @throws Exceptions_Database En cas d'erreur ou d'indisponibilité.
+     */
 
     @FXML
     public void ReservationDAO_Book(ActionEvent event) throws Exceptions_Database {
@@ -369,6 +433,11 @@ public class ReservationDAO_Implementation {
         ReservationDAO_redirectMenu(event);
     }
 
+    /**
+     * Redirige vers l'écran de confirmation de réservation.
+     *
+     * @param event L'événement d'action (clic sur bouton de validation).
+     */
 
     @FXML
     public void ReservationDAO_redirectConfirm(ActionEvent event) {
@@ -390,6 +459,12 @@ public class ReservationDAO_Implementation {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Redirige l'utilisateur vers le menu approprié (admin ou client) après une action.
+     *
+     * @param event L'événement (clic sur un élément de menu).
+     */
 
     public void ReservationDAO_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()){
@@ -426,6 +501,13 @@ public class ReservationDAO_Implementation {
 
     @FXML
     private Spinner<Integer> spinnerReservationId; // Assure-toi qu'il est bien lié à ton FXML
+
+    /**
+     * Annule une réservation sélectionnée par l'utilisateur via un identifiant donné.
+     * <p>
+     * L'annulation est confirmée par une boîte de dialogue.
+     * </p>
+     */
 
     @FXML
     public void ReservationDAO_cancel() {

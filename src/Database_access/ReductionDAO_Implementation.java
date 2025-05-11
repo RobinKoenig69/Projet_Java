@@ -16,14 +16,45 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La classe {@code ReductionDAO_Implementation} permet de gérer les opérations CRUD sur les réductions
+ * appliquées aux attractions dans une base de données. Elle est conçue pour fonctionner avec JavaFX
+ * et un fichier FXML lié à une interface utilisateur.
+ *
+ * <p>Elle propose les fonctionnalités suivantes :
+ * <ul>
+ *   <li>Ajout d'une réduction</li>
+ *   <li>Chargement et affichage des réductions dans une zone de texte</li>
+ *   <li>Récupération de toutes les réductions sous forme d'objet</li>
+ *   <li>Redirection vers un menu différent selon le type d'utilisateur (admin ou client)</li>
+ * </ul>
+ *
+ * <p>Cette classe suppose l'existence d'une table {@code reduction} et d'une table {@code attraction} en base de données.
+ *
+ * @author Robin KOENIG & Marius LEPERE
+ * @version 3.0
+ */
+
 public class ReductionDAO_Implementation {
 
+
+    /**
+     * Constructeur vide requis pour le chargement via FXML.
+     */
     public ReductionDAO_Implementation() {
         // constructeur vide requis par FXMLLoader
     }
 
     @FXML
     private TextArea reductionTable;
+
+    /**
+     * Ajoute une réduction dans la base de données pour une attraction donnée.
+     *
+     * @param pourcentage Le pourcentage de réduction.
+     * @param concerne Le type de public concerné (ex : étudiant, senior).
+     * @param Id_attraction L'identifiant de l'attraction concernée.
+     */
 
     @FXML
     public void  ReductionDAO_Add(int pourcentage, String concerne, int Id_attraction){
@@ -53,6 +84,13 @@ public class ReductionDAO_Implementation {
             }
         }
     }
+
+    /**
+     * Initialise la zone de texte {@code reductionTable} avec les réductions existantes en base.
+     * Cette méthode est automatiquement appelée après le chargement du contrôleur FXML.
+     *
+     * @throws Exceptions_Database si la connexion ou la requête échoue.
+     */
 
     @FXML
     public void initialize() throws Exceptions_Database {
@@ -94,6 +132,13 @@ public class ReductionDAO_Implementation {
         }
     }
 
+    /**
+     * Récupère toutes les réductions présentes en base de données sous forme d'une liste d'objets {@code Reduction}.
+     *
+     * @return Une liste de réductions.
+     * @throws Exceptions_Database en cas d'erreur de connexion ou d'exécution de la requête.
+     */
+
     @FXML
     public List<Reduction> ReductionDAO_GetAll() throws Exceptions_Database {
         List<Reduction> reductions = new ArrayList<>();
@@ -134,6 +179,11 @@ public class ReductionDAO_Implementation {
         return reductions;
     }
 
+    /**
+     * Redirige l'utilisateur vers le menu approprié selon son rôle (admin ou client).
+     *
+     * @param event L'événement déclencheur (lié au clic sur un menu JavaFX).
+     */
 
     public void ReductionDAO_redirectMenu(ActionEvent event) {
         if (Session.getAdmin()){

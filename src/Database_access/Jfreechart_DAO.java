@@ -15,11 +15,35 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * La classe {@code Jfreechart_DAO} permet de générer un rapport PDF contenant des graphiques statistiques
+ * relatifs aux attractions, aux réservations, aux utilisateurs, et aux réductions.
+ * Elle utilise la bibliothèque iText pour le PDF et JFreeChart pour les graphiques.
+ *
+ * <p>Les graphiques inclus sont :
+ * <ul>
+ *   <li>Réservations par attraction</li>
+ *   <li>Réservations par catégorie</li>
+ *   <li>Utilisateurs par tranche d'âge</li>
+ *   <li>Réductions par type de client</li>
+ *   <li>Revenus par attraction</li>
+ *   <li>Places disponibles par catégorie</li>
+ *   <li>Top 5 des attractions les plus réservées</li>
+ * </ul>
+ *
+ * @author Robin KOENIG
+ * @version 1.1
+ */
+
 public class Jfreechart_DAO {
 
     private static final int CHART_WIDTH = 500;
     private static final int CHART_HEIGHT = 300;
     private static final String PDF_PATH = "rapport_statistiques.pdf";
+
+    /**
+     * Constructeur vide de la classe Jfreechart_DAO.
+     */
 
     public Jfreechart_DAO() {
         // Constructor is now empty
@@ -74,6 +98,13 @@ public class Jfreechart_DAO {
         }
     }
 
+    /**
+     * Ajoute l'en-tête du document PDF.
+     *
+     * @param document Le document PDF en cours de génération.
+     * @throws DocumentException si une erreur survient lors de l'ajout du contenu.
+     */
+
     private void addHeader(Document document) throws DocumentException {
         Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLACK);
         Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
@@ -90,6 +121,16 @@ public class Jfreechart_DAO {
         document.add(new Paragraph(" "));
         document.add(new Paragraph(" "));
     }
+
+    /**
+     * Ajoute un graphique au document PDF.
+     *
+     * @param document Le document PDF.
+     * @param chart Le graphique JFreeChart à insérer.
+     * @param title Le titre du graphique.
+     * @throws DocumentException si une erreur d’écriture dans le PDF se produit.
+     * @throws IOException si une erreur de lecture/écriture de fichier survient.
+     */
 
     private void addChartToDocument(Document document, JFreeChart chart, String title) throws DocumentException, IOException {
         // Créer une image temporaire du graphique
@@ -110,6 +151,15 @@ public class Jfreechart_DAO {
         // Supprimer le fichier temporaire
         tempFile.delete();
     }
+
+    /**
+     * Génère et ajoute un graphique en camembert représentant la répartition des réservations par attraction.
+     *
+     * @param document Le document PDF.
+     * @throws SQLException en cas d'erreur SQL.
+     * @throws DocumentException en cas d'erreur d’écriture PDF.
+     * @throws IOException en cas d'erreur de lecture/écriture de fichier.
+     */
 
     private void addReservationParAttractionChart(Document document) throws SQLException, DocumentException, IOException {
         DefaultPieDataset dataset = new DefaultPieDataset();
@@ -146,6 +196,15 @@ public class Jfreechart_DAO {
         }
     }
 
+    /**
+     * Génère et ajoute un graphique en camembert représentant la répartition des réservations par catégorie d’attraction.
+     *
+     * @param document Le document PDF.
+     * @throws SQLException en cas d'erreur SQL.
+     * @throws DocumentException en cas d'erreur PDF.
+     * @throws IOException en cas d'erreur de fichier.
+     */
+
     private void addReservationsParCategorieChart(Document document) throws SQLException, DocumentException, IOException {
         DefaultPieDataset dataset = new DefaultPieDataset();
 
@@ -181,6 +240,15 @@ public class Jfreechart_DAO {
         }
     }
 
+    /**
+     * Génère et ajoute un graphique représentant la répartition des utilisateurs par tranche d’âge.
+     *
+     * @param document Le document PDF.
+     * @throws SQLException en cas d'erreur SQL.
+     * @throws DocumentException en cas d'erreur PDF.
+     * @throws IOException en cas d'erreur de fichier.
+     */
+
     private void addUtilisateursParTrancheAgeChart(Document document) throws SQLException, DocumentException, IOException {
         DefaultPieDataset dataset = new DefaultPieDataset();
 
@@ -215,6 +283,15 @@ public class Jfreechart_DAO {
         }
     }
 
+    /**
+     * Génère et ajoute un graphique représentant la répartition des réductions par type de client.
+     *
+     * @param document Le document PDF.
+     * @throws SQLException en cas d'erreur SQL.
+     * @throws DocumentException en cas d'erreur PDF.
+     * @throws IOException en cas d'erreur de fichier.
+     */
+
     private void addReductionsParTypeClientChart(Document document) throws SQLException, DocumentException, IOException {
         DefaultPieDataset dataset = new DefaultPieDataset();
 
@@ -248,6 +325,15 @@ public class Jfreechart_DAO {
             throw new SQLException("Erreur : " + e.getMessage());
         }
     }
+
+    /**
+     * Génère et ajoute un graphique en barres représentant le chiffre d’affaires généré par chaque attraction.
+     *
+     * @param document Le document PDF.
+     * @throws SQLException en cas d'erreur SQL.
+     * @throws DocumentException en cas d'erreur PDF.
+     * @throws IOException en cas d'erreur de fichier.
+     */
 
     private void addRevenuParAttractionChart(Document document) throws SQLException, DocumentException, IOException {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -284,6 +370,15 @@ public class Jfreechart_DAO {
         }
     }
 
+    /**
+     * Génère et ajoute un graphique en barres représentant le nombre de places disponibles par catégorie d’attraction.
+     *
+     * @param document Le document PDF.
+     * @throws SQLException en cas d'erreur SQL.
+     * @throws DocumentException en cas d'erreur PDF.
+     * @throws IOException en cas d'erreur de fichier.
+     */
+
     private void addPlacesDispoParCategorieChart(Document document) throws SQLException, DocumentException, IOException {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -316,6 +411,15 @@ public class Jfreechart_DAO {
             throw new SQLException("Erreur (places dispo) : " + e.getMessage());
         }
     }
+
+    /**
+     * Génère et ajoute un graphique en barres représentant les 5 attractions les plus réservées.
+     *
+     * @param document Le document PDF.
+     * @throws SQLException en cas d'erreur SQL.
+     * @throws DocumentException en cas d'erreur PDF.
+     * @throws IOException en cas d'erreur de fichier.
+     */
 
     private void addTopAttractionsChart(Document document) throws SQLException, DocumentException, IOException {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();

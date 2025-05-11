@@ -3,6 +3,11 @@ package Model;
 import java.sql.Date;
 import java.time.LocalDate;
 
+/**
+ * Représente un utilisateur du système.
+ * Contient des informations personnelles et préférences de visite.
+ */
+
 public class Utilisateur {
 
     private int id_utilisateur;
@@ -14,6 +19,20 @@ public class Utilisateur {
     private String adresse;
     private Date derniere_visite;
     private int attractionPrefereeId;
+
+    /**
+     * Constructeur utilisateur.
+     *
+     * @param id_utilisateur       ID utilisateur
+     * @param nom                  Nom
+     * @param prenom               Prénom
+     * @param clientType           Type de client
+     * @param trancheAge           Tranche d’âge
+     * @param email                Adresse email
+     * @param adresse              Adresse postale
+     * @param derniere_visite      Dernière visite
+     * @param attractionPrefereeId ID attraction préférée
+     */
 
     //constructor
     public Utilisateur(int id_utilisateur, String nom, String prenom,

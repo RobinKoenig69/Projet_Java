@@ -3,6 +3,10 @@ package Database_access;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * Classe permettant l'accès à la base de données depuis l'ensemble du code.
+ */
+
 public class Database_connection {
 
     public static Connection connect() {

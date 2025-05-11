@@ -11,12 +11,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Date;
 
+
+/**
+ * La classe testGraphic est une application JavaFX qui initialise et affiche l'interface graphique de l'application.
+ */
+
+
 public class testGraphic extends Application {
 
    public static String UserName = "";
    public static int UserID = -1;
 
-   Session newsession = new Session(UserName, UserID, 2, false, "");
+   Session newsession = new Session(UserName, UserID, -1, false, "");
 
 
 
@@ -26,6 +32,14 @@ public class testGraphic extends Application {
    //public String Current_page = "Reservation_cancel";
 
    public String Current_page = "Login";
+
+
+
+ /**
+     * Méthode principale qui démarre l'application JavaFX.
+     *
+     * @param primaryStage La scène principale de l'application.
+     */
 
    @Override
    public void start(Stage primaryStage) {
@@ -42,6 +56,15 @@ public class testGraphic extends Application {
          e.printStackTrace();
       }
    }
+
+
+   /**
+     * Méthode main qui lance l'application et initialise la journalisation.
+     *
+     * @param args Les arguments de la ligne de commande.
+     * @throws IOException Si une erreur d'entrée/sortie se produit.
+     */
+
 
    public static void main(String[] args) throws IOException {
       Log.startLogging("console_output.txt");
